@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	default-lazy-init="true"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	<!-- 缓存整合 -->
+	<cache:annotation-driven />
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="ehcache"/>
+	</bean>
+	<!-- EhCache library setup -->
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation"  value="classpath:ehcache.xml"/>
+		<property name="shared" value="true"/>
+	</bean>
+
+
+
+	<!-- 系统参数缓存-->
+	<bean   id="sysParameterEhCache"  class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="ehcache"/>
+		<property name="cacheName"  value="sysParameterEhCache"/>
+	</bean>
+	<bean id="sysParameterCache" class="com.newtouch.lion.cache.impl.EhCacheBasedObjectCache">
+		<property name="cache"  ref="sysParameterEhCache"/>
+	</bean>
+	<util:list  id="abstractInitializedCaches"  list-class="java.util.ArrayList" value-type="com.newtouch.lion.cache.load.impl.AbstractInitializedCacheImpl">
+		<!--初始化Code缓存  -->
+		<ref  bean="parameterCacheService"/>
+	</util:list>
+	<!-- 缓存初始化加载 -->
+	<bean class="com.newtouch.lion.listener.ApplicationInitializedListenerService">
+		<property name="abstractInitializedCacheServices"  ref="abstractInitializedCaches"/>
+	</bean>
+</beans>
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<!-- Hibernate Common Configuraction -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<!--  
+	<bean  id="dynamicsPersistenceExceptionTranslationPostProcessor" class="com.newtouch.lion.datasource.DynamicsPersistenceExceptionTranslationPostProcessor" />
+	-->
+	<!-- 指定JPA持久化提供商，此处使用Hibernate实现HibernatePersistence类 -->
+	<bean id="persistenceProvider" class="org.hibernate.ejb.HibernatePersistence" />
+	<!-- 如果指定jpaVendorAdapter此属性可选，此处为HibernateJpaDialect -->
+	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+	<!-- 指定实现厂商专用特性，即generateDdl= false表示不自动生成DDL，database= HSQL表示使用hsqldb数据库 -->
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="generateDdl" value="false" />
+		<property name="database" value="HSQL" />
+	</bean>
+	<!-- 配置hibernate session工厂 -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceProvider" ref="persistenceProvider" />
+		<property name="persistenceUnitName" value="entityUnit" />
+		<!-- <property name="persistenceXmlLocation" value="classpath:META-INF/persistence-mysql.xml"></property>--> 
+		<property name="mappingResources">
+			<list>
+				<value>model/application/bas_app_properties.${database.prefix}.orm.xml</value>
+				<value>model/datagrid/bas_datagrid.${database.prefix}.orm.xml</value>
+				<value>model/system/bas_demo.${database.prefix}.orm.xml</value>
+				<value>model/system/bas_common.${database.prefix}.orm.xml</value>
+				<value>model/system/bas_login_log.${database.prefix}.orm.xml</value>
+				<value>model/system/bas_system.${database.prefix}.orm.xml</value>
+				<value>model/system/bas_tasks.${database.prefix}.orm.xml</value>
+				<value>model/system/bas_reminder.${database.prefix}.orm.xml</value>
+			</list>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<!--  <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>-->
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.use_sql_comments">${hibernate.use_sql_comments}</prop>
+				<prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+				<prop key="hibernate.max_fetch_depth">${hibernate.max_fetch_depth}</prop>
+				<prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+				<prop key="hibernate.jdbc.fetch_size">${hibernate.jdbc.fetch_size}</prop>
+				<prop key="hibernate.max_fetch_depth">${hibernate.max_fetch_depth}</prop>
+				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${hibernate.cache.provider_class}</prop>
+				<prop key="hibernate.cache.region.factory_class">${hibernate.cache.region.factory_class}</prop>
+				<prop key="current_session_context_class">thread</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

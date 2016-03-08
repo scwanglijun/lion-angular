@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	
+	<!-- 配置事务管理器 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean name="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<bean id="methodTimerAdvice" class="com.newtouch.lion.advice.MethodTimerAdvice" />
+	<bean id="methodTraceAdvice" class="com.newtouch.lion.advice.MethodTraceAdvice">
+		 <property name="enabledMethodTrace" value="true" />
+	</bean>
+	<!-- Transaction Advisor -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="find*"   read-only="true" />
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="doFind*" read-only="true"   propagation="SUPPORTS" />
+			<tx:method name="find*"   read-only="true"   propagation="SUPPORTS" />
+			<tx:method name="get*"    read-only="true"   propagation="SUPPORTS" />
+			<tx:method name="check*"  read-only="true"   propagation="SUPPORTS" />
+			<tx:method name="doGet*"  read-only="true"  propagation="SUPPORTS" />
+			<tx:method name="do*"     propagation="REQUIRED" />
+			<tx:method name="ido*"    propagation="REQUIRES_NEW" />
+			<tx:method name="*"       propagation="SUPPORTS" />
+			<!-- 必须在事务中运行 -->
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- AOP Configuration -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="txPointCut" expression="execution(* *..*Service.*(..))" />
+		<aop:advisor id="doMethodTimer" advice-ref="methodTimerAdvice" pointcut="execution(* *..*Service.do*(..))" order="1" />
+
+		<aop:advisor id="idoMethodTimer" advice-ref="methodTimerAdvice" 	pointcut="execution(* *..*Service.ido*(..))" order="2" />
+
+		<aop:advisor id="methodTrace" advice-ref="methodTraceAdvice" pointcut="execution(* *..*Service.*(..))" order="3" />
+			
+		<aop:advisor id="serviceTx"  pointcut-ref="txPointCut" advice-ref="txAdvice" order="4" />
+	</aop:config>
+</beans>

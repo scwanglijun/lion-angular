@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<aop:aspectj-autoproxy />
+
+ 
+	<!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
+ 
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--dataSource属性指定要用到的连接池 -->
+		<property name="dataSource" ref="dynamicsDataSource" />
+		<!--configLocation属性指定mybatis的核心配置文件 -->
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+		<!-- 所有配置的mapper文件 -->
+		<property name="mapperLocations" value="classpath*:persistence/*.xml" />
+	</bean>
+	<!-- 构建SqlSessionTemplate -->
+	<bean id="sqlSessionTemplate"  class="org.mybatis.spring.SqlSessionTemplate">
+			<constructor-arg  name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.newtouch.lion.mapper" />
+	</bean>
+	
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	
+	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="dynamicsDataSource" />
+
+
+
+
+	<aop:config>
+		<aop:pointcut id="myPointCut" expression="execution(* com.newtouch.lion.service..*.*(..))" />
+		<aop:advisor pointcut-ref="myPointCut" advice-ref="txAdvice" />
+	 
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*"     read-only="true" />
+			<tx:method name="find*"    read-only="true" />
+			<tx:method name="delete*"  propagation="REQUIRED"/>
+			<tx:method name="save*"     propagation="REQUIRED" />
+			<tx:method name="update*"  propagation="REQUIRED"/>
+			<tx:method name="insert*"  propagation="REQUIRED"/>
+			<tx:method name="*"        propagation="SUPPORTS"/>
+		</tx:attributes>
+	</tx:advice> -->
+
+</beans>

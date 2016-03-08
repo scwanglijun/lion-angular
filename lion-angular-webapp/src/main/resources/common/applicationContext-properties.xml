@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	<description>从数据库装入配置到 propertyConfigurer</description>
+
+	<context:property-placeholder properties-ref="applicationProperties" />
+	<!-- 配置文件 -->
+	<bean name="applicationProperties" class="org.springmodules.commons.configuration.CommonsConfigurationFactoryBean">
+		<constructor-arg ref="databaseConfiguration" />
+	</bean>
+	<!--　加载配置文件 -->
+	<bean name="databaseConfiguration" class="org.apache.commons.configuration.DatabaseConfiguration">
+		<constructor-arg index="0" ref="dataSource" />
+		<constructor-arg index="1" value="bas_app_properties" />
+		<constructor-arg index="2" value="APP_ID" />
+		<constructor-arg index="3" value="KEY_" />
+		<constructor-arg index="4" value="VALUE_" />
+		<constructor-arg index="5" value="lion" />
+	</bean>
+</beans>
