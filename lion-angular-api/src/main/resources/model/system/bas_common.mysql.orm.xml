@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+	<package>com.newtouch.lion.model.system</package>
+	<access>PROPERTY</access>
+	<!-- 抽象类 -->
+	<mapped-superclass class="com.newtouch.lion.model.AuditEntity">
+		<attributes>
+			<basic name="createdById">
+				<column name="CREATE_BY" length="11" scale="0" nullable="true" />
+			</basic>
+			<basic name="createdDate">
+				<column name="CREATE_DATE" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="updatedById">
+				<column name="UPDATE_BY" length="11" scale="0" nullable="true" />
+			</basic>
+			<basic name="updatedDate">
+				<column name="UPDATE_DATE" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.newtouch.lion.model.VersionEntity">
+		<attributes>
+			<basic name="createdById">
+				<column name="CREATE_BY" length="11" scale="0" nullable="true" />
+			</basic>
+			<basic name="createdDate">
+				<column name="CREATE_DATE" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="updatedById">
+				<column name="UPDATE_BY" length="11" scale="0" nullable="true" />
+			</basic>
+			<basic name="updatedDate">
+				<column name="UPDATE_DATE" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="deleteDate">
+				<column name="DELETE_DATE" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="isDeleted">
+				<column name="MARK_FOR_DELETE" />
+			</basic>
+			<version name="optCounter">
+				<column name="OPT_COUNTER" />
+			</version>
+		</attributes>
+	</mapped-superclass>
+	<!-- 系统参数 -->
+	<entity class="Parameter">
+		<table name="BAS_PARAMETER" />
+		<attributes>
+			<id name="id">
+				<column name="BAS_PARAMETER_ID" unique="true" nullable="false" precision="11" scale="0" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="type">
+				<column name="CATEGORY" length="30" nullable="true" />
+			</basic>
+			<basic name="nameZh">
+				<column name="NAME_ZH" length="128" nullable="true" />
+			</basic>
+			<basic name="nameEn">
+				<column name="NAME_EN" length="128" nullable="true" />
+			</basic>
+			<basic name="value">
+				<column name="PARAMETER_VALUE" length="256" nullable="true" />
+			</basic>
+			<basic name="editable">
+				<column name="EDITABLE" />
+			</basic>
+			<basic name="description">
+				<column name="DESCRIPTION" length="512" nullable="true" />
+			</basic>
+		</attributes>
+	</entity>
+	<!-- 提示信息 -->
+	<entity class="TipText">
+		<table name="BAS_TIPTEXT" />
+		<attributes>
+			<id name="id">
+				<column name="BAS_TIPTEXT_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="tipTextKey">
+				<column name="TIP_TEXT_KEY" length="50" nullable="true" />
+			</basic>
+			<basic name="textZh">
+				<column name="TEXT_ZH" length="400" nullable="true" />
+			</basic>
+			<basic name="textEn">
+				<column name="TEXT_EN" length="400" nullable="true" />
+			</basic>
+		</attributes>
+	</entity>
+
+	<!-- 通用编码类型 -->
+	<entity class="CodeType">
+		<table name="BAS_CODE_TYPE" />
+		<attributes>
+			<id name="id">
+				<column name="BAS_CODE_TYPE_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="type">
+				<column name="CODE_TYPE" length="20" nullable="true" />
+			</basic>
+			<basic name="nameZh">
+				<column name="NAME_ZH" length="128" nullable="true" />
+			</basic>
+			<basic name="nameEn">
+				<column name="NAME_EN" length="128" nullable="true" />
+			</basic>
+			<basic name="editable">
+				<column name="EDITABLE" />
+			</basic>
+			<basic name="codeLenLimit">
+				<column name="CODE_LEN_LIMIT" precision="11" scale="0" />
+			</basic>
+			<one-to-many name="codeLists" fetch="LAZY" mapped-by="codeType">
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+
+
+	<!-- 通用编码列表 -->
+	<entity class="CodeList">
+		<table name="BAS_CODE_LIST" />
+		<attributes>
+			<id name="id">
+				<column name="BAS_CODE_LIST_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="codeValue">
+				<column name="CODE_VALUE" length="256" nullable="true" />
+			</basic>
+			<basic name="nameZh">
+				<column name="NAME_ZH" length="256" nullable="false" />
+			</basic>
+			<basic name="nameEn">
+				<column name="NAME_EN" length="256" nullable="false" />
+			</basic>
+			<basic name="editable">
+				<column name="EDITABLE" precision="1" scale="0" />
+			</basic>
+			<basic name="sortNo">
+				<column name="SORT_NO" precision="11" scale="0" />
+			</basic>
+			<basic name="selected">
+				<column name="SELECTED" />
+			</basic>
+			<basic name="codeTypeId">
+				<column name="BAS_CODE_TYPE_ID" precision="11" scale="0" insertable="true"
+					updatable="true" />
+			</basic>
+			<many-to-one name="codeType" fetch="LAZY">
+				<join-column name="BAS_CODE_TYPE_ID" insertable="false" updatable="false" nullable="false" />
+			</many-to-one>			
+		</attributes>
+	</entity>
+</entity-mappings>

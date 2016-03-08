@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+	<package>com.newtouch.lion.model.system</package>
+	<access>PROPERTY</access>
+	<!-- 部门信息 -->
+	<entity class="Department">
+		<table name="BAS_DEPARTMENT" />
+		<sequence-generator name="SEQ_BAS_DEPARTMENT_ID" 	sequence-name="SEQ_BAS_DEPARTMENT_ID"  allocation-size="1"/>
+		<attributes>
+			<id name="id">
+				<column name="BAS_DEPARTMENT_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_DEPARTMENT_ID" />
+			</id>
+			<basic name="parentDepartmentId">
+				<column name="PARENT_BAS_DEPARTMENT_ID" precision="11" scale="0"/>
+			</basic>
+			<basic name="nameZh">
+				<column name="NAME_ZH" length="128" nullable="true" />
+			</basic>
+			<basic name="nameEn">
+				<column name="NAME_EN" length="128" nullable="true" />
+			</basic>
+			<basic name="departmentNo">
+				<column name="DEPARTMENTNO" length="128" nullable="false" />
+			</basic>
+			<basic name="editable">
+				<column name="EDITABLE" precision="1" scale="0" />
+			</basic>
+			<basic name="description">
+				<column name="DESCRIPTION" length="256" nullable="true" />
+			</basic>
+			<many-to-one name="department" fetch="LAZY">
+				<join-column name="PARENT_BAS_DEPARTMENT_ID" insertable="false" updatable="false"/>
+			</many-to-one>
+			<one-to-many name="departments" fetch="LAZY" mapped-by="department">
+				<cascade>
+					 <cascade-remove/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="users" fetch="LAZY" mapped-by="department">
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</one-to-many>
+			<transient name="sortedChildDepartment" />
+		</attributes>
+	</entity>
+	<!-- 岗位信息 -->
+	<entity class="Position">
+		<table name="BAS_POSITION" />
+		<sequence-generator name="SEQ_BAS_POSITION_ID" 	sequence-name="SEQ_BAS_POSITION_ID"  allocation-size="1"/>
+		<attributes>
+			<id name="id">
+				<column name="BAS_POSITION_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_POSITION_ID" />
+			</id>
+			<basic name="nameZh">
+				<column name="NAME_ZH" length="128" nullable="true" />
+			</basic>
+			<basic name="nameEn">
+				<column name="NAME_EN" length="128" nullable="true" />
+			</basic>
+			<basic name="description">
+				<column name="DESCRIPTION" length="256" nullable="true" />
+			</basic>
+			<!--  <many-to-one name="department" fetch="LAZY">
+				<join-column name="BAS_DEPARTMENT_ID" insertable="true"
+					updatable="true" nullable="false" />
+			</many-to-one>-->
+			<many-to-one name="position" fetch="LAZY">
+				<join-column name="PARENT_BAS_POSITION_ID" insertable="true"
+					updatable="true" />
+			</many-to-one>
+			<one-to-many name="positions" fetch="LAZY" mapped-by="position">
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</one-to-many>
+			<!-- <one-to-many name="users" fetch="LAZY" mapped-by="position">
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</one-to-many>-->
+		</attributes>
+	</entity>
+	<!-- 系统用户登录 -->
+	<entity class="User">
+		<table name="BAS_USER" />
+		<sequence-generator name="SEQ_BAS_USER_ID" 	sequence-name="SEQ_BAS_USER_ID"  allocation-size="1"/>
+		<attributes>
+			<id name="id">
+				<column name="BAS_USER_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_USER_ID" />
+			</id>
+			<basic name="departmentId">
+				<column name="BAS_DEPARTMENT_ID" precision="11" scale="0"
+					nullable="true" />
+			</basic>
+			<basic name="username">
+				<column name="USERNAME" length="30" nullable="false" />
+			</basic>
+			<basic name="password">
+				<column name="PASSWORD" length="128" nullable="false" />
+			</basic>
+			<basic name="passwordHint">
+				<column name="PASSWORD_HINT" length="60" nullable="true" />
+			</basic>
+			<basic name="employeeCode">
+				<column name="EMPLOYEE_NO" length="30" nullable="true" />
+			</basic>
+			<basic name="image">
+				<column name="IMAGE" length="100" nullable="true" />
+			</basic>
+			<basic name="realnameZh">
+				<column name="REALNAME_ZH" length="128" nullable="true" />
+			</basic>
+			<basic name="realnameEn">
+				<column name="REALNAME_EN" length="128" nullable="true" />
+			</basic>
+			<basic name="gender">
+				<column name="GENDER" precision="1" scale="0" />
+			</basic>
+			<basic name="usertype">
+				<column name="USERTYPE" length="10" nullable="true" />
+			</basic>
+			<basic name="authtype">
+				<column name="AUTHTYPE" length="10" nullable="true" />
+			</basic>
+			<basic name="telephone">
+				<column name="TELEPHONE" length="30" nullable="true" />
+			</basic>
+			<basic name="mobile">
+				<column name="MOBILE" length="30" nullable="true" />
+			</basic>
+			<basic name="email">
+				<column name="EMAIL" length="128" nullable="true" />
+			</basic>
+			<basic name="officePhone">
+				<column name="OFFICE_TELEPHONE" length="30" nullable="true" />
+			</basic>
+			<basic name="fax">
+				<column name="FAX" length="30" nullable="true" />
+			</basic>
+			<basic name="postcode">
+				<column name="POSTCODE" length="6" nullable="true" />
+			</basic>
+			<basic name="location">
+				<column name="LOCATION" length="128" nullable="true" />
+			</basic>
+			<basic name="accountExpired">
+				<column name="ACCOUNT_EXPIRED" precision="1" scale="0"
+					nullable="true" />
+			</basic>
+			<basic name="accountLocked">
+				<column name="ACCOUNT_LOCKED" precision="1" scale="0"
+					nullable="true" />
+			</basic>
+			<basic name="credentialExpired">
+				<column name="CREDENTIAL_EXPIRED" precision="1" scale="0"
+					nullable="true" />
+			</basic>
+			<basic name="credentialExpiredDate">
+				<column name="CREDENTIAL_EXPIRED_DATE" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="accountExpiredDate">
+				<column name="ACCOUNT_EXPIRED_DATE" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="editable">
+				<column name="EDITABLE" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="description">
+				<column name="DESCRIPTION" length="128" nullable="true" />
+			</basic>
+			<many-to-one name="department" fetch="LAZY">
+				<join-column name="BAS_DEPARTMENT_ID" insertable="false"
+					updatable="false" />
+			</many-to-one>
+			<many-to-many name="roles" fetch="LAZY">
+				<join-table name="BAS_USER_ROLE">
+					<join-column name="BAS_USER_ID"   insertable="false" updatable="false"/>
+					<inverse-join-column name="BAS_ROLE_ID"  insertable="false" updatable="false"/>
+				</join-table>
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</many-to-many>
+			<many-to-many name="groups" fetch="LAZY" >
+				<join-table name="BAS_USER_GROUP">
+					<join-column name="BAS_USER_ID"  updatable="false" insertable="false"/>
+					<inverse-join-column name="BAS_GROUP_ID"  insertable="false" updatable="false"/>
+				</join-table>
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</many-to-many>
+		</attributes>
+	</entity>
+	<!-- 用户组 -->
+	<entity class="Group">
+		<table name="BAS_GROUP" />
+		<sequence-generator name="SEQ_BAS_GROUP_ID" 	sequence-name="SEQ_BAS_GROUP_ID"  allocation-size="1"/>
+		<attributes>
+			<id name="id">
+				<column name="BAS_GROUP_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_GROUP_ID" />
+			</id>
+			<basic name="nameZh">
+				<column name="NAME_ZH" length="128" nullable="true" />
+			</basic>
+			<basic name="nameEn">
+				<column name="NAME_EN" length="128" nullable="true" />
+			</basic>
+			<basic name="editable">
+				<column name="EDITABLE" precision="1" scale="0" />
+			</basic>
+			<basic name="description">
+				<column name="DESCRIPTION" length="256" nullable="true" />
+			</basic>
+			<many-to-many name="roles" fetch="LAZY">
+				<join-table name="BAS_GROUP_ROLE">
+					<join-column name="BAS_GROUP_ID"    updatable="false" insertable="false"/>
+				 	<inverse-join-column  name="BAS_ROLE_ID" updatable="false" insertable="false"/>
+				</join-table>
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</many-to-many>
+			<many-to-many name="users" fetch="LAZY">
+				<join-table name="BAS_USER_GROUP" >
+					<join-column name="BAS_GROUP_ID"  updatable="false" insertable="false"/>
+					<inverse-join-column name="BAS_USER_ID" updatable="false" insertable="false"/>
+				</join-table>
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</many-to-many>
+		</attributes>
+	</entity>
+	<!-- 用户角色 -->
+	<entity class="Role">
+		<table name="BAS_ROLE" />
+		<sequence-generator name="SEQ_BAS_ROLE_ID" 	sequence-name="SEQ_BAS_ROLE_ID"  allocation-size="1"/>
+		<attributes>
+			<id name="id">
+				<column name="BAS_ROLE_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_ROLE_ID" />
+			</id>
+			<basic name="nameZh">
+				<column name="NAME_ZH" length="128" nullable="true" />
+			</basic>
+			<basic name="nameEn">
+				<column name="NAME_EN" length="128" nullable="true" />
+			</basic>
+			<basic name="editable">
+				<column name="EDITABLE" precision="1" scale="0" />
+			</basic>
+			<basic name="description">
+				<column name="DESCRIPTION" length="256" nullable="true" />
+			</basic>
+			<many-to-many name="users" fetch="LAZY">
+				<join-table  name="BAS_USER_ROLE">
+						<join-column name="BAS_ROLE_ID" insertable="false" updatable="false"/>
+						<inverse-join-column name="BAS_USER_ID" insertable="false" updatable="false"/>
+				</join-table>
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</many-to-many>
+			<many-to-many name="groups" fetch="LAZY">
+				<join-table  name="BAS_GROUP_ROLE">
+						<join-column name="BAS_ROLE_ID" insertable="false" updatable="false"/>
+						<inverse-join-column name="BAS_GROUP_ID" insertable="false" updatable="false"/>
+				</join-table>
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</many-to-many>
+			<many-to-many name="resources" fetch="LAZY">
+				<join-table name="BAS_ROLE_RESOURCE">
+					<join-column name="BAS_ROLE_ID" insertable="false" updatable="false"/>
+					<inverse-join-column name="BAS_RESOURCE_ID" insertable="false" updatable="false"/>
+				</join-table>
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</many-to-many>
+		</attributes>
+	</entity>
+	<!-- 资源 -->
+	<entity class="Resource">
+		<table name="BAS_RESOURCE" />
+		<sequence-generator name="SEQ_BAS_RESOURCE_ID" 	sequence-name="SEQ_BAS_RESOURCE_ID"  allocation-size="1"/>
+		<attributes>
+			<id name="id">
+				<column name="BAS_RESOURCE_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_RESOURCE_ID" />
+			</id>
+			<basic name="parentResourceId">
+				<column name="PARENT_BAS_RESOURCE_ID" precision="11" scale="0" />
+			</basic>
+			<basic name="type">
+				<column name="TYPE_" length="256" nullable="false" />
+			</basic>
+			<basic name="path">
+				<column name="PATH" unique="true" length="1024" nullable="false" />
+			</basic>
+			<basic name="nameZh">
+				<column name="NAME_ZH" length="256" nullable="true" unique="true" />
+			</basic>
+			<basic name="nameEn">
+				<column name="NAME_EN" length="256" nullable="true" unique="true" />
+			</basic>
+			<basic name="editable">
+				<column name="EDITABLE" precision="1" scale="0" />
+			</basic>
+			<basic name="description">
+				<column name="DESCRIPTION" length="256" nullable="true" />
+			</basic>
+			<basic name="seqNum">
+				<column name="SEQ_NUM" precision="11" scale="0" nullable="false" />
+			</basic>
+			<basic name="isLeaf">
+				<column name="IS_LEAF" precision="1" scale="0" nullable="false" />
+			</basic>
+			<basic name="target">
+				<column name="TARGET" length="16" nullable="false" />
+			</basic>
+			<basic name="permission">
+				<column name="PERMISSION" length="30" nullable="false" />
+			</basic>
+			<many-to-one name="resource" fetch="LAZY">
+				<join-column name="PARENT_BAS_RESOURCE_ID" insertable="false" updatable="false" />
+			</many-to-one>
+			<one-to-many name="resources" fetch="LAZY" mapped-by="resource">
+				<cascade>
+					<cascade-remove/>
+				</cascade>
+			</one-to-many>
+			<many-to-many name="roles" fetch="LAZY">
+				<join-table name="BAS_ROLE_RESOURCE">
+					<join-column name="BAS_RESOURCE_ID" insertable="false" updatable="false"/>
+					<inverse-join-column  name="BAS_ROLE_ID" insertable="false" updatable="false"/>
+				</join-table>
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</many-to-many>
+			<embedded name="attributes">
+					<attribute-override name="path">
+						 <column  name="path" nullable="false" insertable="false" updatable="false"/>
+					</attribute-override>
+			</embedded>
+		</attributes>
+	</entity>
+	<!-- 图标信息 -->
+	<entity class="Icon">
+		<table name="BAS_ICON" />
+		<sequence-generator name="SEQ_BAS_ICON_ID" 	sequence-name="SEQ_BAS_ICON_ID"  allocation-size="1"/>
+		<attributes>
+			<id name="id">
+				<column name="BAS_ICON_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_ICON_ID" />
+			</id>
+			<basic name="iconType">
+				<column name="ICON_TYPE" length="255" nullable="true" />
+			</basic>
+			<basic name="iconClass">
+				<column name="ICON_CLASS" length="255" nullable="true" />
+			</basic>
+			<basic name="iconImage">
+				<column name="ICON_IMAGE" length="255" nullable="true" />
+			</basic>
+		</attributes>
+	</entity>
+	<!-- 日历信息 -->
+	<entity class="Calendar">
+		<table name="BAS_CALENDAR" />
+		<sequence-generator name="SEQ_BAS_CALENDAR_ID" 	sequence-name="SEQ_BAS_CALENDAR_ID"  allocation-size="1"/>
+		<attributes>
+			<id name="id">
+				<column name="BAS_CALENDAR_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_CALENDAR_ID" />
+			</id>
+			<basic name="event">
+				<column name="EVENT_NAME" length="255" nullable="false" />
+			</basic>
+			<basic name="startdate">
+				<column name="STARTDATE" precision="1" scale="0" nullable="false" />
+			</basic>
+			<basic name="starttime">
+				<column name="STARTTIME" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="enddate">
+				<column name="ENDDATE" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="endtime">
+				<column name="ENDTIME" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="allday">
+				<column name="ALLDAY" length="1" nullable="false" />
+			</basic>
+			<basic name="userId">
+				<column name="BAS_USER_ID" length="11" nullable="false" />
+			</basic>	
+		</attributes>
+	</entity>
+</entity-mappings>

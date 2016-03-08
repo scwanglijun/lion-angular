@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+	<package>com.newtouch.lion.model.system</package>
+	<access>PROPERTY</access>
+	<entity class="LoginLog">
+		<table name="bas_login_log" />
+		<sequence-generator name="SEQ_BAS_LOGIN_LOG_ID" 	sequence-name="SEQ_BAS_LOGIN_LOG_ID"  allocation-size="1"/>
+		<attributes>
+			<id name="id" >
+				<column name="BAS_LOGIN_LOG_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_LOGIN_LOG_ID" />
+			</id>
+			<basic name="userId" >
+				<column name="BAS_USER_ID"  nullable="false" precision="11" scale="0"/>
+			</basic>
+		 	<basic name="loginIP" >
+				<column name="LOGIN_IP" length="20" nullable="true" />
+			</basic>
+			<basic name="loginMAC" >
+				<column name="LOGIN_MAC" length="20" nullable="true" />
+			</basic>
+			<basic name="browserName" >
+				<column name="BROWSER_NAME" length="100" nullable="true" />
+			</basic>
+			<basic name="sessionId" >
+				<column name="SESSION_ID" length="60" nullable="true" />
+			</basic>
+			<basic name="loginResult" >
+				<column name="LOGIN_RESULT" length="120" nullable="true" />
+			</basic>
+			<basic name="loginTime" >
+				<column name="LOGIN_TIME"  nullable="true" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="logoutTime" >
+				<column name="LOGOUT_TIME"  nullable="true" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="osInfo" >
+				<column name="OS_INFO" length="120" nullable="true" />
+			</basic>
+			<basic name="isSuccess" >
+				<column name="IS_SUCCESS"  precision="1" scale="0"/>
+			</basic>
+			<basic name="loginType" >
+				<column name="LOGIN_TYPE" length="2" nullable="true" />
+			</basic>
+			<many-to-one name="user" fetch="LAZY">
+				<join-column name="BAS_USER_ID" insertable="false" updatable="false" nullable="false" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	
+	<entity class="OperationLog">
+		<table name="T_OPTION_LOG" />
+		<sequence-generator name="SEQ_T_OPTION_LOG" 	sequence-name="SEQ_T_OPTION_LOG"  allocation-size="1"/>
+		<attributes>
+			<id name="id" >
+				<column name="id" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_T_OPTION_LOG" />
+			</id>
+			<basic name="branch_company_code" >
+				<column name="branch_company_code"  nullable="false" precision="11" scale="0"/>
+			</basic>
+		 	<basic name="employee_id" >
+				<column name="employee_id" length="20" nullable="true" />
+			</basic>
+			<basic name="resource_id" >
+				<column name="resource_id" length="20" nullable="true" />
+			</basic>
+		</attributes>
+	</entity>
+</entity-mappings>

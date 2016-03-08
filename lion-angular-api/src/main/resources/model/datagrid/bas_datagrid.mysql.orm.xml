@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+	<package>com.newtouch.lion.model.datagrid</package>
+	<access>PROPERTY</access>
+	<!-- DataGrid -->
+	<entity class="DataGrid">
+		<table name="bas_datagrid" />
+		<attributes>
+			<id name="id">
+				<column name="BAS_DATAGRID_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="type">
+				<column name="TYPE_" length="30" nullable="true" />
+			</basic>
+			<basic name="tableId">
+				<column name="TABLE_ID" length="60" nullable="true" />
+			</basic>
+			<basic name="title">
+				<column name="TITLE" length="128" nullable="true" />
+			</basic>
+			<basic name="showTitle">
+				<column name="SHOW_TITLE" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="fit">
+				<column name="FIT" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="frozen">
+				<column name="FROZEN" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="showGroup">
+				<column name="SHOW_GROUP" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="pagination">
+				<column name="PAGINACTION" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="fitColumns">
+				<column name="FIT_COLUMNS" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="striped">
+				<column name="STRIPED" precision="1" scale="0" />
+			</basic>
+			<basic name="method">
+				<column name="METHOD" length="30" nullable="true" />
+			</basic>
+			<basic name="nowrap">
+				<column name="NOWRAP" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="url">
+				<column name="URL" length="256" nullable="true" />
+			</basic>
+			<basic name="data">
+				<column name="DATA_" length="512" nullable="true" />
+			</basic>
+			<basic name="loadMsg">
+				<column name="LOAD_MSG" length="100" nullable="true" />
+			</basic>
+			<basic name="rownumbers">
+				<column name="ROW_NUMBERS" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="singleSelect">
+				<column name="SINGLE_SELECT" precision="1" scale="0"
+					nullable="true" />
+			</basic>
+			<basic name="checkOnSelect">
+				<column name="CHECK_ON_SELECT" precision="1" scale="0"
+					nullable="true" />
+			</basic>
+			<basic name="selectOnCheck">
+				<column name="SELECT_ON_CHECK" precision="1" scale="0"
+					nullable="true" />
+			</basic>
+			<basic name="pagePosition">
+				<column name="PAGE_POSITION" length="30" nullable="true" />
+			</basic>
+			<basic name="pageNumber">
+				<column name="PAGE_NUMBER" length="30" nullable="true" />
+			</basic>
+			<basic name="pageSize">
+				<column name="PAGE_SIZE" length="30" nullable="true" />
+			</basic>
+			<basic name="pageList">
+				<column name="PAGE_LIST" length="30" nullable="true" />
+			</basic>
+			<basic name="queryParams">
+				<column name="QUEYR_PARAMS" length="50" nullable="true" />
+			</basic>
+			<basic name="sortName">
+				<column name="SORT_NAME" length="30" nullable="true" />
+			</basic>
+			<basic name="sortOrder">
+				<column name="SORT_ORDER" length="5" nullable="true" />
+			</basic>
+			<basic name="remoteSort">
+				<column name="REMOTE_SORT" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="showHeader">
+				<column name="SHOW_HEADER" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="showFooter">
+				<column name="SHOW_FOOTER" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="scrollbarSize">
+				<column name="SCROLLBER_SIZE" precision="11" scale="0"
+					nullable="true" />
+			</basic>
+			<basic name="rowStyler">
+				<column name="ROW_STYLER" length="100" nullable="true" />
+			</basic>
+			<basic name="loadFilter">
+				<column name="LOAD_FILTER" length="100" nullable="true" />
+			</basic>
+			<basic name="editors">
+				<column name="EDITERS" length="100" nullable="true" />
+			</basic>
+			<basic name="loader">
+				<column name="LOADER" length="100" nullable="true" />
+			</basic>
+			<basic name="view">
+				<column name="VIEW_" length="100" nullable="true" />
+			</basic>
+			<one-to-many name="columns" fetch="LAZY">
+				<join-column name="BAS_DATAGRID_ID" insertable="false"
+					nullable="true" updatable="false" />
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</one-to-many>
+			<transient name="sortColumns" />
+		</attributes>
+	</entity>
+	<!-- DataCloumn -->
+	<entity class="DataColumn">
+		<table name="BAS_COLUMN" />
+		<attributes>
+			<id name="id">
+				<column name="BAS_COLUMN_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="dataGridId">
+				<column name="BAS_DATAGRID_ID" precision="11" scale="0"
+					nullable="true" />
+			</basic>
+			<basic name="showOrder">
+				<column name="SHOW_ORDER" precision="1" scale="0" />
+			</basic>
+			<basic name="field">
+				<column name="FILED" length="255" nullable="true" />
+			</basic>
+			<basic name="name">
+				<column name="NAME" length="255" nullable="true" />
+			</basic>
+			<basic name="width">
+				<column name="WIDTH" precision="11" scale="0" nullable="true" />
+			</basic>
+			<basic name="rowspan">
+				<column name="ROWSPAN" precision="11" scale="0" />
+			</basic>
+			<basic name="colspan">
+				<column name="COLSPAN" precision="11" scale="0" nullable="true" />
+			</basic>
+			<basic name="sortable">
+				<column name="SORTABLE" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="order">
+				<column name="SORT_ORDER" length="5" nullable="true" />
+			</basic>
+			<basic name="headerAlign">
+				<column name="HEADER_ALIGN" length="10" nullable="true" />
+			</basic>
+			<basic name="align">
+				<column name="ALIGN" length="10" nullable="true" />
+			</basic>
+			<basic name="hidden">
+				<column name="HIDDEN" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="checkbox">
+				<column name="CHECK_BOX" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="formatter">
+				<column name="FORMATTER" length="256" nullable="true" />
+			</basic>
+			<basic name="styler">
+				<column name="STYLER" length="256" nullable="true" />
+			</basic>
+			<basic name="sorter">
+				<column name="SORTER" length="256" nullable="true" />
+			</basic>
+			<basic name="editor">
+				<column name="EDITOR" length="256" nullable="true" />
+			</basic>
+			<many-to-one name="dataGrid" fetch="LAZY">
+				<join-column name="BAS_DATAGRID_ID" insertable="false"
+					updatable="false" nullable="false" />
+				<cascade>
+					<cascade-merge />
+				</cascade>
+			</many-to-one>
+		</attributes>
+	</entity>
+</entity-mappings>

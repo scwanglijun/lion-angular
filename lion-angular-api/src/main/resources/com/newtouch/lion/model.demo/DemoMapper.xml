@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这里的namespace名字必须为执行该sql的dao地址&nbsp; -->
+<mapper namespace="com.newtouch.lion.dao.demo.BasDemoDao">
+	<resultMap type="com.newtouch.lion.model.demo.BasDemo" id="demoResultMap">  
+        <id property="id" column="bas_demo_id"/>  
+        <result property="parentId"  column="parent_id"/>  
+        <result property="nameZh"    column="name_zh"/>  
+        <result property="createdById" column="CREATE_BY"/>
+        <result property="createdDate"   column="CREATE_DATE"/>
+        <result property="updatedById"   column="UPDATE_BY"/>
+        <result property="updatedDate"   column="UPDATE_DATE"/>
+    </resultMap>
+     
+	<select id="find" parameterType="Long" resultType="com.newtouch.lion.model.demo.BasDemo" resultMap="demoResultMap">  
+        <![CDATA[ 
+            SELECT * FROM bas_demo
+			WHERE bas_demo_id =  #{id}
+        ]]>   
+    </select>
+    
+    <insert id="save" parameterType="com.newtouch.lion.model.demo.BasDemo">
+            INSERT INTO bas_demo(bas_demo_id,parent_id,name_zh,CREATE_BY,CREATE_DATE,UPDATE_BY,UPDATE_DATE)
+             VALUES(
+             	#{id},
+             	#{parentId},
+             	#{nameZh},
+             	#{createdById},
+             	#{createdDate},
+             	#{updatedById},
+             	#{updatedDate}
+             )
+    </insert>
+</mapper>
