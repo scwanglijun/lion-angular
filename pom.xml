@@ -4,13 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>lion-angular</groupId>
+    <groupId>com.newtouch.lion</groupId>
     <artifactId>lion-angular</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>lion-angular-parent</module>
         <module>lion-angular-api</module>
+        <module>lion-angular-service</module>
+        <module>lion-angular-web</module>
+        <module>lion-angular-webapp</module>
     </modules>
     <name>lion Admin</name>
     <url>http://lion.newtouch.com</url>
