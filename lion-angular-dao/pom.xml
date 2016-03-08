@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lion-angular-parent</artifactId>
+        <groupId>com.newtouch.lion</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../lion-angular-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.newtouch.lion</groupId>
+    <artifactId>lion-angular-dao</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>lion-angular-dao</name>
+    <url>http://lion.newtouch.com</url>
+    <dependencies>
+        <dependency>
+            <groupId>com.newtouch.lion</groupId>
+            <artifactId>lion-angular-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>
