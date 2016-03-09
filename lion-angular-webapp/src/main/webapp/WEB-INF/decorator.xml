@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/WEB-INF/decorators">
+	<excludes>
+		<pattern>**/css/*</pattern>
+		<pattern>**/images/*</pattern>
+		<pattern>**/js/*</pattern>
+		<pattern>**/ajax/*</pattern>
+		<pattern>**/menu/*</pattern>
+		<pattern>**/json*</pattern>
+		<pattern>**/list*.htm*</pattern>
+		<pattern>**/combox*.htm*</pattern>
+		<pattern>**/check*.htm*</pattern>
+		<pattern>**/dialog*.htm*</pattern>
+		<pattern>**/export*.htm*</pattern>
+		<pattern>/logout.htm*</pattern>
+		<pattern>/loginerror.htm*</pattern>
+		<pattern>/login.htm*</pattern>
+		<pattern>/test.htm</pattern>
+	</excludes>
+	
+	<!-- 主装饰器 -->
+	<decorator name="main" page="sitemesh.ftl">
+		<pattern>*.htm</pattern>
+	</decorator>
+</decorators>
+
