@@ -1,7 +1,7 @@
 <#import "/WEB-INF/tags/lion.ftl" as lion>
 <#import "/WEB-INF/tags/spring.ftl" as spring>
 <!DOCTYPE html>
-<!-- 
+<!--
 Template Name: Newtouch Admin Dashboard Template build with Twitter Bootstrap 3.3.1
 Version: 1.0
 Author: wanglijun
@@ -50,12 +50,12 @@ ${head}
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
-<#include "header.ftl"/> 
+<#include "header.ftl"/>
 <!-- BEGIN PAGE -->
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
 	<!-- BEGIN SIDEBAR -->
-	<#include "menu.ftl"/> 
+	<#include "menu.ftl"/>
 	<!-- END SIDEBAR -->
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
@@ -69,15 +69,15 @@ ${head}
 	<!-- END CONTENT -->
 </div>
 <!-- END CONTAINER -->
-<!-- END PAGE --> 
+<!-- END PAGE -->
 <!-- BEGIN FOOTER -->
-<#include "footer.ftl"> 
+<#include "footer.ftl">
 <!-- END FOOTER -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="${base}/resources/global/plugins/respond.min.js"></script>
-<script src="${base}/resources/global/plugins/excanvas.min.js"></script> 
+<script src="${base}/resources/global/plugins/excanvas.min.js"></script>
 <![endif]-->
 <script src="${base}/resources/global/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
@@ -97,12 +97,12 @@ ${head}
 <script src="${base}/resources/admin/layout4/scripts/layout.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/pages/scripts/tasks.js" type="text/javascript"></script>
 ${javascript!}
-<!-- END PAGE LEVEL SCRIPTS 
+<!-- END PAGE LEVEL SCRIPTS
 <script>
-$(document).ready(function() { 
+$(document).ready(function() {
 Metronic.init(); // init metronic core componets
 Layout.init(); // init layout
-Tasks.initDashboardWidget(); // init tash dashboard widget  
+Tasks.initDashboardWidget(); // init tash dashboard widget
 });
 </script>-->
 <!-- END JAVASCRIPTS -->

@@ -26,7 +26,6 @@
 	<!-- MyBatis End -->
 	<!-- shiro Start-->
 	<import resource="classpath:shiro/applicationContext-shiroweb.xml" />
-	<import resource="classpath:freemarker/applicationContext-freemarker.xml" />
 	<!-- shiro End-->
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>  

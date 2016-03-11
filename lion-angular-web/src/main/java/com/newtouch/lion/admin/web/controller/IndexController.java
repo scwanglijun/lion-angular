@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class IndexController extends  AbstractController{
 	/**首页模板路径*/
-	private static final String INDEX_RETURN="/index";
+	private static final String INDEX_RETURN="view/index";
 	/**测试页面*/
 	private static final String TEST_RETURN="/test";
 	/**选择页面*/
@@ -50,7 +50,6 @@ public class IndexController extends  AbstractController{
 		boolean isPermitted = subject.isPermitted("/index.htm");
 		logger.info("isPermitted:{}",isPermitted);
 		logger.info("进入首页.....");
-		System.out.println("===================");
 		return INDEX_RETURN;
 	}
 	
