@@ -1,1 +1,11 @@
+/lion-angular-webapp/target
+/lion-angular-web/target/lion-angular-web-1.0-SNAPSHOT.jar
+/lion-angular-api/lion-angular-api.iml
+/lion-angular-dao/lion-angular-dao.iml
+/lion-angular-parent/lion-angular-parent.iml
+/lion-angular-service/lion-angular-service.iml
+/lion-angular-web/target
+/lion-angular-web/lion-angular-web.iml
+/lion-angular-webapp/lion-angular-webapp.iml
+/lion-angular-webapp/lion-angualr-webapp.iml
 /.idea
