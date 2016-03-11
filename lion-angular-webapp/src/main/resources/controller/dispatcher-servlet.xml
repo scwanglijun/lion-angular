@@ -94,19 +94,6 @@
 		<property name="fallbackToSystemLocale" value="true" />
 		<property name="useCodeAsDefaultMessage" value="false" />
 	</bean>
-	<!-- 针对free marker的视图配置 -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-		<property name="cache" value="true" />
-		<property name="order" value="1" />
-		<property name="viewClass" 	value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
-		<property name="suffix" value=".ftl" />
-		<property name="requestContextAttribute"  value="request" />
-		<property name="exposeSpringMacroHelpers" value="true" />
-		<property name="exposeRequestAttributes"  value="true" />
-		<property name="exposeSessionAttributes"  value="true" />
-		<property name="allowSessionOverride"     value="true" />
-		<property name="contentType" value="text/html;charset=utf-8" />
-	</bean>
 
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="2" />
@@ -122,8 +109,8 @@
 	<bean id="jsltViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="order" value="3" />
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".html" />
 	</bean>
 	<!-- 统一异常处理 -->
 	<bean id="exceptionResolver"

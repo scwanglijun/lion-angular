@@ -49,13 +49,13 @@ import java.util.Date;
 @Controller("adminLoginController1")
 public class LoginController extends AbstractController {
 	/** 进入登录页面 */
-	private static final String LOGIN_RETURN = "/login";
+	private static final String LOGIN_RETURN = "view/login";
 	/** 登录成功 */
-	private static final String LOGIN_SUCCESS = "/index.htm";
+	private static final String LOGIN_SUCCESS = "view/index.html";
 	/**重定向到登录*/
-	private static final String REDIRECT_LOGIN="/login.htm";
+	private static final String REDIRECT_LOGIN="login.htm";
 	/**未授权页面*/
-	private static final String UNAUTHORIZED_RETURN="/unauthorized";
+	private static final String UNAUTHORIZED_RETURN="view/unauthorized";
 	/** Shiro Session缓存管理*/
 	@Autowired
 	private SessionCacheManager sessionCacheManager;
@@ -105,11 +105,8 @@ public class LoginController extends AbstractController {
 		if(currentUser.isAuthenticated()){
 			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", loginUser.getUsername(),userInfo.getId());
 			model.asMap().clear();
-			//
-			//saveLoginLog(userInfo,"success","login");
 			return this.redirect(LOGIN_SUCCESS);
 		}else{
-			 //saveLoginLog(userInfo,"error","login");
 			 token.clear(); 
 		}
 		return LOGIN_RETURN;
