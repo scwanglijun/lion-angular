@@ -51,9 +51,9 @@ public class LoginController extends AbstractController {
 	/** 进入登录页面 */
 	private static final String LOGIN_RETURN = "view/login";
 	/** 登录成功 */
-	private static final String LOGIN_SUCCESS = "view/index.html";
+	private static final String LOGIN_SUCCESS = "index";
 	/**重定向到登录*/
-	private static final String REDIRECT_LOGIN="login.htm";
+	private static final String REDIRECT_LOGIN="login";
 	/**未授权页面*/
 	private static final String UNAUTHORIZED_RETURN="view/unauthorized";
 	/** Shiro Session缓存管理*/
