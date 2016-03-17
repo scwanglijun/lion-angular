@@ -122,7 +122,7 @@
 	</session-config>
 	<!-- Welcome-File-List Start -->
 	<welcome-file-list>
-		<welcome-file>login.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	<!-- Welcome-File-List End -->
 </web-app>
