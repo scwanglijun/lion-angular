@@ -419,6 +419,28 @@ var Layout = function() {
             return false;
         });
     };
+
+    var initSideBarMenu=function($scope, $http, $modal, $window, $state,callback){
+        $scope.menus = [{
+            "name":"控制面板","icon":"home","url":".dashboard"
+        },{
+            "name":"系统设置","icon":"settings","open":"","url":"",
+            "subList":[
+                {"name":"用户管理","icon":"star","open":"","url":"","subList":[{"name":"角色管理","icon":"star","url":".role"},{"name":"用户组管理","icon":"star","url":".usergroup"},{"name":"用户管理","icon":"star","url":".user"}]},
+                {"name":"编码管理","icon":"star","open":"","url":".code"},
+                {"name":"部门管理","icon":"star","open":"","url":".department"},
+                {"name":"图标管理","icon":"star","open":"","url":".icon"}
+            ]
+        },{
+            "name": "账户管理", "icon": "user","open":"","url":"",
+            "subList": [
+                {"name": "个人资料", "icon": "user", "url": ".account","open":""},
+                {"name": "待办事项", "icon": "calendar", "url": ".calendar","open":""},
+                {"name": "通知消息", "icon": "bell", "url": ".toastr","open":""}
+            ]
+        }];
+    }
+
     //* END:CORE HANDLERS *//
 
     return {
@@ -434,8 +456,9 @@ var Layout = function() {
             handleSidebarMenuActiveLink(mode, el);
         },
 
-        initSidebar: function() {
+        initSidebar: function($scope,$http,$modal, $window, $state,callback) {
             //layout handlers
+            initSideBarMenu($scope,$http,$modal, $window, $state,callback);
             handleFixedSidebar(); // handles fixed sidebar menu
             handleSidebarMenu(); // handles main menu
             handleSidebarToggler(); // handles sidebar hide/show

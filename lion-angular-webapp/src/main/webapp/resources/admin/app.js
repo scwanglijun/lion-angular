@@ -19,7 +19,7 @@ lionApp.config(['$ocLazyLoadProvider','$httpProvider',function($ocLazyLoadProvid
     $httpProvider.defaults.headers.post['X-Requested-With']='XMLHttpRequest';
 }]);
 
-lionApp.factory('settings',['$rootScope',function($rootScope){
+lionApp.factory('settings',['$rootScope','$state',function($rootScope,$state){
 
     /**获取应用上下文根属性*/
     var context=function(){
@@ -41,6 +41,8 @@ lionApp.factory('settings',['$rootScope',function($rootScope){
     };
 
 
+    console.log($state);
+
 
     $rootScope.settings=settings;
     return settings;
@@ -61,31 +63,11 @@ lionApp.controller('HeaderController',['$scope','$window', '$http', '$state',fun
        });
 
 }]);
-//LeftMenuController
-lionApp.controller('LeftMenuController',['$scope',function($scope){
+//SideBarController
+lionApp.controller('SideBarController',['$scope','$http', '$modal', '$window', '$state',function($scope,$http,$modal,$window,$state){
     $scope.$on('$includeContentLoaded', function () {
-        Layout.initSidebar();
+        Layout.initSidebar($scope,$http,$modal,$window,$state);
     });
-
-    $scope.menus = [{
-        "name":"控制面板","icon":"home","url":".dashboard"
-    },{
-        "name":"系统设置","icon":"settings","open":"","url":"",
-        "subList":[
-            {"name":"用户管理","icon":"star","open":"","url":"","subList":[{"name":"角色管理","icon":"star","url":".role"},{"name":"用户组管理","icon":"star","url":".usergroup"},{"name":"用户管理","icon":"star","url":".user"}]},
-            {"name":"编码管理","icon":"star","open":"","url":".code"},
-            {"name":"部门管理","icon":"star","open":"","url":".department"},
-            {"name":"图标管理","icon":"star","open":"","url":".icon"}
-        ]
-    },{
-        "name": "账户管理", "icon": "user","open":"","url":"",
-        "subList": [
-            {"name": "个人资料", "icon": "user", "url": ".account","open":""},
-            {"name": "待办事项", "icon": "calendar", "url": ".calendar","open":""},
-            {"name": "通知消息", "icon": "bell", "url": ".toastr","open":""}
-        ]
-    }];
-
 }]);
 //PageHeaderController
 lionApp.controller('PageHeadController',['$scope',function($scope){
@@ -101,6 +83,8 @@ lionApp.controller('FooterController',['$scope',function($scope){
 }]);
 /*UI Routing for All Pages*/
 lionApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
+
+
     // Redirect any unmatched url
     $urlRouterProvider.otherwise("dashboard");
 
