@@ -12,7 +12,7 @@ Author:wanglijun
 
 <!--BEGIN HEAD-->
 <head>
-    <title></title>
+    <title ng-bind="'通用管理框架|'+$state.current.data.pageTitle"></title>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -57,7 +57,10 @@ Author:wanglijun
             <div ng-include="'template/navigationbar.html'" ng-controller="PageHeadController" class="page-head">
             </div>
             <!-- END PAGE HEAD -->
-
+            <!-- BEGIN ACTUAL CONTENT -->
+            <div ui-view="contentContainer" class="fade-in-up">
+            </div>
+            <!-- END ACTUAL CONTENT -->
         </div>
     </div>
 </div>
@@ -86,7 +89,20 @@ Author:wanglijun
 <script src="../resources/global/plugins/angularjs/plugins/ui-bootstrap-tpls-0.13.3.min.js" type="text/javascript"></script>
 <script src="../resources/global/plugins/angularjs/plugins/angular-sanitize.min.js" type="text/javascript"></script>
 <!--END   CORE AngularJS PLUGINS-->
+<!--BEGIN APP LEVEL ANGULAR JS SCRIPT-->
 <script src="../resources/admin/app.js" type="text/javascript"></script>
+<!--END   APP LEVEL ANGULAR JS SCRIPT-->
+<!--BEGIN APP LEVEL JQUERY SCRIPTS-->
+<script src="../resources/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="../resources/global/theme/layout4/scripts/layout.js" type="text/javascript"></script>
+<script src="../resources/global/theme/layout4/scripts/demo.js" type="text/javascript"></script>
+<!--END   APP LEVEL JQUERY SCRIPTS-->
+<script type="text/javascript">
+    $(function(){
+        Metronic.init();
+        Metronic.setAssetsPath('../resources/global/theme/');
+    });
+</script>
 <!--END     JAVASCRIPT-->
 </body>
 <!--BEGIN BODY-->
