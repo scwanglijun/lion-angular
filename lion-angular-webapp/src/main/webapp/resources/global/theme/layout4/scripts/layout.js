@@ -458,13 +458,18 @@ var Layout = function() {
 
         initSidebar: function($scope,$http,$modal, $window, $state,callback) {
             //layout handlers
+            var stateName = $state.$current.name;
             initSideBarMenu($scope,$http,$modal, $window, $state,callback);
             handleFixedSidebar(); // handles fixed sidebar menu
             handleSidebarMenu(); // handles main menu
             handleSidebarToggler(); // handles sidebar hide/show
 
             if (Metronic.isAngularJsApp()) {
-                handleSidebarMenuActiveLink('match'); // init sidebar active links
+               // handleSidebarMenuActiveLink('match'); // init sidebar active links
+                setTimeout(function () {
+                    //延迟几百毫秒,等待菜单列表渲染完成再触发激活菜单状态的事件
+                    handleSidebarMenuActiveLink('match', null, stateName);
+                }, 400);
             }
 
             Metronic.addResizeHandler(handleFixedSidebar); // reinitialize fixed sidebar on window resize

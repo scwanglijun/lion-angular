@@ -111,7 +111,7 @@ lionApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
                 templateUrl: '/admin/html/views/account/index.html' //具体需要显示的页面URL路径
             }
         },
-        data: {pageTitle: '账户管理', pageSubTitle: '主页 | 欢迎页面'},
+        data: {pageTitle: '账户管理', pageSubTitle: '个人资料 | 基本信息'},
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                 //在切换到这个view的时候需要先加载对应的js或其他文件，load当中可以放入数组加载多个文件
