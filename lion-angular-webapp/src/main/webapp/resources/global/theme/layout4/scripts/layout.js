@@ -22,14 +22,31 @@ var Layout = function() {
         if (mode === 'click' || mode === 'set') {
             el = $(el);
         } else if (mode === 'match') {
-            menu.find("li > a").each(function() {
-                var path = $(this).attr("href").toLowerCase();
-                // url match condition
-                if (path.length > 1 && url.substr(1, path.length - 1) == path.substr(1)) {
+            menu.find("li > a").each(function () {
+                //通过点击菜单跳转时，有stateChangeSuccess事件触发传递stateName，便于定位菜单状态
+                var state = $(this).attr("ui-sref") || "";
+                if (state != "" && stateName != "" && state === stateName) {
                     el = $(this);
-                    return;
+                    matched = true;
+                    return false;
                 }
+
             });
+            //使用state未匹配时，再次使用URL匹配
+            if (!matched) {
+                menu.find("li > a").each(function () {
+                    //直接刷新浏览器时，通过URL来定位菜单状态
+                    //使用angular ui-route时无href属性，做兼容判断
+                    var href = $(this).attr("ui-sref") || $(this).attr("href");
+                    var path = href.toLowerCase();
+                    // url match condition
+                    if (path.length > 1 && url.substr(2) == path) {//去掉#/后做比较
+                        el = $(this);
+                        return false;
+                    }
+                });
+
+            }
         }
 
         if (!el || el.size() == 0) {
