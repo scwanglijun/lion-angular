@@ -23,6 +23,9 @@ var Metronic = function() {
 
     // theme layout color set
 
+
+    
+
     var brandColors = {
         'blue': '#89C4F4',
         'red': '#F3565D',

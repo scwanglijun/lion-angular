@@ -20,14 +20,28 @@ lionApp.config(['$ocLazyLoadProvider','$httpProvider',function($ocLazyLoadProvid
 }]);
 
 lionApp.factory('settings',['$rootScope',function($rootScope){
+
+    /**获取应用上下文根属性*/
+    var context=function(){
+        //获取应用的上下文根路径
+        var pathname=window.location.pathname;
+        var indexNext= pathname.indexOf("/",1);
+        return pathname.substr(0,indexNext);
+    }();
+
     var settings={
         layout:{
             pageSidebarClosed:false,
             pageAutoScrollOnLoad:1000,
+
         },
         layoutImgPath:Metronic.getAssetsPath(),
-        layoutCssPath:Metronic.getAssetsPath()
+        layoutCssPath:Metronic.getAssetsPath(),
+        context:context,
     };
+
+
+
     $rootScope.settings=settings;
     return settings;
 }]);
@@ -46,18 +60,37 @@ lionApp.controller('HeaderController',['$scope','$window', '$http', '$state',fun
            Layout.initHeader();
        });
 
-
 }]);
 //LeftMenuController
 lionApp.controller('LeftMenuController',['$scope',function($scope){
     $scope.$on('$includeContentLoaded', function () {
-        Demo.init();
+        Layout.initSidebar();
     });
+
+    $scope.menus = [{
+        "name":"控制面板","icon":"home","url":".dashboard"
+    },{
+        "name":"系统设置","icon":"settings","open":"","url":"",
+        "subList":[
+            {"name":"用户管理","icon":"star","open":"","url":"","subList":[{"name":"角色管理","icon":"star","url":".role"},{"name":"用户组管理","icon":"star","url":".usergroup"},{"name":"用户管理","icon":"star","url":".user"}]},
+            {"name":"编码管理","icon":"star","open":"","url":".code"},
+            {"name":"部门管理","icon":"star","open":"","url":".department"},
+            {"name":"图标管理","icon":"star","open":"","url":".icon"}
+        ]
+    },{
+        "name": "账户管理", "icon": "user","open":"","url":"",
+        "subList": [
+            {"name": "个人资料", "icon": "user", "url": ".account","open":""},
+            {"name": "待办事项", "icon": "calendar", "url": ".calendar","open":""},
+            {"name": "通知消息", "icon": "bell", "url": ".toastr","open":""}
+        ]
+    }];
+
 }]);
 //PageHeaderController
 lionApp.controller('PageHeadController',['$scope',function($scope){
     $scope.$on('$includeContentLoaded', function () {
-        Layout.initFooter(); // init footer
+        Demo.init(); // init footer
     });
 }]);
 //FooterController
@@ -72,11 +105,11 @@ lionApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
     $urlRouterProvider.otherwise("dashboard");
 
     $stateProvider.state('dashboard', {
-        url: "/dashboard",
+        url: '/dashboard',
         views: {
-            "contentContainer": { //contentContainer 对应页面上的ui-view值，用于指定view显示在哪个位置
-                controller: "DashboardController", // 新加载的页面对应controller，需要确保值唯一
-                templateUrl: "/admin/html/views/dashboard.html"//具体需要显示的页面URL路径
+            'contentContainer': { //contentContainer 对应页面上的ui-view值，用于指定view显示在哪个位置
+                controller: 'DashboardController', // 新加载的页面对应controller，需要确保值唯一
+                templateUrl: '/admin/html/views/dashboard.html' //具体需要显示的页面URL路径
             }
         },
         data: {pageTitle: 'DashBoard', pageSubTitle: '主页 | 欢迎页面'},
@@ -87,11 +120,11 @@ lionApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
             }]
         }
     }).state('account', {
-        url: "/account",
+        url: '/account',
         views: {
-            "contentContainer": { //contentContainer 对应页面上的ui-view值，用于指定view显示在哪个位置
-                controller: "AccountController", // 新加载的页面对应controller，需要确保值唯一
-                templateUrl: "/admin/html/views/account/index.html"//具体需要显示的页面URL路径
+            'contentContainer': { //contentContainer 对应页面上的ui-view值，用于指定view显示在哪个位置
+                controller: 'AccountController', // 新加载的页面对应controller，需要确保值唯一
+                templateUrl: '/admin/html/views/account/index.html' //具体需要显示的页面URL路径
             }
         },
         data: {pageTitle: '账户管理', pageSubTitle: '主页 | 欢迎页面'},
@@ -102,5 +135,16 @@ lionApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
             }]
         }
     });
+}]);
+
+
+
+/* Init global settings and run the app */
+lionApp.run(["$rootScope", "settings", "$state", "$templateCache", function ($rootScope, settings, $state, $templateCache) {
+    $rootScope.$state = $state; // state to be accessed from view
+   // console.log(settings)
+   // $templateCache.put("db/db-form.html", "<div class='row'><db-form></db-form></div>");
+   // $templateCache.put("db/db-form-grid.html", "<div class='row'><db-form-grid></db-form-grid></div>");
+
 }]);
 
