@@ -40,10 +40,6 @@ lionApp.factory('settings',['$rootScope','$state',function($rootScope,$state){
         context:context,
     };
 
-
-
-
-
     $rootScope.settings=settings;
     return settings;
 }]);
