@@ -14,7 +14,13 @@ var Layout = function() {
 
 
     // Handle sidebar menu links
-    var handleSidebarMenuActiveLink = function(mode, el) {
+    var handleSidebarMenuActiveLink = function (mode, el, stateName) {
+
+
+        console.log(mode);
+        console.log(el);
+        console.log(stateName);
+
         var url = location.hash.toLowerCase();
 
         var menu = $('.page-sidebar-menu');
@@ -22,10 +28,11 @@ var Layout = function() {
         if (mode === 'click' || mode === 'set') {
             el = $(el);
         } else if (mode === 'match') {
+            var matched = false;
             menu.find("li > a").each(function () {
                 //通过点击菜单跳转时，有stateChangeSuccess事件触发传递stateName，便于定位菜单状态
-                var state = $(this).attr("ui-sref") || "";
-                if (state != "" && stateName != "" && state === stateName) {
+                var state = $(this).attr('ui-sref') || '';
+                if (state !='' && stateName != '' && state === stateName) {
                     el = $(this);
                     matched = true;
                     return false;
@@ -45,8 +52,8 @@ var Layout = function() {
                         return false;
                     }
                 });
-
             }
+
         }
 
         if (!el || el.size() == 0) {
@@ -65,7 +72,7 @@ var Layout = function() {
         menu.find('li > a > .selected').remove();
 
         if (menu.hasClass('page-sidebar-menu-hover-submenu') === false) {
-            menu.find('li.open').each(function(){
+            menu.find('li.open').each(function () {
                 if ($(this).children('.sub-menu').size() === 0) {
                     $(this).removeClass('open');
                     $(this).find('> a > .arrow.open').removeClass('open');
@@ -456,6 +463,9 @@ var Layout = function() {
                 {"name": "通知消息", "icon": "bell", "url": ".toastr","open":""}
             ]
         }];
+
+        //回调函数
+        callback.call();
     }
 
     //* END:CORE HANDLERS *//
@@ -473,23 +483,28 @@ var Layout = function() {
             handleSidebarMenuActiveLink(mode, el);
         },
 
-        initSidebar: function($scope,$http,$modal, $window, $state,callback) {
+        initSidebar: function($scope,$http,$modal, $window, $state) {
             //layout handlers
             var stateName = $state.$current.name;
-            initSideBarMenu($scope,$http,$modal, $window, $state,callback);
-            handleFixedSidebar(); // handles fixed sidebar menu
-            handleSidebarMenu(); // handles main menu
-            handleSidebarToggler(); // handles sidebar hide/show
 
-            if (Metronic.isAngularJsApp()) {
-               // handleSidebarMenuActiveLink('match'); // init sidebar active links
-                setTimeout(function () {
-                    //延迟几百毫秒,等待菜单列表渲染完成再触发激活菜单状态的事件
-                    handleSidebarMenuActiveLink('match', null, stateName);
-                }, 400);
-            }
+            //加载菜单数据
+            initSideBarMenu($scope,$http,$modal, $window, $state,function(){
 
-            Metronic.addResizeHandler(handleFixedSidebar); // reinitialize fixed sidebar on window resize
+                handleFixedSidebar(); // handles fixed sidebar menu
+                handleSidebarMenu(); // handles main menu
+                handleSidebarToggler(); // handles sidebar hide/show
+
+                if (Metronic.isAngularJsApp()) {
+                    // handleSidebarMenuActiveLink('match'); // init sidebar active links
+                    setTimeout(function () {
+                        //延迟几百毫秒,等待菜单列表渲染完成再触发激活菜单状态的事件
+                        handleSidebarMenuActiveLink('match', null, stateName);
+                    }, 400);
+                }
+
+                Metronic.addResizeHandler(handleFixedSidebar); // reinitialize fixed sidebar on window resize
+            });
+
         },
 
         initContent: function() {
