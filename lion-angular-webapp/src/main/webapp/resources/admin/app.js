@@ -41,7 +41,7 @@ lionApp.factory('settings',['$rootScope','$state',function($rootScope,$state){
     };
 
 
-    console.log($state);
+
 
 
     $rootScope.settings=settings;
@@ -83,8 +83,7 @@ lionApp.controller('FooterController',['$scope',function($scope){
 }]);
 /*UI Routing for All Pages*/
 lionApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
-
-
+    console.dir($stateProvider);
     // Redirect any unmatched url
     $urlRouterProvider.otherwise("dashboard");
 
@@ -103,8 +102,8 @@ lionApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
                 return $ocLazyLoad.load(['../resources/admin/scripts/DashboardController.js']);
             }]
         }
-    }).state('account', {
-        url: '/account',
+    }).state('account/person', {
+        url: '/account/person',
         views: {
             'contentContainer': { //contentContainer 对应页面上的ui-view值，用于指定view显示在哪个位置
                 controller: 'AccountController', // 新加载的页面对应controller，需要确保值唯一
@@ -124,7 +123,7 @@ lionApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
 
 
 /* Init global settings and run the app */
-lionApp.run(["$rootScope", "settings", "$state", "$templateCache", function ($rootScope, settings, $state, $templateCache) {
+lionApp.run(['$rootScope', 'settings', '$state', "$templateCache", function ($rootScope, settings, $state, $templateCache) {
     $rootScope.$state = $state; // state to be accessed from view
    // console.log(settings)
    // $templateCache.put("db/db-form.html", "<div class='row'><db-form></db-form></div>");

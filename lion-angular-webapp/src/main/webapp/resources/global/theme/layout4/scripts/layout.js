@@ -16,11 +16,6 @@ var Layout = function() {
     // Handle sidebar menu links
     var handleSidebarMenuActiveLink = function (mode, el, stateName) {
 
-
-        console.log(mode);
-        console.log(el);
-        console.log(stateName);
-
         var url = location.hash.toLowerCase();
 
         var menu = $('.page-sidebar-menu');
@@ -32,6 +27,7 @@ var Layout = function() {
             menu.find("li > a").each(function () {
                 //通过点击菜单跳转时，有stateChangeSuccess事件触发传递stateName，便于定位菜单状态
                 var state = $(this).attr('ui-sref') || '';
+                //console.log(state);
                 if (state !='' && stateName != '' && state === stateName) {
                     el = $(this);
                     matched = true;
@@ -458,9 +454,9 @@ var Layout = function() {
         },{
             "name": "账户管理", "icon": "user","open":"","url":"",
             "subList": [
-                {"name": "个人资料", "icon": "user", "url": ".account","open":""},
-                {"name": "待办事项", "icon": "calendar", "url": ".calendar","open":""},
-                {"name": "通知消息", "icon": "bell", "url": ".toastr","open":""}
+                {"name": "个人资料", "icon": "user", "url": ".account/person","open":""},
+                {"name": "待办事项", "icon": "calendar", "url": ".account.calendar","open":""},
+                {"name": "通知消息", "icon": "bell", "url": ".account.toastr","open":""}
             ]
         }];
 
@@ -484,6 +480,8 @@ var Layout = function() {
         },
 
         initSidebar: function($scope,$http,$modal, $window, $state) {
+
+
             //layout handlers
             var stateName = $state.$current.name;
 
