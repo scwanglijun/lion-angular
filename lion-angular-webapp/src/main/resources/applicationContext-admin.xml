@@ -20,7 +20,10 @@
 	<import resource="classpath:dao/applicationContext-jpa.xml" />
 	<import resource="classpath:tx/applicationContext-tx.xml" />
 	<!-- Dao End -->
-
+	<!--spring mvc-->
+	<import resource="classpath:controller/dispatcher-servlet.xml" />
+	<import resource="classpath:controller/applicationContext-dispatcher.xml" />
+	<!--spring mvc-->
 	<!-- MyBatis Start
 	<import resource="classpath:mybatis/mybatis-context.xml" /> -->
 	<!-- MyBatis End -->
