@@ -55,6 +55,11 @@
             <groupId>com.newtouch.lion</groupId>
             <artifactId>com.newtouch.lion-cache</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.newtouch.lion</groupId>
+            <artifactId>com.newtouch.lion-webtrans</artifactId>
+            <version>1.7.0</version>
+        </dependency>
         <!-- Spring MVC Start -->
         <dependency>
             <groupId>org.springframework</groupId>
