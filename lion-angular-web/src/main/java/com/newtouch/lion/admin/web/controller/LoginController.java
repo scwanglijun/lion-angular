@@ -17,6 +17,8 @@ import com.newtouch.lion.web.shiro.cache.SessionCacheManager;
 import com.newtouch.lion.web.shiro.constant.Constants;
 import com.newtouch.lion.web.shiro.model.LoginUser;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
+import com.newtouch.lion.web.vo.login.resp.LoginResp;
+import com.newtouch.lion.webtrans.trans.Trans;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -46,16 +48,9 @@ import java.util.Date;
  * @author WangLijun
  * @version 1.0
  */
-@Controller("adminLoginController1")
+@Controller
 public class LoginController extends AbstractController {
-	/** 进入登录页面 */
-	private static final String LOGIN_RETURN = "view/login";
-	/** 登录成功 */
-	private static final String LOGIN_SUCCESS = "index";
-	/**重定向到登录*/
-	private static final String REDIRECT_LOGIN="login";
-	/**未授权页面*/
-	private static final String UNAUTHORIZED_RETURN="view/unauthorized";
+
 	/** Shiro Session缓存管理*/
 	@Autowired
 	private SessionCacheManager sessionCacheManager;
@@ -69,8 +64,8 @@ public class LoginController extends AbstractController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/login",method=RequestMethod.POST)
-	public String login(LoginUser loginUser,Model model) {
+	@Trans(value = "user.login")
+	public LoginResp login(LoginUser loginUser,Model model) {
 		logger.info("进入登录页面");
 		UserInfo userInfo = LoginSecurityUtil.getUser();
 		//获取当前的Subject
@@ -105,117 +100,12 @@ public class LoginController extends AbstractController {
 		if(currentUser.isAuthenticated()){
 			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", loginUser.getUsername(),userInfo.getId());
 			model.asMap().clear();
-			return this.redirect(LOGIN_SUCCESS);
+			return new LoginResp("201","已经登录，重定向到首页");
 		}else{
 			 token.clear(); 
 		}
-		return LOGIN_RETURN;
+		return new LoginResp("200","登录成功");
 	}
 	
-	
-	/****
-	 * 登录跳转
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/login",method=RequestMethod.GET)
-	public String welcome(Model model) {
-		String forcelogout=this.getRequest().getParameter(Constants.FORCE_LOGOUT);
-		if(Constants.LOGIN_FORCE_ERROR.equals(forcelogout)){
-			model.addAttribute(Constants.LOGIN_ERROR_MSG,"您被系统管理员强制退出系统，请联系系统管理员.");
-		}else if(Constants.LOGIN_MAXS_ERROR.equals(forcelogout)){
-			model.addAttribute(Constants.LOGIN_ERROR_MSG,"您的用户名已登录系统正在使用中…如有疑问请联系系统管理员.");
-		}
-		UserInfo userInfo = LoginSecurityUtil.getUser();
-		if (userInfo != null) {
-			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", userInfo.getUsername(),userInfo.getId());
-			return this.redirect(LOGIN_SUCCESS);
-		}
-		return LOGIN_RETURN;
-	}
-	
-	@RequestMapping(value = "/logout",method=RequestMethod.GET)
-	public String logout(){
-		logger.info("退出系统");
-		Subject subject = SecurityUtils.getSubject();
-		if (subject.isAuthenticated()) {
-			UserInfo userInfo = LoginSecurityUtil.getUser();
-			//退出
-			//saveLoginLog(userInfo,"success","logout");
-			// session 会销毁，在SessionListener监听session销毁，清理权限缓存
-			subject.logout(); 
-			//清除缓存
-			sessionCacheManager.removeSessionController(Constants.CACHE_SESSION_NAME,userInfo.getUsername());
-		}
-		return this.redirect(REDIRECT_LOGIN);
-	}
-	
-	/***
-	 * 未授权的情况
-	 */
-	@RequestMapping(value="unauthorized",method=RequestMethod.GET)
-	public String unauthorized(){
-		return UNAUTHORIZED_RETURN;
-	}
-	
-	
-	
-	
-	/**
-	 * 登录错误处理
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="/loginerror",method=RequestMethod.GET)
-	public String loginerror(Model model){
-		String forcelogout=this.getRequest().getParameter(Constants.FORCE_LOGOUT);
-		model.addAttribute(Constants.FORCE_LOGOUT, forcelogout);
-		return  this.redirect(REDIRECT_LOGIN);
-	}
-	
-	/**
-	 * 
-	 * */
-	private void saveLoginLog(UserInfo userInfo,String loginResult,String loginType){
-		try{
-			HttpServletRequest request=super.getRequest();
-			String requestHeader=request.getHeader("User-Agent");
-			LoginLog loginLog=new LoginLog();
-			loginLog.setUserId(userInfo.getId());
-			loginLog.setLoginIP(IPAddressUtil.getIPAddress(request));
-			loginLog.setLoginMAC(userInfo.getMacAddress());
-			loginLog.setBrowserName(requestHeader);
-			loginLog.setSessionId(request.getSession().getId());
-			loginLog.setLoginResult(loginResult);
-			loginLog.setLoginTime(new Date());
-			if(!LoginController.isMobileDevice(requestHeader)){
-				loginLog.setOsInfo("PC");
-	        }else{
-	        	loginLog.setOsInfo("APP");
-	        }
-			
-			loginLog.setLoginType(loginType);
-			loginLogService.save(loginLog);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	 /**
-     * android : 所有android设备
-     * mac os : iphone ipad
-     * windows phone:Nokia等windows系统的手机
-     */
-	public static boolean  isMobileDevice(String requestHeader){
-       
-		String[] deviceArray = new String[]{"android","mac os","windows phone"};
-        if(requestHeader == null)
-            return false;
-        requestHeader = requestHeader.toLowerCase();
-        for(int i=0;i<deviceArray.length;i++){
-            if(requestHeader.indexOf(deviceArray[i])>0){
-                return true;
-            }
-        }
-        return false;
-    }
+
 }
