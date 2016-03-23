@@ -9,7 +9,7 @@ lion_utils.factory("lionUtils", ["$http",
     function ($http) {
         function fetch(transCode, data, successfn, errorfn) {
             //successfn = successfn || $.noop;
-            //errorfn = errorfn || $.noop;
+            //errorfn = errorfn || $.noop;INCOu.INCOME_DATE
 
             var params = {
                 requestBody: JSON.stringify(data),
