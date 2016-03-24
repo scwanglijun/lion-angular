@@ -16,9 +16,9 @@ lion_utils.factory("lionUtils", ["$http",
                 transCode: transCode
             };
 
-            $http.post("http://localhost:8080/admin/api.do")
+            $http.post("http://localhost:8080/admin/api.do",params)
                 .success(function (data) {
-                    successfn.call(this, data, arg);
+                    successfn.call(this, data);
                 });
         }
 

@@ -38,7 +38,7 @@ import java.util.List;
 public class ShiroResourceManagerImpl  implements ShiroResourceManager {
 	/** 资源读取类 */
 	@Autowired
-	private ResourceService resourceService; 
+	private ResourceService resourceService;
 	
 	/*
 	 * (non-Javadoc)

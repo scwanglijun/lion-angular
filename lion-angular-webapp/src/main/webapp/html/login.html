@@ -50,7 +50,7 @@
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
             <label class="control-label visible-ie8 visible-ie9">用户名</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" ng-model="data.userName">
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" ng-model="data.username">
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">密 码</label>
@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-md-7">
                     <label class="control-label visible-ie8 visible-ie9">验证码</label>
-                    <input class="form-control form-control-solid placeholder-no-fix" type="text" placeholder="验证码" ng-model="data.validCode">
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" placeholder="验证码" ng-model="data.verifyCode">
                 </div>
                 <div class="col-md-5">
                     <img ng-src="{{ verifyCodeUrl }}" style="width: 120px;height: 40px;" ng-click="resetVerifyCode()"/>
