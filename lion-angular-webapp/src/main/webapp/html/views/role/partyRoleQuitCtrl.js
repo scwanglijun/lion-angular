@@ -18,18 +18,18 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
         },
         grid: {
             settings: {
-                transCode: "../data/roles.json",
+                transCode: "../data/list.json",
                 autoLoad: true,
                 page: {pageSize: 10},
                 showCheckBox: true
             },
             header: [
-                {name: "角色名称(英文)", width: "18%", field: "partyNo"},
-                {name: "角色名称(中文)", width: "18%", field: "partyName"},
-                {name: "描述", width: "18%", field: "organizationName"},
-                {name: "可编辑", width: "10%", field: "departmentName"},
-                {name: "创建时间", width: "18%", field: "businessType"},
-                {name: "更新时间", width: "18%", field: "certificateType"},
+                {name: "角色名称(英文)", width: "18%", field: "nameEn"},
+                {name: "角色名称(中文)", width: "18%", field: "nameZh"},
+                {name: "描述", width: "18%", field: "description"},
+                {name: "可编辑", width: "10%", field: "editable"},
+                {name: "创建时间", width: "18%", field: "createdDate"},
+                {name: "更新时间", width: "18%", field: "updatedDate"},
             ],
             rowOperation: {show: false}
         }
@@ -56,6 +56,10 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
             operationEvents: [{
                 name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
                     quit();
+                }
+            },{
+                name: "新增", class: "btn-success", icon: "shanchu", click: function () {
+                    //quit();
                 }
             }]
         }

@@ -813,7 +813,6 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: 'raisingPeriodModifyCtrl',
-
                 templateUrl: "db/db-form-grid.html"
             }
         },
