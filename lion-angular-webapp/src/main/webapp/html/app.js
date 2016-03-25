@@ -837,7 +837,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
 /* Init global settings and run the app */
 DBApp.run(["$rootScope", "settings", "$state", "$templateCache", function ($rootScope, settings, $state, $templateCache) {
     $rootScope.$state = $state; // state to be accessed from view
-    $templateCache.put("db/db-form.html", "<div class='row'><db-form></db-form></div>");
-    $templateCache.put("db/db-form-grid.html", "<div class='row'><db-form-grid></db-form-grid></div>");
+    $templateCache.put("db/db-form.html", "<div class=''><db-form></db-form></div>");
+    $templateCache.put("db/db-form-grid.html", "<div class=''><db-form-grid></db-form-grid></div>");
 
 }]);

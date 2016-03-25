@@ -1,4 +1,4 @@
-<div class="page-sidebar navbar-collapse collapse">
+<!--<div class="page-sidebar navbar-collapse collapse">
 	<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
 		<li ng-repeat="menu in pageHeaderMenus">
 			<a ui-sref="{{menu.url}}"  ng-if="menu.url&&menu.show">
@@ -21,5 +21,49 @@
 			</ul>
 		</li>
 	</ul>
+</div>	-->
+
+<!-- modified by 吴翔 -->
+<div class="page-sidebar navbar-collapse collapse">
+	<!--动态加载sidebar  menu-->
+	<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+		<li ng-repeat="menu in pageHeaderMenus" ui-sref-active="active">
+			<a ui-sref="{{menu.url}}"  ng-if="menu.url">
+				<i class="icon-{{menu.icon}}"></i>
+				<span class="title">{{menu.name}}</span>
+				<i class="iconfont arrow {{menu.open}}" ng-if="menu.subList"></i>
+			</a>
+			<a href="javascript:void(0)"  ng-if="!menu.url">
+				<i class="icon-{{menu.icon}}"></i>
+				<span class="title">{{menu.name}}</span>
+				<i class="iconfont arrow {{menu.open}}" ng-if="menu.subList"></i>
+			</a>
+			<ul class="sub-menu"  ng-if="menu.subList">
+				<li ng-repeat="submenu in menu.subList" ui-sref-active="active">
+					<a ui-sref="{{submenu.url}}" ng-if="submenu.url">
+						<i class="icon-{{submenu.icon}}"></i>
+						<span class="title">{{submenu.name}}</span>
+						<i class="iconfont arrow {{submenu.open}}" ng-if="submenu.subList"></i>
+					</a>
+
+					<a href="javascript:void(0)" ng-if="!submenu.url">
+						<i class="icon-{{submenu.icon}}"></i>
+						<span class="title">{{submenu.name}}</span>
+						<i class="iconfont arrow {{submenu.open}}" ng-if="submenu.subList"></i>
+					</a>
+
+					<ul class="sub-menu" ng-if="submenu.subList">
+						<li ng-repeat="subsubmenu in submenu.subList" ui-sref-active="active">
+							<a ui-sref="{{subsubmenu.url}}">
+								<i class="icon-{{subsubmenu.icon}}"></i>
+								<span class="title">{{subsubmenu.name}}</span>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
 	<!-- END SIDEBAR MENU -->
-</div>	
+</div>
+

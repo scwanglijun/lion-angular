@@ -449,7 +449,7 @@ var Layout = function () {
     //绑定菜单列表，数据从后端获取到
     var initMenuURL = function ($scope, $http, $modal, $window, $state, callback) {
         // 数据从服务端获取，或从指定的JSON文件当中获取
-        var menus = [
+        /*var menus = [
             {
                 "name": "控制面板", "icon": "quanxianguanlix", "url":"dashboard"
             },
@@ -505,7 +505,27 @@ var Layout = function () {
                     {"name": "通知消息", "icon": "shanchu", "url": "talentDeleted"}
                 ]
             }
-        ];
+        ];*/
+
+        /* modified by 吴翔 */
+        var menus = [{
+            "name":"控制面板","icon":"home","url":"dashboard"
+        },{
+            "name":"系统设置","icon":"settings","open":"","url":"",
+            "subList":[
+                {"name":"用户管理","icon":"star","open":"","url":"","subList":[{"name":"角色管理","icon":"star","url":"partyRoleQuit"},{"name":"用户组管理","icon":"star","url":"usergroup"},{"name":"用户管理","icon":"star","url":".user"}]},
+                {"name":"编码管理","icon":"star","open":"","url":"code"},
+                {"name":"部门管理","icon":"star","open":"","url":"department"},
+                {"name":"图标管理","icon":"star","open":"","url":"icon"}
+            ]
+        },{
+            "name": "账户管理", "icon": "user","open":"","url":"",
+            "subList": [
+                {"name": "个人资料", "icon": "user", "url": "account","open":""},
+                {"name": "待办事项", "icon": "calendar", "url": "calendar","open":""},
+                {"name": "通知消息", "icon": "bell", "url": "toastr","open":""}
+            ]
+        }];
 
 
         var ApiRequest = {};
