@@ -21,6 +21,10 @@
 	<link href="../resources/lib/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 	<link href="../resources/lib/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
 	<link href="../resources/lib/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="../resources/lib/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link href="../resources/lib/global/css/tasks.css" rel="stylesheet" type="text/css"/>
+
 	<!-- 加载全局样式 字体和bootstrap必须的css文件 结束 -->
 	<!--<link rel="icon" href="../resources/layout4/img/logo.png" type="image/x-icon"/>-->
 
@@ -129,6 +133,7 @@
 <script src="../resources/lib/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="../resources/lib/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
 <script src="../resources/lib/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../resources/lib/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <!-- END CORE JQUERY PLUGINS -->
 
 <!-- BEGIN CORE ANGULARJS PLUGINS -->
@@ -170,6 +175,7 @@
 	$(document).ready(function() {
 		Metronic.init(); // Run metronic theme
 		Metronic.setAssetsPath('../resources/lib/'); // Set the ../resources/lib folder path
+		$("input[type='checkbox']").uniform();
 	});
 </script>
 <!-- END JAVASCRIPTS -->
