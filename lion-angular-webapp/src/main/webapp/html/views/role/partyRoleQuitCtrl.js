@@ -18,7 +18,7 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
         },
         grid: {
             settings: {
-                transCode: "../data/list.json",
+                transCode: "role.list",
                 autoLoad: true,
                 page: {pageSize: 10},
                 showCheckBox: true
