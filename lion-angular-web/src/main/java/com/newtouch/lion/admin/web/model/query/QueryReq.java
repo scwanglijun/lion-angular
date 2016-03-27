@@ -1,4 +1,5 @@
-package com.newtouch.lion.admin.web.model.query;/**
+package com.newtouch.lion.admin.web.model.query;
+/**
  * Created by jovi on 3/25/16.
  */
 
