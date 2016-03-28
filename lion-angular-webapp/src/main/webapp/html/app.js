@@ -575,8 +575,8 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         data: {pageTitle: 'Role', pageSubTitle: '用户管理|角色管理'},
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                return $ocLazyLoad.load(['views/role/partyRoleQuitCtrl.js',
-                    'views/role/partyRoleDetailCtrl.js']);
+                return $ocLazyLoad.load(['../resources/admin/controllers/role/partyRoleQuitCtrl.js',
+                    '../resources/admin/controllers/role/partyRoleDetailCtrl.js']);
             }]
         }
     }).state('partyRoleTransfer', {
