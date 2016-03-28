@@ -3,11 +3,8 @@ package com.newtouch.lion.admin.web.model.query;
  * Created by jovi on 3/25/16.
  */
 
-import com.newtouch.lion.web.model.Order;
-import com.newtouch.lion.web.model.QueryVo;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * <p>
@@ -28,6 +25,7 @@ import java.util.List;
  */
 public class QueryReq implements Serializable{
     private GridPage page;
+    private SortPage sort;
 
     public GridPage getPage() {
         return page;
@@ -35,5 +33,13 @@ public class QueryReq implements Serializable{
 
     public void setPage(GridPage page) {
         this.page = page;
+    }
+
+    public SortPage getSort() {
+        return sort;
+    }
+
+    public void setSort(SortPage sort) {
+        this.sort = sort;
     }
 }
