@@ -41,12 +41,16 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
 
             },
             operationEvents: [{
-                name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
-                    quit();
+                name: "新增", class: "btn-success", icon: "tianjia", click: function () {
+                    //quit();
                 }
             },{
-                name: "新增", class: "btn-success", icon: "shanchu", click: function () {
+                name: "编辑", class: "btn-info", icon: "luru", click: function () {
                     //quit();
+                }
+            },{
+                name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
+                    quit();
                 }
             }]
         }
