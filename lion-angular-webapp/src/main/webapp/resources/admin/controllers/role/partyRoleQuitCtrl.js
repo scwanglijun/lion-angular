@@ -70,9 +70,9 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
     function openModal(source) {
         var instance = $modal.open({
             animation: true,
-            templateUrl: 'views/role/test.html',
+            templateUrl: 'views/admin/system/role/test.html',
             controller: 'testCtrl',
-            size: "",
+            size: "md",
             backdrop: "static",
             resolve: {
                 source: function () {
