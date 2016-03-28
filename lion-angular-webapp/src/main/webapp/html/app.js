@@ -199,7 +199,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 return $ocLazyLoad.load(['DashboardController.js']);
             }]
         }
-    }).state('securityUserList', {
+    })/*.state('securityUserList', {
         url: "/securityUserList",
         views: {
             "mainContentContainer": {
@@ -829,7 +829,56 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]);
             }]
         }
-    });
+    });*/
+
+        .state('system/users/rolelist', {
+            url: "/system/users/rolelist",
+            views: {
+                "mainContentContainer": {
+                    controller: "partyRoleQuitCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'Role', pageSubTitle: '用户管理|角色管理'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/role/partyRoleQuitCtrl.js',
+                        '../resources/admin/controllers/role/partyRoleDetailCtrl.js']);
+                }]
+            }
+        })
+        .state('system/users/usergrouplist', {
+            url: "/system/users/usergrouplist",
+            views: {
+                "mainContentContainer": {
+                    controller: "usergroupListCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'Usergroup', pageSubTitle: '用户管理|用户组管理'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/usergroup/usergroupListCtrl.js',
+                        '../resources/admin/controllers/usergroup/usergroupDetailCtrl.js']);
+                }]
+            }
+        })
+        .state('system/users/userlist', {
+            url: "/system/users/userlist",
+            views: {
+                "mainContentContainer": {
+                    controller: "userListCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'User', pageSubTitle: '用户管理|用户管理'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/user/userListCtrl.js',
+                        '../resources/admin/controllers/user/userDetailCtrl.js']);
+                }]
+            }
+        })
 
 
 }
@@ -837,7 +886,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
 /* Init global settings and run the app */
 DBApp.run(["$rootScope", "settings", "$state", "$templateCache", function ($rootScope, settings, $state, $templateCache) {
     $rootScope.$state = $state; // state to be accessed from view
-    $templateCache.put("db/db-form.html", "<div class='row'><db-form></db-form></div>");
-    $templateCache.put("db/lion-form-grid.html", "<div class='row'><lion-form-grid></lion-form-grid></div>");
+    $templateCache.put("db/db-form.html", "<div class=''><db-form></db-form></div>");
+    $templateCache.put("db/lion-form-grid.html", "<div class=''><lion-form-grid></lion-form-grid></div>");
 
 }]);
