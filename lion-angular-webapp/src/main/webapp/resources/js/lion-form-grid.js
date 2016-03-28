@@ -165,7 +165,7 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
             }
 
             $scope.lionFormGrid.queryParams = $scope.lionFormGrid.options.form.hiddenParams || {};
-            $scope.dbFormGrid.sortingParams = {};
+            $scope.dbFormGrid.sortingParams = null;
 
             var selectFields = [];
             //计算每个占用的列数
@@ -226,12 +226,14 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
                     keyWord: $scope.lionFormGrid.queryParams.keyWord || "",
                     pageNumber: $scope.lionFormGrid.page.pageNumber,
                     pageSize: $scope.lionFormGrid.page.pageSize
+
                 };
+                queryParams["sort"] = $scope.dbFormGrid.sortingParams;
+               // var sortingParams = angular.copy($scope.dbFormGrid.sortingParams);
 
-                var sortingParams = angular.copy($scope.dbFormGrid.sortingParams);
-
-                dbUtils.post($scope.lionFormGrid.options.grid.settings.transCode, queryParams, sortingParams, function (data) {
+                dbUtils.post($scope.lionFormGrid.options.grid.settings.transCode, queryParams, function (data) {
                     //获取每行数据，并调用format方法进行处理，最后赋值给$scope.lionFormGrid.rows
+                    //console.log();
                     var rows = data.content;
                     for (var i in rows) {
                         var row = rows[i];
@@ -416,6 +418,7 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
 
             // 执行排序功能
             $scope.dbFormGrid.sorting=function(header){
+                $scope.dbFormGrid.sortingParams={};
                 $scope.dbFormGrid.sortingParams.order = header.field;
                 angular.forEach($scope.dbFormGrid.options.grid.header, function (h) {
                     if(angular.equals(h.field,header.field)){

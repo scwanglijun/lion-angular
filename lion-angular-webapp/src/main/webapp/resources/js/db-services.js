@@ -252,13 +252,13 @@ function DialogUtil($modal, $http, $window, toaster) {
                 }
             });
         },
-        post: function (transCode, reqBody, sorting, success, error) {
+        post: function (transCode, reqBody, success, error) {
             Metronic.startPageLoading();
             var ApiRequest = {};
             ApiRequest["transCode"] = transCode;
             ApiRequest["requestBody"] = reqBody;
-            ApiRequest["sorting"] = sorting;
             $http.post("../api.do", ApiRequest).success(function (data, status, headers, config) {
+                console.log(ApiRequest);
                 Metronic.stopPageLoading();
                 if (data.status == "401") {//用户未登录
                     $window.location.href = "login.html";
