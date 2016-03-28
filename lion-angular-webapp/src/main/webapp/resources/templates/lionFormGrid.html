@@ -97,11 +97,9 @@
                     <tr style="background-color: #E9ECF3;">
                         <th ng-if="lionFormGrid.options.grid.settings.showCheckBox"
                             style="vertical-align: middle;width:5%;text-align: center;padding: 0px;border-right-width: 0px;">
-
                             <div class="form-group form-md-checkboxes" style="margin: 0px;">
                                 <div class="md-checkbox-inline" style="width: 64px; margin: 0px;">
                                     <div class="md-checkbox">
-
                                         <input type="checkbox" class="md-check"
                                                checked="checked"
                                                ng-if="lionFormGrid.options.grid.settings.allRowChecked">
@@ -119,7 +117,8 @@
                         </th>
                         <th ng-repeat="header in lionFormGrid.options.grid.header"
                             style="width: {{header.width}};text-align: center;" ng-show="true" title="{{header.name}}">
-                            {{header.name}}
+                            <span class="headerName">{{header.name}}</span>
+                            <i ng-click="lionFormGrid.sorting(header)" class="sorting {{header.sortingClass}}" id="sorting"></i>
                         </th>
                         <th ng-if="lionFormGrid.options.grid.rowOperation.show"
                             style="width:{{lionFormGrid.options.grid.rowOperation.width}};text-align: center;">操作
