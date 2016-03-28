@@ -558,7 +558,7 @@ var Layout = function () {
                         {
                             "name":"编码列表",
                             "icon":"star",
-                            "url":"system/code/codetypelist"
+                            "url":"system/code/codelist"
                         },
                     ]
                 },
@@ -648,7 +648,7 @@ var Layout = function () {
                     "name":"项目属性配置",
                     "icon":"star",
                     "open":"",
-                    "url":"system/applicationproperty"
+                    "url":"system/appliProperty"
                 },
                 {
                     "name":"图标管理",
