@@ -2,6 +2,8 @@ package com.newtouch.lion.admin.web.controller.role;/**
  * Created by jovi on 3/25/16.
  */
 
+import com.newtouch.lion.admin.web.model.role.RoleAddReq;
+import com.newtouch.lion.admin.web.model.role.RoleAddResp;
 import com.newtouch.lion.admin.web.model.role.RoleGetReq;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
@@ -10,15 +12,21 @@ import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.system.RoleService;
 import com.newtouch.lion.web.page.Page;
+import com.newtouch.lion.web.servlet.view.support.BindMessage;
+import com.newtouch.lion.web.servlet.view.support.BindResult;
 import com.newtouch.lion.webtrans.trans.Trans;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.validation.Valid;
+import java.util.*;
 
 /**
  * <p>
@@ -54,13 +62,19 @@ public class RoleController {
         // 每页大小
         queryCriteria.setPageSize(req.getPage().getPageSize());
         // 设置排序字段及排序方向
-//        if (StringUtils.isNotEmpty(req.getSort()) && StringUtils.isNotEmpty(req.getOrder())) {
-//            queryCriteria.setOrderField(req.getSort());
-//            queryCriteria.setOrderDirection(req.getOrder());
-//        } else {
-//            queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-//            queryCriteria.setOrderDirection(QueryCriteria.ASC);
-//        }
+
+       if(req.getSort()==null){
+           queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+           queryCriteria.setOrderDirection(QueryCriteria.ASC);
+       }else{
+           if (StringUtils.isNotEmpty(req.getSort().getSort()) && StringUtils.isNotEmpty(req.getSort().getOrder())) {
+               queryCriteria.setOrderField(req.getSort().getSort());
+               queryCriteria.setOrderDirection(req.getSort().getOrder());
+           } else {
+               queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+               queryCriteria.setOrderDirection(QueryCriteria.ASC);
+           }
+       }
         //查询条件 中文参数名称按模糊查询
         if(StringUtils.isNotEmpty(req.getNameZh())){
             queryCriteria.addQueryCondition("nameZh","%"+req.getNameZh()+"%");
@@ -78,8 +92,39 @@ public class RoleController {
             list2.add(role);
         }
         pageResult.setContent(list2);
-        System.out.print(pageResult.getContent());
         return new Page(pageResult);
     }
 
+    @Trans("system.role.add")
+    public RoleAddResp add(@Valid @ModelAttribute("role") RoleAddReq roleVo){
+
+        if (this.isExistByNameEn(roleVo.getNameEn())) {
+            return new RoleAddResp(RoleAddResp.FAIL_ROLE_ADD_CODE,RoleAddResp.FAIL_ROLE_ADD_MESSAGE);
+        }
+
+        Role role = new Role();
+
+        BeanUtils.copyProperties(roleVo, role);
+        roleService.doCreate(role);
+
+        return new RoleAddResp(RoleAddResp.SUCCESS_ROLE_ADD_CODE,RoleAddResp.SUCCESS_ROLE_ADD_MESSAGE);
+//        return null;
+    }
+
+    /*add by maojiawei*/
+    private Boolean isExistByNameEn(String nameEn) {
+        Boolean flag = false;
+        if (StringUtils.isNotEmpty(nameEn)) {
+            flag = roleService.doIsExistByNameEn(nameEn.trim());
+        }
+        return flag;
+    }
+    /*add by maojiawei*/
+    private Boolean isExistByNameEn(String nameEn, String oldNameEn) {
+        Boolean flag = false;
+        if (StringUtils.isNotEmpty(nameEn) && !nameEn.equals(oldNameEn)) {
+            flag = roleService.doIsExistByNameEn(nameEn.trim());
+        }
+        return flag;
+    }
 }

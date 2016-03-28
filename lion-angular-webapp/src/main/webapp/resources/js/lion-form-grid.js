@@ -165,7 +165,8 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
             }
 
             $scope.lionFormGrid.queryParams = $scope.lionFormGrid.options.form.hiddenParams || {};
-            $scope.dbFormGrid.sortingParams = null;
+
+            $scope.lionFormGrid.sortingParams = null ;
 
             var selectFields = [];
             //计算每个占用的列数
@@ -228,7 +229,7 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
                     pageSize: $scope.lionFormGrid.page.pageSize
 
                 };
-                queryParams["sort"] = $scope.dbFormGrid.sortingParams;
+                queryParams["sort"] = $scope.lionFormGrid.sortingParams;
                // var sortingParams = angular.copy($scope.dbFormGrid.sortingParams);
 
                 dbUtils.post($scope.lionFormGrid.options.grid.settings.transCode, queryParams, function (data) {
@@ -417,10 +418,10 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
             };
 
             // 执行排序功能
-            $scope.dbFormGrid.sorting=function(header){
-                $scope.dbFormGrid.sortingParams={};
-                $scope.dbFormGrid.sortingParams.order = header.field;
-                angular.forEach($scope.dbFormGrid.options.grid.header, function (h) {
+            $scope.lionFormGrid.sorting=function(header){
+                $scope.lionFormGrid.sortingParams={};
+                $scope.lionFormGrid.sortingParams.order = header.field;
+                angular.forEach($scope.lionFormGrid.options.grid.header, function (h) {
                     if(angular.equals(h.field,header.field)){
                         if(angular.isUndefined(header.sortingClass)){
                             h.sortingClass="sorting_asc";
@@ -434,10 +435,10 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
                     }
                 });
                 if(header.sortingClass=="sorting_desc"){
-                    $scope.dbFormGrid.sortingParams.sort = "desc";
+                    $scope.lionFormGrid.sortingParams.sort = "desc";
                     queryData();
                 }else{
-                    $scope.dbFormGrid.sortingParams.sort = "asc";
+                    $scope.lionFormGrid.sortingParams.sort = "asc";
                     queryData();
                 }
             };
