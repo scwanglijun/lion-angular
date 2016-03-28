@@ -45,7 +45,7 @@ public class RoleController {
     /**默认排序字段名称*/
     private static final String DEFAULT_ORDER_FILED_NAME="id";
 
-    @Trans("role.list")
+    @Trans("system.role.list")
     public Page<Role> list(RoleGetReq req) {
         QueryCriteria queryCriteria = new QueryCriteria();
 

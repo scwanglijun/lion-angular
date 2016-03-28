@@ -13,12 +13,12 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
                 cols: 2
             },
             fields: [
-                {name: "organizationName", label: "角色名称", type: "text", required: true, placeholder: "角色名称", readonly: true, labelCols: "3"}
+                {name: "nameZh", label: "角色名称", type: "text", required: true, placeholder: "角色名称", readonly: true, labelCols: "3"}
             ]
         },
         grid: {
             settings: {
-                transCode: "role.list",
+                transCode: "system.role.list",
                 autoLoad: true,
                 page: {pageSize: 10},
                 showCheckBox: true
@@ -29,7 +29,7 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
                 {name: "描述", width: "18%", field: "description"},
                 {name: "可编辑", width: "10%", field: "editable"},
                 {name: "创建时间", width: "18%", field: "createdDate"},
-                {name: "更新时间", width: "18%", field: "updatedDate"},
+                {name: "更新时间", width: "18%", field: "updatedDate"}
             ],
             rowOperation: {show: false}
         }
