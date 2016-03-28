@@ -564,8 +564,8 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                     'views/role/partyRoleDetailCtrl.js']);
             }]
         }
-    }).state('partyRoleQuit', {
-        url: "/partyRoleQuit",
+    }).state('system/role/index', {
+        url: "/system/role/index",
         views: {
             "mainContentContainer": {
                 controller: "partyRoleQuitCtrl",

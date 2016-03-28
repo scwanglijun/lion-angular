@@ -515,21 +515,171 @@ var Layout = function () {
 
         /* modified by 吴翔 */
         var menus = [{
-            "name":"控制面板","icon":"home","url":"dashboard"
+            "name":"控制面板",
+            "icon":"home",
+            "url":"dashboard"
         },{
-            "name":"系统设置","icon":"settings","open":"","url":"",
+            "name":"系统设置",
+            "icon":"settings",
+            "open":"",
             "subList":[
-                {"name":"用户管理","icon":"star","open":"","url":"","subList":[{"name":"角色管理","icon":"star","url":"partyRoleQuit"},{"name":"用户组管理","icon":"star","url":"usergroup"},{"name":"用户管理","icon":"star","url":".user"}]},
-                {"name":"编码管理","icon":"star","open":"","url":"talentEntry"},
-                {"name":"部门管理","icon":"star","open":"","url":"department"},
-                {"name":"图标管理","icon":"star","open":"","url":"icon"}
+                {
+                    "name":"用户管理",
+                    "icon":"star",
+                    "open":"",
+                    "subList":[
+                        {
+                            "name":"角色管理",
+                            "icon":"star",
+                            "url":"system/users/rolelist"
+                        },
+                        {
+                            "name":"用户组管理",
+                            "icon":"star",
+                            "url":"system/users/usergrouplist"
+                        },
+                        {
+                            "name":"用户管理",
+                            "icon":"star",
+                            "url":"system/users/userlist"
+                        }
+                    ]
+                },
+                {
+                    "name":"编码管理",
+                    "icon":"star",
+                    "open":"",
+                    "subList":[
+                        {
+                            "name":"通用编码类型",
+                            "icon":"star",
+                            "url":"system/code/codetypelist"
+                        },
+                        {
+                            "name":"编码列表",
+                            "icon":"star",
+                            "url":"system/code/codetypelist"
+                        },
+                    ]
+                },
+                {
+                    "name":"部门管理",
+                    "icon":"star",
+                    "open":"",
+                    "url":"system/department"
+                },
+                {
+                    "name":"系统信息",
+                    "icon":"star",
+                    "open":"",
+                    "url":"system/application"
+                },
+                {
+                    "name":"资源管理",
+                    "icon":"star",
+                    "open":"",
+                    "url":"system/resource"
+                },
+                {
+                    "name":"系统参数",
+                    "icon":"star",
+                    "open":"",
+                    "url":"system/parameterlist"
+                },
+                {
+                    "name":"DataGrid管理",
+                    "icon":"star",
+                    "open":"",
+                    "subList":[
+                        {
+                            "name":"DataGrid",
+                            "icon":"star",
+                            "url":"system/datagrid/datagridlist"
+                        },
+                        {
+                            "name":"DataColumn管理",
+                            "icon":"star",
+                            "url":"system/datagrid/datacolumnlist"
+                        },
+                    ]
+                },
+                {
+                    "name":"系统监控",
+                    "icon":"star",
+                    "open":"",
+                    "subList":[
+                        {
+                            "name":"用户会话监控",
+                            "icon":"star",
+                            "url":"system/monitor/sessionlist"
+                        },
+                        {
+                            "name":"JVM内存监控",
+                            "icon":"star",
+                            "url":"system/monitor/jvmmemory"
+                        },
+                        {
+                            "name":"JVM监控",
+                            "icon":"star",
+                            "url":"system/monitor/jvmmoniter"
+                        },
+                        {
+                            "name":"JVM线程监控",
+                            "icon":"star",
+                            "url":"system/monitor/jvmthread"
+                        },
+                        {
+                            "name":"Hibernate监控",
+                            "icon":"star",
+                            "url":"system/monitor/hibernate"
+                        },
+                        {
+                            "name":"数据库连接池",
+                            "icon":"star",
+                            "url":"system/monitor/druid"
+                        },
+                        {
+                            "name":"缓存监控",
+                            "icon":"star",
+                            "url":"system/monitor/cachemoniter"
+                        }
+                    ]
+                },{
+                    "name":"项目属性配置",
+                    "icon":"star",
+                    "open":"",
+                    "url":"system/applicationproperty"
+                },
+                {
+                    "name":"图标管理",
+                    "icon":"star",
+                    "open":"",
+                    "url":"system/iconlist"
+                }
             ]
         },{
-            "name": "账户管理", "icon": "user","open":"","url":"",
+            "name": "账户管理",
+            "icon": "user",
+            "open":"",
             "subList": [
-                {"name": "个人资料", "icon": "user", "url": "departmentModify","open":""},
-                {"name": "待办事项", "icon": "calendar", "url": "calendar","open":""},
-                {"name": "通知消息", "icon": "bell", "url": "toastr","open":""}
+                {
+                    "name": "个人资料",
+                    "icon": "user",
+                    "url": "account/profile",
+                    "open":""
+                },
+                {
+                    "name": "待办事项",
+                    "icon": "calendar",
+                    "url": "account/calendar",
+                    "open":""
+                },
+                {
+                    "name": "通知消息",
+                    "icon": "bell",
+                    "url": "account/notifications",
+                    "open":""
+                }
             ]
         }];
 
