@@ -2,9 +2,7 @@ package com.newtouch.lion.admin.web.controller.role;/**
  * Created by jovi on 3/25/16.
  */
 
-import com.newtouch.lion.admin.web.model.role.RoleAddReq;
-import com.newtouch.lion.admin.web.model.role.RoleAddResp;
-import com.newtouch.lion.admin.web.model.role.RoleGetReq;
+import com.newtouch.lion.admin.web.model.role.*;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
@@ -22,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -68,8 +67,8 @@ public class RoleController {
            queryCriteria.setOrderDirection(QueryCriteria.ASC);
        }else{
            if (StringUtils.isNotEmpty(req.getSort().getSort()) && StringUtils.isNotEmpty(req.getSort().getOrder())) {
-               queryCriteria.setOrderField(req.getSort().getSort());
-               queryCriteria.setOrderDirection(req.getSort().getOrder());
+               queryCriteria.setOrderField(req.getSort().getOrder());
+               queryCriteria.setOrderDirection(req.getSort().getSort());
            } else {
                queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
                queryCriteria.setOrderDirection(QueryCriteria.ASC);
@@ -126,5 +125,27 @@ public class RoleController {
             flag = roleService.doIsExistByNameEn(nameEn.trim());
         }
         return flag;
+    }
+
+    @Trans("system.role.delete")
+    public RoleDelResp delete(RoleDelReq req){
+        Map<String, String> params = new HashMap<String, String>();
+        int updateRow = this.roleService.doDeleteById(req.getId());
+        if (updateRow > 0) {
+           return new RoleDelResp(RoleAddResp.SUCCESS_ROLE_ADD_CODE,RoleAddResp.SUCCESS_ROLE_ADD_MESSAGE);
+        } else {
+            return new RoleDelResp(RoleAddResp.FAIL_ROLE_ADD_CODE,RoleAddResp.FAIL_ROLE_ADD_MESSAGE);
+        }
+    }
+
+    @Trans("system.role.edit")
+    public RoleEditResp edit(RoleEditReq req){
+        Map<String, String> params = new HashMap<String, String>();
+        int updateRow = this.roleService.doDeleteById(req.getId());
+        if (updateRow > 0) {
+            return new RoleEditResp(RoleAddResp.SUCCESS_ROLE_ADD_CODE,RoleAddResp.SUCCESS_ROLE_ADD_MESSAGE);
+        } else {
+            return new RoleEditResp(RoleAddResp.FAIL_ROLE_ADD_CODE,RoleAddResp.FAIL_ROLE_ADD_MESSAGE);
+        }
     }
 }

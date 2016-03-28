@@ -240,6 +240,7 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
                         var row = rows[i];
                         for (var j in $scope.lionFormGrid.options.grid.header) {
                             var header = $scope.lionFormGrid.options.grid.header[j];
+                            header.sortingClass="sorting_both";
                             var value = (row[header.field] || "");
                             if (!angular.isUndefined($scope.lionFormGrid.events.grid.fieldEvents)) {
                                 var colorEvent = $scope.lionFormGrid.events.grid.fieldEvents[header.field + 'Color'];
@@ -437,9 +438,11 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
                 if(header.sortingClass=="sorting_desc"){
                     $scope.lionFormGrid.sortingParams.sort = "desc";
                     queryData();
+                    header.sortingClass = "sorting_desc";
                 }else{
                     $scope.lionFormGrid.sortingParams.sort = "asc";
                     queryData();
+                    header.sortingClass = "sorting_asc";
                 }
             };
         }],
