@@ -422,7 +422,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "talentEntryCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '人才招聘', pageSubTitle: '人才管理|人才招聘——人才信息维护录入'},
@@ -442,7 +442,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "talentModifyCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '人才修改', pageSubTitle: '人才管理|人才修改——人才信息维护录入'},
@@ -462,7 +462,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "talentInterviewCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '人才面试', pageSubTitle: '人才管理|人才面试——人才面试结果信息维护'},
@@ -479,7 +479,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "talentSearchCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '人才查询', pageSubTitle: '人才管理|人才查询——人才信息查询预览'},
@@ -496,7 +496,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "talentDeletedCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '人才删除', pageSubTitle: '人才管理|人才删除——人才删除,注销'},
@@ -513,7 +513,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "partyRoleEntryCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: 'Role', pageSubTitle: '用户管理|角色管理'},
@@ -534,7 +534,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "partyRoleModifyCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '人员修改', pageSubTitle: '人员管理|人员修改——人员信息维护编辑'},
@@ -554,7 +554,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "partyRoleSearchCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '人员查询', pageSubTitle: '人员管理|人员查询——人员信息预览查询'},
@@ -569,7 +569,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "partyRoleQuitCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: 'Role', pageSubTitle: '用户管理|角色管理'},
@@ -584,7 +584,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "partyRoleTransferCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '人员调动', pageSubTitle: '人员管理|人员调动——人员职位变动调配'},
@@ -599,7 +599,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: "partyRoleImageManageCtrl",
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '影像管理', pageSubTitle: '人员管理|影像管理——人员影像信息维护'},
@@ -722,7 +722,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: 'productEntryCtrl',
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '产品录入', pageSubTitle: '产品管理|产品录入——新产品信息录入维护'},
@@ -740,7 +740,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             "mainContentContainer": {
                 controller: 'productModifyCtrl',
 
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '产品修改', pageSubTitle: '产品管理|产品修改——产品信息变更维护'},
@@ -757,7 +757,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: 'productSearchCtrl',
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '产品查询', pageSubTitle: '产品管理|产品查询——产品信息信息查询并预览'},
@@ -774,7 +774,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: 'productRemoveCtrl',
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '产品删除', pageSubTitle: '产品管理|产品删除——删除不符合或错误产品信息'},
@@ -791,7 +791,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: 'raisingPeriodEntryCtrl',
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '期次录入', pageSubTitle: '产品管理|期次录入——产品募集期次信息录入'},
@@ -813,7 +813,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
         views: {
             "mainContentContainer": {
                 controller: 'raisingPeriodModifyCtrl',
-                templateUrl: "db/db-form-grid.html"
+                templateUrl: "db/lion-form-grid.html"
             }
         },
         data: {pageTitle: '期次修改', pageSubTitle: '产品管理|期次修改——产品募集期次信息变更修改'},
@@ -837,7 +837,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
 /* Init global settings and run the app */
 DBApp.run(["$rootScope", "settings", "$state", "$templateCache", function ($rootScope, settings, $state, $templateCache) {
     $rootScope.$state = $state; // state to be accessed from view
-    $templateCache.put("db/db-form.html", "<div class=''><db-form></db-form></div>");
-    $templateCache.put("db/db-form-grid.html", "<div class=''><db-form-grid></db-form-grid></div>");
+    $templateCache.put("db/db-form.html", "<div class='row'><db-form></db-form></div>");
+    $templateCache.put("db/lion-form-grid.html", "<div class='row'><lion-form-grid></lion-form-grid></div>");
 
 }]);

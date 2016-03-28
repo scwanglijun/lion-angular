@@ -38,20 +38,7 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
     var formGridEvents = {
         grid: {
             fieldEvents: {
-                "auditStatusColor": function (value, currentRecord) {
-                    var color = "red";
-                    value == "审核失败" ? color : color = "green";
-                    return color;
-                },
-                "statusColor": function (value, currentRecord) {
-                    var color = "green";
-                    if (value == "删除") {
-                        color = "#B0B6C3"
-                    } else if (value == "暂停") {
-                        color = "red"
-                    }
-                    return color;
-                },
+
             },
             operationEvents: [{
                 name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
@@ -65,14 +52,14 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
         }
     };
 
-    $scope.dbFormGrid = {options: formGridOptions, events: formGridEvents};
+    $scope.lionFormGrid = {options: formGridOptions, events: formGridEvents};
 
     //机构树选择后的回调事件
     $scope.dbOrgTree = {settings: {noCache: true, showDivision: true, showDepartment: true}};
     $scope.dbOrgTree.onOrgSelected = function (item) {
-        $scope.dbFormGrid.setFormDataField("organizationName", item['orgNamePath']);
-        $scope.dbFormGrid.setFormDataField("organizationId", item['orgId']);
-        $scope.dbFormGrid.setFormDataField("departmentId", item['departId']);
+        $scope.lionFormGrid.setFormDataField("organizationName", item['orgNamePath']);
+        $scope.lionFormGrid.setFormDataField("organizationId", item['orgId']);
+        $scope.lionFormGrid.setFormDataField("departmentId", item['departId']);
     };
 
 
@@ -80,7 +67,7 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
      * 删除操作
      */
     function quit() {
-        var selectRows = $scope.dbFormGrid.getAllSelectRows();
+        var selectRows = $scope.lionFormGrid.getAllSelectRows();
         if (selectRows.length === 0) {
             return;
         }
@@ -92,7 +79,7 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
                 } else {
                     dbUtils.success("渠道维护人员删除成功！!");
                 }
-                $scope.dbFormGrid.reLoadData();
+                $scope.lionFormGrid.reLoadData();
             }, function (error) {
                 dbUtils.error("人员删除处理异常!" + error);
             });
@@ -118,29 +105,5 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
         });
     }
 
-    /**
-     * 查看人员详细信息
-     * @param currentRecord
-     */
-    function viewPartyRoleDetail(source) {
 
-        dbUtils.post("partyRoleQuitGet", {id: source['id'], partyId: source['partyId'], businessType: source['businessType']}, function (data) {
-            var instance = $modal.open({
-                animation: true,
-                templateUrl: 'views/roles.json/partyRoleDetailView.html',
-                controller: 'partyRoleDetailCtrl',
-                size: "lg",
-                backdrop: "static",
-                resolve: {
-                    source: function () {
-                        data["infoUrl"] = "partyRoleQuitInfo";
-                        return data;
-                    }
-                }
-            });
-            instance.result.then(function () {
-                $scope.dbFormGrid.reLoadData();
-            });
-        });
-    }
 }

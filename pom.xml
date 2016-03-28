@@ -14,7 +14,6 @@
         <module>lion-angular-service</module>
         <module>lion-angular-web</module>
         <module>lion-angular-webapp</module>
-        <module>lion-angular-webamin</module>
     </modules>
     <name>lion Admin</name>
     <url>http://lion.newtouch.com</url>

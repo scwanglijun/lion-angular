@@ -3,7 +3,9 @@ package com.newtouch.lion.admin.web.controller.role;/**
  */
 
 import com.newtouch.lion.admin.web.model.role.RoleGetReq;
+import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
+import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.system.RoleService;
@@ -12,6 +14,11 @@ import com.newtouch.lion.webtrans.trans.Trans;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -60,6 +67,17 @@ public class RoleController {
         }
 
         PageResult<Role> pageResult = roleService.doFindByCriteria(queryCriteria);
+        List<Role> list = pageResult.getContent();
+        System.out.println(list);
+        List<Role> list2 = new ArrayList<>();
+        for(int i=0; i<list.size(); i++) {
+            Role role = list.get(i);
+            role.getResources().clear();
+            role.getUsers().clear();
+            role.getGroups().clear();
+            list2.add(role);
+        }
+        pageResult.setContent(list2);
         System.out.print(pageResult.getContent());
         return new Page(pageResult);
     }
