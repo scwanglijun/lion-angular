@@ -410,6 +410,40 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
             $scope.lionFormGrid.setFormDataField = function (fieldName, value) {
                 $scope.lionFormGrid.queryParams[fieldName] = value;
             };
+
+            // 执行排序功能
+            $scope.lionFormGrid.sorting=function(header){
+                angular.forEach($scope.lionFormGrid.options.grid.header, function (h) {
+                    if(angular.equals(h.field,header.field)){
+                        if(angular.isUndefined(header.sortingClass)){
+                            h.sortingClass="sorting_asc";
+                        }else if( h.sortingClass =="sorting_asc"){
+                            h.sortingClass = "sorting_desc";
+                        }else{
+                            h.sortingClass = "sorting_asc";
+                        }
+                    }else{
+                        h.sortingClass = "sorting_both";
+                    }
+                });
+                if(header.sortingClass=="sorting_desc"){
+                    $scope.lionFormGrid.rows = jsonSort($scope.lionFormGrid.rows,header.field,"desc");
+                }else{
+                    $scope.lionFormGrid.rows = jsonSort($scope.lionFormGrid.rows,header.field);
+                }
+                function jsonSort(json,key,order){
+                    return json.sort(function(a, b) {
+                        var x = a[key];
+                        var y = b[key];
+                        if(order=="desc"){
+                            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                        }else{
+                            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                        }
+                    });
+                }
+            };
+
         }],
         link: function (scope, element, attrs) {
             console.log("db form grid link");
