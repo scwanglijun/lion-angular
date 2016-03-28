@@ -879,6 +879,89 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+        .state('system/code/codetypelist', {
+            url: "/system/code/codetypelist",
+            views: {
+                "mainContentContainer": {
+                    controller: "codeTypeListCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'CodeType', pageSubTitle: '编码管理|编码类型'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/code/codeTypeListCtrl.js',
+                        '../resources/admin/controllers/code/codeTypeDetailCtrl.js']);
+                }]
+            }
+        })
+        .state('system/code/codelist', {
+            url: "/system/code/codelist",
+            views: {
+                "mainContentContainer": {
+                    controller: "codeListCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'CodeList', pageSubTitle: '编码管理|编码列表'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/code/codeListCtrl.js',
+                        '../resources/admin/controllers/code/codeDetailCtrl.js']);
+                }]
+            }
+        })
+        .state('system/department', {
+            url: "/system/department",
+            views: {
+                "mainContentContainer": {
+                    controller: "departmentCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'Department', pageSubTitle: '系统设置|部门管理'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/department/departmentCtrl.js',
+                        '../resources/admin/controllers/department/departmentDetailCtrl.js']);
+                }]
+            }
+        })
+
+
+
+        .state('system/appliProperty', {
+            url: "/system/appliProperty",
+            views: {
+                "mainContentContainer": {
+                    controller: "appliPropertyCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'Applicationproperty', pageSubTitle: '系统设置|部门管理'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/appliProperty/appliPropertyCtrl.js',
+                        '../resources/admin/controllers/appliProperty/appliPropertyDetailCtrl.js']);
+                }]
+            }
+        })
+        .state('system/iconlist', {
+            url: "/system/iconlist",
+            views: {
+                "mainContentContainer": {
+                    controller: "iconListCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'IconList', pageSubTitle: '系统设置|部门管理'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/icon/iconListCtrl.js',
+                        '../resources/admin/controllers/icon/iconDetailCtrl.js']);
+                }]
+            }
+        })
 
 
 }
