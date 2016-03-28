@@ -42,7 +42,7 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
             },
             operationEvents: [{
                 name: "新增", class: "btn-success", icon: "tianjia", click: function () {
-                    //quit();
+                    openModal();
                 }
             },{
                 name: "编辑", class: "btn-info", icon: "luru", click: function () {
@@ -66,6 +66,24 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
         $scope.lionFormGrid.setFormDataField("departmentId", item['departId']);
     };
 
+    //打开modal
+    function openModal(source) {
+        var instance = $modal.open({
+            animation: true,
+            templateUrl: 'views/role/test.html',
+            controller: 'testCtrl',
+            size: "",
+            backdrop: "static",
+            resolve: {
+                source: function () {
+                    return source;
+                }
+            }
+        });
+        instance.result.then(function () {
+            $scope.dbFormGrid.reLoadData();
+        });
+    }
 
     /**
      * 删除操作
