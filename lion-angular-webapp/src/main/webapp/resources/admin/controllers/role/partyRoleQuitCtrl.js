@@ -42,11 +42,11 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
             },
             operationEvents: [{
                 name: "新增", class: "btn-success", icon: "tianjia", click: function () {
-                    //quit();
+                    openModal();
                 }
             },{
-                name: "编辑", class: "btn-info", icon: "luru", click: function () {
-                    //quit();
+                name: "编辑", class: "btn-info", icon: "luru", click: function (row) {
+                    editModal(row);
                 }
             },{
                 name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
@@ -65,6 +65,66 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
         $scope.lionFormGrid.setFormDataField("organizationId", item['orgId']);
         $scope.lionFormGrid.setFormDataField("departmentId", item['departId']);
     };
+
+    //打开modal
+    function openModal(source) {
+        var instance = $modal.open({
+            animation: true,
+            templateUrl: 'views/admin/system/role/test.html',
+            controller: 'testCtrl',
+            size: "md",
+            backdrop: "static",
+            resolve: {
+                source: function () {
+                    return source;
+                }
+            }
+        });
+        instance.result.then(function () {
+            $scope.dbFormGrid.reLoadData();
+        });
+    }
+
+
+    //编辑modal
+    function editModal(row) {
+        if($scope.lionFormGrid.getAllSelectRows().length == 0){
+            dbUtils.info('请选择要编辑的行数据');
+        }else{
+            dbUtils.post("roleModifyGet", {id: row['id']}, function (data) {
+                var instance = $modal.open({
+                    animation: true,
+                    templateUrl: 'views/admin/system/role/test.html',
+                    controller: 'roleEditCtrl',
+                    size: "md",
+                    backdrop: "static",
+                    resolve: {
+                        source: function () {
+                            return data;
+                        }
+                    }
+                });
+                instance.result.then(function () {
+                    $scope.dbFormGrid.reLoadData();
+                });
+            });
+        };
+        /*var instance = $modal.open({
+            animation: true,
+            templateUrl: 'views/admin/system/role/test.html',
+            controller: 'testCtrl',
+            size: "md",
+            backdrop: "static",
+            resolve: {
+                source: function () {
+                    return source;
+                }
+            }
+        });
+        instance.result.then(function () {
+            $scope.dbFormGrid.reLoadData();
+        });*/
+    }
 
 
     /**

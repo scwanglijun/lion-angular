@@ -842,8 +842,11 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             data: {pageTitle: 'Role', pageSubTitle: '用户管理|角色管理'},
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(['../resources/admin/controllers/role/partyRoleQuitCtrl.js',
-                        '../resources/admin/controllers/role/partyRoleDetailCtrl.js']);
+                    return $ocLazyLoad.load([{
+                        serie:true,
+                        files:['../resources/admin/controllers/role/partyRoleQuitCtrl.js',
+                        '../resources/admin/controllers/role/test.js']
+                    }]);
                 }]
             }
         })
@@ -938,11 +941,10 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                     templateUrl: "db/lion-form-grid.html"
                 }
             },
-            data: {pageTitle: 'Applicationproperty', pageSubTitle: '系统设置|部门管理'},
+            data: {pageTitle: 'Applicationproperty', pageSubTitle: '系统设置|系统属性配置'},
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(['../resources/admin/controllers/appliProperty/appliPropertyCtrl.js',
-                        '../resources/admin/controllers/appliProperty/appliPropertyDetailCtrl.js']);
+                    return $ocLazyLoad.load(['../resources/admin/controllers/appliProperty/appliPropertyCtrl.js']);
                 }]
             }
         })
