@@ -1,14 +1,4 @@
-package com.newtouch.lion.admin.web.model.application;/**
- * Created by Zhangyake on 3/25/16.
- */
-
-import com.newtouch.lion.admin.web.model.query.QueryReq;
-import com.newtouch.lion.model.system.Group;
-import com.newtouch.lion.model.system.Resource;
-import com.newtouch.lion.model.system.User;
-
-import java.util.HashSet;
-import java.util.Set;
+package com.newtouch.lion.admin.web.model.application;
 
 /**
  * <p>
@@ -18,16 +8,16 @@ import java.util.Set;
  * Description:
  * </p>
  * <p>
- * Copyright: Copyright (c) 2016
+ * Copyright: Copyright (c) 2014
  * </p>
  * <p>
- * Company: XiQing
+ * Company: NewTouch
  * </p>
  *
- * @author Zhangyake
+ * @author ZhangYaKe
  * @version 1.0
  */
-public class ApplicationPropertiesGetReq extends QueryReq{
+public class ApplicationPropertyAddReq {
     /** 系统应用ID */
     private Long id;
 
@@ -39,10 +29,6 @@ public class ApplicationPropertiesGetReq extends QueryReq{
     private String value;
     /** 配置项描述 */
     private String description;
-    /**创建时间*/
-    private String createDateFormatter;
-    /**更新时间*/
-    private String updateDateFormatter;
 
     public Long getId() {
         return id;
@@ -82,21 +68,5 @@ public class ApplicationPropertiesGetReq extends QueryReq{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getCreateDateFormatter() {
-        return createDateFormatter;
-    }
-
-    public void setCreateDateFormatter(String createDateFormatter) {
-        this.createDateFormatter = createDateFormatter;
-    }
-
-    public String getUpdateDateFormatter() {
-        return updateDateFormatter;
-    }
-
-    public void setUpdateDateFormatter(String updateDateFormatter) {
-        this.updateDateFormatter = updateDateFormatter;
     }
 }

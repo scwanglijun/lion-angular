@@ -3,12 +3,6 @@ package com.newtouch.lion.admin.web.model.application;/**
  */
 
 import com.newtouch.lion.admin.web.model.query.QueryReq;
-import com.newtouch.lion.model.system.Group;
-import com.newtouch.lion.model.system.Resource;
-import com.newtouch.lion.model.system.User;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * <p>
@@ -27,7 +21,7 @@ import java.util.Set;
  * @author Zhangyake
  * @version 1.0
  */
-public class ApplicationPropertiesGetReq extends QueryReq{
+public class ApplicationPropertiesGetResp extends QueryReq{
     /** 系统应用ID */
     private Long id;
 
@@ -99,4 +93,5 @@ public class ApplicationPropertiesGetReq extends QueryReq{
     public void setUpdateDateFormatter(String updateDateFormatter) {
         this.updateDateFormatter = updateDateFormatter;
     }
+
 }

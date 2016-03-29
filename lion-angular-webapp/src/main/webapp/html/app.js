@@ -941,10 +941,11 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                     templateUrl: "db/lion-form-grid.html"
                 }
             },
-            data: {pageTitle: 'Applicationproperty', pageSubTitle: '系统设置|系统属性配置'},
+            data: {pageTitle: 'Applicationproperty', pageSubTitle: '系统设置|项目属性配置'},
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(['../resources/admin/controllers/appliProperty/appliPropertyCtrl.js']);
+                    return $ocLazyLoad.load(['../resources/admin/controllers/appliProperty/appliPropertyCtrl.js',
+                        '../resources/admin/controllers/appliProperty/appliPropertyEditorCtrl.js']);
                 }]
             }
         })

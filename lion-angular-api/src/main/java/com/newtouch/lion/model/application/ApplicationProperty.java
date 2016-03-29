@@ -40,12 +40,11 @@ public class ApplicationProperty extends VersionEntity<Long> {
 	private String appId;
 	/** 配置项-key */
 	private String key;
-
 	/** 配置项-value */
 	private String value;
-
 	/** 配置项描述 */
 	private String description;
+
 
 	/** ID */
 	@Override
@@ -114,7 +113,7 @@ public class ApplicationProperty extends VersionEntity<Long> {
 	}
 
 	/**
-	 * @param 记录ID
+	 * @param
 	 */
 	public void setId(Long id) {
 		this.id = id;

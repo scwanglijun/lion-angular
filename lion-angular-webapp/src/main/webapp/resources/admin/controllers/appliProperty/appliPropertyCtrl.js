@@ -29,8 +29,8 @@ function appliPropertyCtrl($scope, $modal, dbUtils) {
                 {name: "Key", width: "12%", field: "key"},
                 {name: "Value", width: "12%", field: "value"},
                 {name: "Description", width: "10%", field: "description"},
-                {name: "创建时间", width: "18%", field: "createdDate"},
-                {name: "更新时间", width: "18%", field: "updatedDate"},
+                {name: "创建时间", width: "18%", field: "createDateFormatter"},
+                {name: "更新时间", width: "18%", field: "updateDateFormatter"},
             ],
             rowOperation: {show: false}
         }
@@ -42,12 +42,16 @@ function appliPropertyCtrl($scope, $modal, dbUtils) {
 
             },
             operationEvents: [{
-                name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
-                    quit();
+                name: "新增", class: "btn-success", icon: "tianjia", click: function () {
+                    openModal();
                 }
             },{
-                name: "新增", class: "btn-success", icon: "shanchu", click: function () {
-                    //quit();
+                name: "编辑", class: "btn-info", icon: "luru", click: function (row) {
+                    editModal(row);
+                }
+            },{
+                name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
+                    quit();
                 }
             }]
         }
@@ -63,6 +67,49 @@ function appliPropertyCtrl($scope, $modal, dbUtils) {
         $scope.lionFormGrid.setFormDataField("departmentId", item['departId']);
     };
 
+    //打开modal
+    function openModal(source) {
+        var instance = $modal.open({
+            animation: true,
+            templateUrl: 'views/admin/system/application/appliPropertyEditorView.html',
+            controller: 'appliPropertyEditorCtrl',
+            size: "md",
+            backdrop: "static",
+            resolve: {
+                source: function () {
+                    return source;
+                }
+            }
+        });
+        instance.result.then(function () {
+            $scope.dbFormGrid.reLoadData();
+        });
+    }
+
+    //编辑modal
+    function editModal(row) {
+        if ($scope.lionFormGrid.getAllSelectRows().length == 0) {
+            dbUtils.info('请选择要编辑的行数据');
+        } else {
+            dbUtils.post("roleModifyGet", {id: row['id']}, function (data) {
+                var instance = $modal.open({
+                    animation: true,
+                    templateUrl: 'views/admin/system/role/test.html',
+                    controller: 'roleEditCtrl',
+                    size: "md",
+                    backdrop: "static",
+                    resolve: {
+                        source: function () {
+                            return data;
+                        }
+                    }
+                });
+                instance.result.then(function () {
+                    $scope.dbFormGrid.reLoadData();
+                });
+            });
+        }
+    }
 
     /**
      * 删除操作
@@ -73,7 +120,7 @@ function appliPropertyCtrl($scope, $modal, dbUtils) {
             return;
         }
         var ids = dbUtils.getFieldArray(selectRows, "id");
-        dbUtils.confirm("确定要对所选项目属性进行<span style='color: red'>删除</span>操作?", function () {
+        dbUtils.confirm("确定要对所选人员进行<span style='color: red'>删除</span>操作?", function () {
             dbUtils.post('partyRoleQuit', {'ids': ids}, function (data) {
                 if (data) {
                     dbUtils.error(data + "以上渠道维护人员不能删除，请先迁移其所辖的代理机构！")
@@ -105,6 +152,4 @@ function appliPropertyCtrl($scope, $modal, dbUtils) {
             }
         });
     }
-
-
 }
