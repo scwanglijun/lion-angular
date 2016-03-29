@@ -45,8 +45,8 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
                     openModal();
                 }
             },{
-                name: "编辑", class: "btn-info", icon: "luru", click: function () {
-                    //quit();
+                name: "编辑", class: "btn-info", icon: "luru", click: function (row) {
+                    editModal(row);
                 }
             },{
                 name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
@@ -70,9 +70,9 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
     function openModal(source) {
         var instance = $modal.open({
             animation: true,
-            templateUrl: 'views/role/test.html',
+            templateUrl: 'views/admin/system/role/test.html',
             controller: 'testCtrl',
-            size: "",
+            size: "md",
             backdrop: "static",
             resolve: {
                 source: function () {
@@ -84,6 +84,48 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
             $scope.dbFormGrid.reLoadData();
         });
     }
+
+
+    //编辑modal
+    function editModal(row) {
+        if($scope.lionFormGrid.getAllSelectRows().length == 0){
+            dbUtils.info('请选择要编辑的行数据');
+        }else{
+            dbUtils.post("roleModifyGet", {id: row['id']}, function (data) {
+                var instance = $modal.open({
+                    animation: true,
+                    templateUrl: 'views/admin/system/role/test.html',
+                    controller: 'roleEditCtrl',
+                    size: "md",
+                    backdrop: "static",
+                    resolve: {
+                        source: function () {
+                            return data;
+                        }
+                    }
+                });
+                instance.result.then(function () {
+                    $scope.dbFormGrid.reLoadData();
+                });
+            });
+        };
+        /*var instance = $modal.open({
+            animation: true,
+            templateUrl: 'views/admin/system/role/test.html',
+            controller: 'testCtrl',
+            size: "md",
+            backdrop: "static",
+            resolve: {
+                source: function () {
+                    return source;
+                }
+            }
+        });
+        instance.result.then(function () {
+            $scope.dbFormGrid.reLoadData();
+        });*/
+    }
+
 
     /**
      * 删除操作
