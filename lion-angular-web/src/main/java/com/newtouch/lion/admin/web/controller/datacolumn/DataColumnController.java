@@ -42,6 +42,7 @@ public class DataColumnController {
     private static final String DEFAULT_ORDER_FILED_NAME="id";
 
 
+
     @Trans("system.datacolumn.list")
     public Page<DataColumn> list(DataColumnGetReq req){
 
