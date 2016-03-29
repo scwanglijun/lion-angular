@@ -118,7 +118,7 @@
                         <th ng-repeat="header in lionFormGrid.options.grid.header"
                             style="width: {{header.width}};text-align: center;" ng-show="true" title="{{header.name}}">
                             <span class="headerName">{{header.name}}</span>
-                            <i ng-click="lionFormGrid.sorting(header)" class="sorting {{header.sortingClass}}" id="sorting"></i>
+                            <i ng-click="lionFormGrid.sorting(header)" ng-init="header.sortingClass='sorting_both'" class="sorting {{header.sortingClass}}"></i>
                         </th>
                         <th ng-if="lionFormGrid.options.grid.rowOperation.show"
                             style="width:{{lionFormGrid.options.grid.rowOperation.width}};text-align: center;">操作
@@ -206,7 +206,4 @@
                         <li class="paginate_button disabled"><a href="#">{{lionFormGrid.page.totalRecords}}条/{{lionFormGrid.page.totalPages}}页</a></li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+         
