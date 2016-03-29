@@ -5,7 +5,7 @@
  1.功能说明
  实现一个带自定义条件查询功能的grid
  2.使用方式
- 2.1 直接在html页面当中使用<db-form-grid></db-form-grid>
+ 2.1 直接在html页面当中使用<lion-form-grid></lion-form-grid>
  3.js定义示例(这里将options与events分开定义,目的是为将来开发工具插件自动生成使用,请保留注释和变量名称):
  //设置项，由插件生成
  //!!formGridOptions-START!!

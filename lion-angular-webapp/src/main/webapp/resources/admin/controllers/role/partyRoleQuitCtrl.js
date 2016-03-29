@@ -90,8 +90,28 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
     function editModal(row) {
         if($scope.lionFormGrid.getAllSelectRows().length == 0){
             dbUtils.info('请选择要编辑的行数据');
+        }else if($scope.lionFormGrid.getAllSelectRows().length > 1){
+            dbUtils.info('请选择一行数据');
         }else{
-            dbUtils.post("roleModifyGet", {id: row['id']}, function (data) {
+
+            var instance = $modal.open({
+                animation: true,
+                templateUrl: 'views/admin/system/role/test.html',
+                controller: 'testCtrl',
+                size: "md",
+                backdrop: "static",
+                resolve: {
+                   source: function(){
+                       return $scope.lionFormGrid.getAllSelectRows();
+                   }
+                }
+            });
+            instance.result.then(function () {
+                $scope.dbFormGrid.reLoadData();
+            });
+
+
+            /*dbUtils.post("roleModifyGet", {id: row['id']}, function (data) {
                 var instance = $modal.open({
                     animation: true,
                     templateUrl: 'views/admin/system/role/test.html',
@@ -107,23 +127,8 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
                 instance.result.then(function () {
                     $scope.dbFormGrid.reLoadData();
                 });
-            });
+            });*/
         };
-        /*var instance = $modal.open({
-            animation: true,
-            templateUrl: 'views/admin/system/role/test.html',
-            controller: 'testCtrl',
-            size: "md",
-            backdrop: "static",
-            resolve: {
-                source: function () {
-                    return source;
-                }
-            }
-        });
-        instance.result.then(function () {
-            $scope.dbFormGrid.reLoadData();
-        });*/
     }
 
 
