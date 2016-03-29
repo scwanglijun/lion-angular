@@ -7,6 +7,7 @@ import com.newtouch.lion.admin.web.model.application.ApplicationPropertiesGetReq
 import com.newtouch.lion.admin.web.model.application.ApplicationPropertiesGetResp;
 import com.newtouch.lion.admin.web.model.application.ApplicationPropertyAddReq;
 import com.newtouch.lion.admin.web.model.application.ApplicationPropertyAddResp;
+import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.model.application.ApplicationProperty;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -17,13 +18,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.validation.Valid;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Formatter;
 import java.util.List;
 /**
  * <p>
@@ -43,14 +39,14 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-public class AppliPropertyController {
+public class ApplicationPropertyController {
     @Autowired
     private ApplicationPropertyService applicationPropertyService;
     /** 默认排序字段 */
     private static final String DEFAULT_ORDER_FILED_NAME = "id";
 
     @Trans("system.applicationProperty.list")
-    public Page<ApplicationProperty> list(ApplicationPropertiesGetReq req) {
+    public Page<ApplicationPropertiesGetResp> list(ApplicationPropertiesGetReq req) {
         QueryCriteria queryCriteria = new QueryCriteria();
 
         // 设置分页 启始页
@@ -77,13 +73,13 @@ public class AppliPropertyController {
         }
 
         PageResult<ApplicationProperty> pageResult = applicationPropertyService.doFindByCriteria(queryCriteria);
-        SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+
         List<ApplicationPropertiesGetResp> list = new ArrayList<ApplicationPropertiesGetResp>();
         for (ApplicationProperty applicationProperty : pageResult.getContent()) {
             ApplicationPropertiesGetResp applicationPropertiesGetResp = new ApplicationPropertiesGetResp();
             BeanUtils.copyProperties(applicationProperty,applicationPropertiesGetResp);
-            String createDate  = formatter.format(applicationProperty.getCreatedDate());
-            String updateDate  = formatter.format(applicationProperty.getUpdatedDate());
+            String createDate  = DateUtil.formatDate(applicationProperty.getCreatedDate(),DateUtil.FORMAT_DATETIME_YYYY_MM_DD_HH_MM_SS);
+            String updateDate    = DateUtil.formatDate(applicationProperty.getUpdatedDate(),DateUtil.FORMAT_DATETIME_YYYY_MM_DD_HH_MM_SS);
             applicationPropertiesGetResp.setCreateDateFormatter(createDate);
             applicationPropertiesGetResp.setUpdateDateFormatter(updateDate);
             list.add(applicationPropertiesGetResp);
@@ -101,11 +97,11 @@ public class AppliPropertyController {
     }
 
     @Trans("system.applicationProperty.add")
-    public ApplicationPropertyAddResp add(@Valid @ModelAttribute("role") ApplicationPropertyAddReq applicationPropertyVo){
+    public ApplicationPropertyAddResp add(ApplicationPropertyAddReq  req){
 
         ApplicationProperty applicationProperty = new ApplicationProperty();
 
-        BeanUtils.copyProperties(applicationPropertyVo, applicationProperty);
+        BeanUtils.copyProperties(req, applicationProperty);
         applicationPropertyService.doCreate(applicationProperty);
 
         return new ApplicationPropertyAddResp(ApplicationPropertyAddResp.SUCCESS_ROLE_ADD_CODE,ApplicationPropertyAddResp.SUCCESS_ROLE_ADD_MESSAGE);
