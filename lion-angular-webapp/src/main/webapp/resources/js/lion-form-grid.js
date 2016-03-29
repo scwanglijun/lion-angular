@@ -230,8 +230,6 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
 
                 };
                 queryParams["sort"] = $scope.lionFormGrid.sortingParams;
-               // var sortingParams = angular.copy($scope.dbFormGrid.sortingParams);
-
                 dbUtils.post($scope.lionFormGrid.options.grid.settings.transCode, queryParams, function (data) {
                     //获取每行数据，并调用format方法进行处理，最后赋值给$scope.lionFormGrid.rows
                     //console.log();
@@ -240,7 +238,6 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
                         var row = rows[i];
                         for (var j in $scope.lionFormGrid.options.grid.header) {
                             var header = $scope.lionFormGrid.options.grid.header[j];
-                            header.sortingClass="sorting_both";
                             var value = (row[header.field] || "");
                             if (!angular.isUndefined($scope.lionFormGrid.events.grid.fieldEvents)) {
                                 var colorEvent = $scope.lionFormGrid.events.grid.fieldEvents[header.field + 'Color'];
@@ -422,6 +419,12 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
             $scope.lionFormGrid.sorting=function(header){
                 $scope.lionFormGrid.sortingParams={};
                 $scope.lionFormGrid.sortingParams.order = header.field;
+                if(header.sortingClass=="sorting_desc"){
+                    $scope.lionFormGrid.sortingParams.sort = "desc";
+                }else{
+                    $scope.lionFormGrid.sortingParams.sort = "asc";
+                }
+                queryData();
                 angular.forEach($scope.lionFormGrid.options.grid.header, function (h) {
                     if(angular.equals(h.field,header.field)){
                         if(angular.isUndefined(header.sortingClass)){
@@ -435,15 +438,6 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
                         h.sortingClass = "sorting_both";
                     }
                 });
-                if(header.sortingClass=="sorting_desc"){
-                    $scope.lionFormGrid.sortingParams.sort = "desc";
-                    queryData();
-                    header.sortingClass = "sorting_desc";
-                }else{
-                    $scope.lionFormGrid.sortingParams.sort = "asc";
-                    queryData();
-                    header.sortingClass = "sorting_asc";
-                }
             };
         }],
         link: function (scope, element, attrs) {
