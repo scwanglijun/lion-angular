@@ -1,4 +1,4 @@
-<form name="dataForm" novalidate ng-submit="submitDialogForm(dataForm.$valid)">
+<form name="dataForm1" novalidate ng-submit="submitDialogForm(dataForm1.$valid)">
     <div class="modal-body form-horizontal form">
         <div class="form-body portlet light">
             <div class="portlet-title">
@@ -14,44 +14,37 @@
                 <div class="form-body">
                     <div class="row">
                         <div class="col-md-12  margin-top-15">
-                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm.auditDesc.$invalid && submited }">
-                                <label class="control-label col-md-2"><span class="required"> * </span>拒绝原因</label>
-                                <div class="col-md-9">
-                                    <input ng-model="data.auditDesc" name="auditDesc" db-validator="required" placeholder="请输入拒绝原因" type="text" class="form-control" ng-disabled="formDisabled">
-                                    <span class="help-block" ng-show="dataForm.auditDesc.$error.custom && submited">{{$dbForm.auditDesc.msg}}</span>
-                                </div>
-                            </div>-->
 
-                            <div class="form-group" ng-class="{ 'has-error' : dataForm.nameZh.$invalid && submited }">
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm1.nameZh.$invalid && submited }">
                                 <label class="col-md-3 control-label">
                                     角色名(中文)
                                 </label>
                                 <div class="col-md-9">
                                     <div class="input-group">
-                                        <input type="text" ng-model="data.nameZh" db-validator="required" name="nameZh" maxlength="100" class="form-control" placeholder="角色名(中文)"  ng-disabled="formDisabled"/>
-                                        <span class="help-block" ng-show="dataForm.nameZh.$invalid && submited ">{{$dbForm.nameZh.msg}}</span>
+                                        <input type="text" ng-model="data.nameZh" name="nameZh" db-validator="required"  maxlength="100" class="form-control" placeholder="角色名(中文)" ng-disabled="formDisabled"/>
+                                        <span class="help-block" ng-show="dataForm1.nameZh.$invalid && submited ">{{$dbForm.nameZh.msg}}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" ng-class="{ 'has-error' : dataForm.nameEn.$invalid && submited }">
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm1.nameEn.$invalid && submited }">
                                 <label class="col-md-3 control-label">
                                     角色名(英文)
                                 </label>
                                 <div class="col-md-9">
                                     <div class="input-group">
                                         <input type="text" ng-model="data.nameEn" db-validator="required" name="nameEn" maxlength="100" class="form-control" placeholder="角色名(英文)"  ng-disabled="formDisabled"/>
-                                        <span class="help-block" ng-show="dataForm.nameEn.$invalid && submited ">{{$dbForm.nameEn.msg}}</span>
+                                        <span class="help-block" ng-show="dataForm1.nameEn.$invalid && submited ">{{$dbForm.nameEn.msg}}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" ng-class="{ 'has-error' : dataForm.description.$invalid && submited }">
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm1.description.$invalid && submited }">
                                 <label class="col-md-3 control-label">
                                     描述
                                 </label>
                                 <div class="col-md-9">
                                     <div class="input-group">
                                         <input type="text" ng-model="data.description" db-validator="required" name="description" class="form-control" placeholder="描述" maxlength="255"  ng-disabled="formDisabled"/>
-                                        <span class="help-block" ng-show="dataForm.description.$invalid && submited ">{{$dbForm.description.msg}}</span>
+                                        <span class="help-block" ng-show="dataForm1.description.$invalid && submited ">{{$dbForm.description.msg}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +54,7 @@
                                 </label>
                                 <div class="col-md-9 control-label">
                                     <div class="input-group">
-                                        <input type="checkbox" class="form-control" name="editable" checked="true" value="1"/>
+                                        <input type="checkbox" ng-model="data.editable" class="form-control" name="editable" checked="true" value="1"/>
                                     </div>
                                 </div>
                             </div>

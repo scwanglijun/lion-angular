@@ -835,7 +835,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             url: "/system/users/rolelist",
             views: {
                 "mainContentContainer": {
-                    controller: "partyRoleQuitCtrl",
+                    controller: "partyRoleEntryCtrl",
                     templateUrl: "db/lion-form-grid.html"
                 }
             },
@@ -844,7 +844,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load([{
                         serie:true,
-                        files:['../resources/admin/controllers/role/partyRoleQuitCtrl.js',
+                        files:['../resources/admin/controllers/role/partyRoleEntryCtrl.js',
                         '../resources/admin/controllers/role/test.js']
                     }]);
                 }]

@@ -407,7 +407,7 @@ dbServices.directive('dbValidator', ['$log', function ($log) {
                 var validity = check(input);
                 $ngModelCtrl.$setValidity('custom', validity.valid);
                 $scope.$dbForm[name] = validity;
-                console.log($scope.$dbForm);
+                //console.log($scope.$dbForm);
                 return validity.valid ? input : "";
             });
         }

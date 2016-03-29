@@ -12,12 +12,14 @@ function test($scope,$modalInstance,dbUtils,dbImService,source){
         $scope.data = {
             nameZh: null,
             nameEn: null,
-            description: null
+            description: null,
+            editable:true
         };
     } else {
-        $scope.formDisabled = true;
+        $scope.formDisabled = false;
         $scope.editData = true;
-        $scope.data = angular.copy(source);
+        $scope.data = angular.copy(source)[0];
+        //console.log($scope.data[0].nameZh);
     }
 
     //取消Modal
@@ -33,7 +35,7 @@ function test($scope,$modalInstance,dbUtils,dbImService,source){
             var reqBody = angular.copy($scope.data);
 
             dbUtils.post(angular.isUndefined(source) ? 'sourceHandle' : 'sourceModify',reqBody, function (data) {
-                dbUtils.success('添加角色成功!');
+                dbUtils.success('操作成功!');
                 $modalInstance.close();
             }, function (error) {
                 dbUtils.error(error);
