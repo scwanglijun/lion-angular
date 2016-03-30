@@ -20,10 +20,10 @@ package com.newtouch.lion.admin.web.model.role;/**
  * @version 1.0
  */
 public class RoleDelResp {
-    public final static String SUCCESS_ROLE_ADD_CODE = "200";
-    public final static String SUCCESS_ROLE_ADD_MESSAGE = "添加成功";
-    public final static String FAIL_ROLE_ADD_CODE = "201";
-    public final static String FAIL_ROLE_ADD_MESSAGE = "添加失败";
+    public final static String SUCCESS_ROLE_DELETE_CODE = "200";
+    public final static String SUCCESS_ROLE_DELETE_MESSAGE = "删除成功";
+    public final static String FAIL_ROLE_DELETE_CODE = "201";
+    public final static String FAIL_ROLE_DELETE_MESSAGE = "删除失败";
 
     private String code;
     private String message;
@@ -44,7 +44,7 @@ public class RoleDelResp {
         this.message = message;
     }
 
-    public RoleDelResp(String message, String code) {
+    public RoleDelResp(String code, String message) {
         this.message = message;
         this.code = code;
     }

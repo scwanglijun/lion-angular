@@ -74,6 +74,7 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
         var ids = dbUtils.getFieldArray(selectRows, "id");
         dbUtils.confirm("确定要对所选人员进行<span style='color: red'>删除</span>操作?", function () {
             dbUtils.post('partyRoleQuit', {'ids': ids}, function (data) {
+                console.dir(data);
                 if (data) {
                     dbUtils.error(data + "以上渠道维护人员不能删除，请先迁移其所辖的代理机构！")
                 } else {

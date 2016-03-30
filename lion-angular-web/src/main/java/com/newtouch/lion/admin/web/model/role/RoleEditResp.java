@@ -22,9 +22,9 @@ package com.newtouch.lion.admin.web.model.role;
  */
 public class RoleEditResp {
     public final static String SUCCESS_ROLE_ADD_CODE = "200";
-    public final static String SUCCESS_ROLE_ADD_MESSAGE = "添加成功";
+    public final static String SUCCESS_ROLE_ADD_MESSAGE = "编辑成功";
     public final static String FAIL_ROLE_ADD_CODE = "201";
-    public final static String FAIL_ROLE_ADD_MESSAGE = "添加失败";
+    public final static String FAIL_ROLE_ADD_MESSAGE = "编辑失败";
 
     private String code;
     private String message;

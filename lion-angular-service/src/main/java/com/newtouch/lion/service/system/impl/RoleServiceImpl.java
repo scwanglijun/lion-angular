@@ -598,5 +598,20 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 		this.doDeleteGroupsFromRole(deleteGroupIds, role);
 		this.doAddGroupsToRole(targetGroupIds, role);
 	}
-	
+
+	/**
+	 * 批量删除角色
+	 *
+	 * @param ids
+	 * @return 删除的记录数
+	 */
+	@Override
+	public int doDeleteRolesByIds(Long[] ids) {
+		int i = 0;
+		for(Long id:ids){
+			this.doDeleteById(id);
+			i++;
+		}
+		return i;
+	}
 }

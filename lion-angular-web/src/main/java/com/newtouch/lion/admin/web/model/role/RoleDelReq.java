@@ -31,6 +31,7 @@ public class RoleDelReq {
     private String description;
     /** 是否可编辑 */
     private Boolean editable;
+    private Long[] ids;
 
     public Long getId() {
         return id;
@@ -70,5 +71,13 @@ public class RoleDelReq {
 
     public void setEditable(Boolean editable) {
         this.editable = editable;
+    }
+
+    public Long[] getIds() {
+        return ids;
+    }
+
+    public void setIds(Long[] ids) {
+        this.ids = ids;
     }
 }

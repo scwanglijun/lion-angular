@@ -107,7 +107,6 @@ public class RoleController {
         roleService.doCreate(role);
 
         return new RoleAddResp(RoleAddResp.SUCCESS_ROLE_ADD_CODE,RoleAddResp.SUCCESS_ROLE_ADD_MESSAGE);
-//        return null;
     }
 
     /*add by maojiawei*/
@@ -129,12 +128,11 @@ public class RoleController {
 
     @Trans("system.role.delete")
     public RoleDelResp delete(RoleDelReq req){
-        Map<String, String> params = new HashMap<String, String>();
-        int updateRow = this.roleService.doDeleteById(req.getId());
+        int updateRow = this.roleService.doDeleteRolesByIds(req.getIds());
         if (updateRow > 0) {
-           return new RoleDelResp(RoleAddResp.SUCCESS_ROLE_ADD_CODE,RoleAddResp.SUCCESS_ROLE_ADD_MESSAGE);
+           return new RoleDelResp(RoleDelResp.SUCCESS_ROLE_DELETE_CODE,RoleDelResp.SUCCESS_ROLE_DELETE_MESSAGE);
         } else {
-            return new RoleDelResp(RoleAddResp.FAIL_ROLE_ADD_CODE,RoleAddResp.FAIL_ROLE_ADD_MESSAGE);
+            return new RoleDelResp(RoleDelResp.FAIL_ROLE_DELETE_CODE,RoleDelResp.FAIL_ROLE_DELETE_MESSAGE);
         }
     }
 

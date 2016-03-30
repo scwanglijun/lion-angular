@@ -146,11 +146,11 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
             var ids = dbUtils.getFieldArray(selectRows, "id");
             dbUtils.confirm("确定要对所选角色进行<span style='color: red'>删除</span>操作?", function () {
                 dbUtils.post('system.role.delete', {'ids': ids}, function (data) {
-                    //console.log(data);
-                    if (data) {
-                        dbUtils.error(data + "以上角色不能删除!")
-                    } else {
+                    console.dir(data);
+                    if (data.code==='200') {
                         dbUtils.success("角色删除成功！!");
+                    } else {
+                        dbUtils.error("删除失败!");
                     }
                     $scope.lionFormGrid.reLoadData();
                 }, function (error) {

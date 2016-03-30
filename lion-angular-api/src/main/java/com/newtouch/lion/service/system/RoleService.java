@@ -136,6 +136,13 @@ public interface RoleService {
 	public void doDelete(Role role);
 
 	public int doDeleteById(Long id);
+	/**
+	 * 批量删除角色
+	 *
+	 * @param ids
+	 * @return 删除的记录数
+	 * */
+	public int doDeleteRolesByIds(Long[] ids);
 
 	public List<Role> doFindAll();
 
@@ -230,5 +237,8 @@ public interface RoleService {
 	/** 将角色授权给用户组 */
 	public void idoAuthGroupToRole(List<Long> targetGroupIds,
 								   List<Long> deleteGroupIds, Role role);
-	
+
+
+
+
 }
