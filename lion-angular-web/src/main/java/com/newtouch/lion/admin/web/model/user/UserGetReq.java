@@ -33,7 +33,7 @@ import com.newtouch.lion.model.system.Role;
  * @author LiJie
  * @version 1.0
  */
-public abstract class UserGetReq extends QueryReq{
+public class UserGetReq extends QueryReq{
 	
 	/** 序列化 */
 	private static final long serialVersionUID = -3674276844049006131L;

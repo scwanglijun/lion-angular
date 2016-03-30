@@ -8,6 +8,7 @@
 package com.newtouch.lion.admin.web.controller.user; 
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.newtouch.lion.admin.web.model.user.UserGetReq;
@@ -37,8 +38,9 @@ import com.newtouch.lion.webtrans.trans.Trans;
  */
 @Controller
 public class UserController {
-	
+	@Autowired
 	private UserService userService;
+
 	/** 默认排序字段*/
 	private static final String DEFAULT_ORDER_FILED_NAME="id";
 	 
