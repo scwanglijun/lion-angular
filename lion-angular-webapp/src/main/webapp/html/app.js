@@ -966,6 +966,23 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             }
         })
 
+        .state('system/parameterlist', {
+            url: "/system/parameterlist",
+            views: {
+                "mainContentContainer": {
+                    controller: "parameterListCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'Parameter', pageSubTitle: '系统设置|系统参数'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/parameter/parameterListCtrl.js']);
+                }]
+            }
+        })
+
+
 
 }
 

@@ -29,12 +29,13 @@ function test($scope,$modalInstance,dbUtils,dbImService,source){
 
     //提交成功
     $scope.submitDialogForm = function (isValid) {
-        //console.log($scope.data);
+        console.log($scope.data);
+        console.log(source);
         $scope.submited = true;
         if (isValid) {
             var reqBody = angular.copy($scope.data);
 
-            dbUtils.post(angular.isUndefined(source) ? 'sourceHandle' : 'sourceModify',reqBody, function (data) {
+            dbUtils.post(angular.isUndefined(source) ? 'system.role.add' : 'system.role.edit',reqBody, function (data) {
                 dbUtils.success('操作成功!');
                 $modalInstance.close();
             }, function (error) {

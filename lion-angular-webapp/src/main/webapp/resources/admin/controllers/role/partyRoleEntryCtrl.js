@@ -81,7 +81,7 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
             }
         });
         instance.result.then(function () {
-            $scope.dbFormGrid.reLoadData();
+            $scope.lionFormGrid.reLoadData();
         });
     }
 
@@ -109,7 +109,7 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
                 }
             });
             instance.result.then(function () {
-                $scope.dbFormGrid.reLoadData();
+                $scope.lionFormGrid.reLoadData();
             });
 
 
@@ -144,7 +144,7 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
         }
         var ids = dbUtils.getFieldArray(selectRows, "id");
         dbUtils.confirm("确定要对所选角色进行<span style='color: red'>删除</span>操作?", function () {
-            dbUtils.post('partyRoleQuit', {'ids': ids}, function (data) {
+            dbUtils.post('system.role.delete', {'ids': ids}, function (data) {
                 if (data) {
                     dbUtils.error(data + "以上角色不能删除!")
                 } else {
