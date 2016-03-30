@@ -140,21 +140,24 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
     function quit() {
         var selectRows = $scope.lionFormGrid.getAllSelectRows();
         if (selectRows.length === 0) {
-            return;
-        }
-        var ids = dbUtils.getFieldArray(selectRows, "id");
-        dbUtils.confirm("确定要对所选角色进行<span style='color: red'>删除</span>操作?", function () {
-            dbUtils.post('system.role.delete', {'ids': ids}, function (data) {
-                if (data) {
-                    dbUtils.error(data + "以上角色不能删除!")
-                } else {
-                    dbUtils.success("角色删除成功！!");
-                }
-                $scope.lionFormGrid.reLoadData();
-            }, function (error) {
-                dbUtils.error("角色删除处理异常!" + error);
+            dbUtils.info('请选择要删除的行数据');
+        }else{
+            console.log(selectRows);
+            var ids = dbUtils.getFieldArray(selectRows, "id");
+            dbUtils.confirm("确定要对所选角色进行<span style='color: red'>删除</span>操作?", function () {
+                dbUtils.post('system.role.delete', {'ids': ids}, function (data) {
+                    //console.log(data);
+                    if (data) {
+                        dbUtils.error(data + "以上角色不能删除!")
+                    } else {
+                        dbUtils.success("角色删除成功！!");
+                    }
+                    $scope.lionFormGrid.reLoadData();
+                }, function (error) {
+                    dbUtils.error("角色删除处理异常!" + error);
+                });
             });
-        });
+        }
     }
 
     /**

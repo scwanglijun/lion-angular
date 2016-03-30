@@ -516,30 +516,36 @@ var Layout = function () {
         /* modified by 吴翔 */
         var menus = [{
             "name":"控制面板",
+            "translate":"aside.nav.DASHBOARD",
             "icon":"home",
             "url":"dashboard"
         },{
             "name":"系统设置",
+            "translate":"aside.nav.system.SYSTEM",
             "icon":"settings",
             "open":"",
             "subList":[
                 {
                     "name":"用户管理",
+                    "translate":"aside.nav.system.users.USERS",
                     "icon":"star",
                     "open":"",
                     "subList":[
                         {
                             "name":"角色管理",
+                            "translate":"aside.nav.system.users.ROLE",
                             "icon":"star",
                             "url":"system/users/rolelist"
                         },
                         {
                             "name":"用户组管理",
+                            "translate":"aside.nav.system.users.USERGROUP",
                             "icon":"star",
                             "url":"system/users/usergrouplist"
                         },
                         {
                             "name":"用户管理",
+                            "translate":"aside.nav.system.users.USER",
                             "icon":"star",
                             "url":"system/users/userlist"
                         }
@@ -547,16 +553,19 @@ var Layout = function () {
                 },
                 {
                     "name":"编码管理",
+                    "translate":"aside.nav.system.code.CODE",
                     "icon":"star",
                     "open":"",
                     "subList":[
                         {
                             "name":"通用编码类型",
+                            "translate":"aside.nav.system.code.CODETYPE",
                             "icon":"star",
                             "url":"system/code/codetypelist"
                         },
                         {
                             "name":"编码列表",
+                            "translate":"aside.nav.system.code.CODELIST",
                             "icon":"star",
                             "url":"system/code/codelist"
                         },
@@ -564,40 +573,47 @@ var Layout = function () {
                 },
                 {
                     "name":"部门管理",
+                    "translate":"aside.nav.system.DEPARTMENT",
                     "icon":"star",
                     "open":"",
                     "url":"system/department"
                 },
                 {
                     "name":"系统信息",
+                    "translate":"aside.nav.system.APPLICATION",
                     "icon":"star",
                     "open":"",
                     "url":"system/application"
                 },
                 {
                     "name":"资源管理",
+                    "translate":"aside.nav.system.RESOURCE",
                     "icon":"star",
                     "open":"",
                     "url":"system/resource"
                 },
                 {
                     "name":"系统参数",
+                    "translate":"aside.nav.system.PARAMETER",
                     "icon":"star",
                     "open":"",
                     "url":"system/parameterlist"
                 },
                 {
                     "name":"DataGrid管理",
+                    "translate":"aside.nav.system.datagrid.DATAGRID",
                     "icon":"star",
                     "open":"",
                     "subList":[
                         {
                             "name":"DataGrid",
+                            "translate":"aside.nav.system.datagrid.DATAGRIDLIST",
                             "icon":"star",
                             "url":"system/datagrid/datagridlist"
                         },
                         {
                             "name":"DataColumn管理",
+                            "translate":"aside.nav.system.datagrid.DATACOLUMN",
                             "icon":"star",
                             "url":"system/datagrid/datacolumnlist"
                         },
@@ -605,53 +621,63 @@ var Layout = function () {
                 },
                 {
                     "name":"系统监控",
+                    "translate":"aside.nav.system.systemmoniter.SYSTEMMONITER",
                     "icon":"star",
                     "open":"",
                     "subList":[
                         {
                             "name":"用户会话监控",
+                            "translate":"aside.nav.system.systemmoniter.SESSION",
                             "icon":"star",
                             "url":"system/monitor/sessionlist"
                         },
                         {
                             "name":"JVM内存监控",
+                            "translate":"aside.nav.system.systemmoniter.JVMMEMORY",
                             "icon":"star",
                             "url":"system/monitor/jvmmemory"
                         },
                         {
                             "name":"JVM监控",
+                            "translate":"aside.nav.system.systemmoniter.JVMMONITER",
                             "icon":"star",
                             "url":"system/monitor/jvmmoniter"
                         },
                         {
                             "name":"JVM线程监控",
+                            "translate":"aside.nav.system.systemmoniter.JVMTHREAD",
                             "icon":"star",
                             "url":"system/monitor/jvmthread"
                         },
                         {
                             "name":"Hibernate监控",
+                            "translate":"aside.nav.system.systemmoniter.HIBERATE",
                             "icon":"star",
                             "url":"system/monitor/hibernate"
                         },
                         {
                             "name":"数据库连接池",
+                            "translate":"aside.nav.system.systemmoniter.DRUID",
                             "icon":"star",
                             "url":"system/monitor/druid"
                         },
                         {
                             "name":"缓存监控",
+                            "translate":"aside.nav.system.systemmoniter.CACHEMONITER",
                             "icon":"star",
                             "url":"system/monitor/cachemoniter"
                         }
                     ]
                 },{
                     "name":"项目属性配置",
+                    "translate":"aside.nav.system.APPLIPROPERTY",
                     "icon":"star",
                     "open":"",
                     "url":"system/appliProperty"
                 },
                 {
                     "name":"图标管理",
+                    "translate":"aside.nav.system.ICON",
                     "icon":"star",
                     "open":"",
                     "url":"system/iconlist"
@@ -659,23 +685,27 @@ var Layout = function () {
             ]
         },{
             "name": "账户管理",
+            "translate":"aside.nav.account.ACCOUNT",
             "icon": "user",
             "open":"",
             "subList": [
                 {
                     "name": "个人资料",
+                    "translate":"aside.nav.account.PROFILE",
                     "icon": "user",
                     "url": "account/profile",
                     "open":""
                 },
                 {
                     "name": "待办事项",
+                    "translate":"aside.nav.account.CALENDAR",
                     "icon": "calendar",
                     "url": "account/calendar",
                     "open":""
                 },
                 {
                     "name": "通知消息",
+                    "translate":"aside.nav.account.NOTIFICATIONS",
                     "icon": "bell",
                     "url": "account/notifications",
                     "open":""

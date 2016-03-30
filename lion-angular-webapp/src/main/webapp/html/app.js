@@ -20,8 +20,26 @@ var DBApp = angular.module("DBApp", [
     "dbImService",
     "dbUtils",
     "ngAnimate",
+    "ngStorage",
+    "pascalprecht.translate",
     "toaster"
 ]);
+
+
+/*国际化配置*/
+DBApp.config(['$translateProvider',function($translateProvider){
+    $translateProvider.useStaticFilesLoader({
+        prefix: '../l10n/',
+        suffix: '.js'
+    });
+
+    //告诉module使用什么默认语言
+    $translateProvider.preferredLanguage('en');
+
+    //告诉module存储语言到localstorage
+    //$translateProvider.useLocalStorage();
+}]);
+
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
 DBApp.config(['$ocLazyLoadProvider', '$httpProvider', function ($ocLazyLoadProvider, $httpProvider) {
@@ -82,7 +100,7 @@ DBApp.filter('selectPropsFilter', function () {
 /* Setup App Main Controller */
 DBApp.controller('AppController', ['$scope', '$rootScope', AppController]);
 
-function AppController($scope) {
+function AppController($scope,$rootScope) {
     $scope.$on('$viewContentLoaded', function () {
         Metronic.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
