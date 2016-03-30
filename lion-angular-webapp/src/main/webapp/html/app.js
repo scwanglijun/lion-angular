@@ -34,7 +34,7 @@ DBApp.config(['$translateProvider',function($translateProvider){
     });
 
     //告诉module使用什么默认语言
-    $translateProvider.preferredLanguage('en');
+    $translateProvider.preferredLanguage('Zh');
 
     //告诉module存储语言到localstorage
     //$translateProvider.useLocalStorage();
