@@ -141,11 +141,12 @@ public class RoleController {
     @Trans("system.role.edit")
     public RoleEditResp edit(RoleEditReq req){
         Map<String, String> params = new HashMap<String, String>();
-        int updateRow = this.roleService.doDeleteById(req.getId());
-        if (updateRow > 0) {
-            return new RoleEditResp(RoleAddResp.SUCCESS_ROLE_ADD_CODE,RoleAddResp.SUCCESS_ROLE_ADD_MESSAGE);
-        } else {
-            return new RoleEditResp(RoleAddResp.FAIL_ROLE_ADD_CODE,RoleAddResp.FAIL_ROLE_ADD_MESSAGE);
+        Role role = roleService.doFindById(req.getId());
+        if (role == null) {
+            return new RoleEditResp(RoleEditResp.FAIL_ROLE_ADD_CODE,RoleEditResp.FAIL_ROLE_ADD_MESSAGE);
         }
+        BeanUtils.copyProperties(req, role);
+        roleService.doUpdate(role);
+        return new RoleEditResp(RoleEditResp.SUCCESS_ROLE_ADD_CODE,RoleEditResp.SUCCESS_ROLE_ADD_MESSAGE);
     }
 }
