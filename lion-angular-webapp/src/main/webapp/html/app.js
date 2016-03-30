@@ -21,6 +21,8 @@ var DBApp = angular.module("DBApp", [
     "dbUtils",
     "ngAnimate",
     "ngStorage",
+    "ui.load",
+    "ui.jq",
     "pascalprecht.translate",
     "toaster"
 ]);
