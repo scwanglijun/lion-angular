@@ -30,14 +30,14 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>{{thread.totalStartedThreadCount}}</td>
-                            <td>{{thread.threadCount}}</td>
-                            <th>{{thread.daemonThreadCount}}</th>
-                            <td>{{thread.peakThreadCount}}</td>
-                            <td>{{thread.threadContentionMonitoringEnabled?string('开启','关闭')}}</td>
-                            <td>{{thread.threadContentionMonitoringSupported?string('是','否')}}</td>
-                            <td>{{thread.threadCpuTimeEnabled?string('开启','关闭')}}</td>
-                            <td>{{thread.threadCpuTimeSupported?string('是','否')}}</td>
+                            <td>{{threadSummary.totalStartedThreadCount}}</td>
+                            <td>{{threadSummary.threadCount}}</td>
+                            <th>{{threadSummary.daemonThreadCount}}</th>
+                            <td>{{threadSummary.peakThreadCount}}</td>
+                            <td>{{threadSummary.threadContentionMonitoringEnabled?'是':'否'}}</td>
+                            <td>{{threadSummary.threadContentionMonitoringSupported?'是':'否'}}</td>
+                            <td>{{threadSummary.threadCpuTimeEnabled?'开启':'关闭'}}</td>
+                            <td>{{threadSummary.threadCpuTimeSupported?'是':'否'}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -64,21 +64,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <ng-repeat thread.threadDetails as item>
-                            <tr ng-repeat="item in b">
-                                <td>{{item.id}}</td>
-                                <td>{{item.name}}</td>
-                                <th>{{item.cupCostTime}}</th>
-                                <td>{{item.waitedTime}}</td>
-                                <td>{{item.waitedCount}}</td>
-                                <td>{{item.blockedTime}}</td>
-                                <td>{{item.blockedCount}}</td>
-                                <td>{{item.suspended?string('true','false')}}</td>
-                                <td>{{item.lockName}}</td>
-                                <td>{{item.lockOwnerName}}</td>
-                                <td>{{item.stackInfo}}</td>
-                            </tr>
-                        </ng-repeat>
+                        <tr ng-repeat="item in threadSummary.threadDetails">
+                            <td>{{item.id}}</td>
+                            <td>{{item.name}}</td>
+                            <th>{{item.cupCostTime}}</th>
+                            <td>{{item.waitedTime}}</td>
+                            <td>{{item.waitedCount}}</td>
+                            <td>{{item.blockedTime}}</td>
+                            <td>{{item.blockedCount}}</td>
+                            <td>{{item.suspended?'true':'false'}}</td>
+                            <td>{{item.lockName}}</td>
+                            <td>{{item.lockOwnerName}}</td>
+                            <td>{{item.stackInfo}}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
