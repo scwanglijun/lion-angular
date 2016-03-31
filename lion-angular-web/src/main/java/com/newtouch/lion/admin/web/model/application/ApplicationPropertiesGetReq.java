@@ -24,7 +24,7 @@ import java.util.Set;
  * Company: XiQing
  * </p>
  *
- * @author Zhangyake
+ * @author ZhangYake
  * @version 1.0
  */
 public class ApplicationPropertiesGetReq extends QueryReq{

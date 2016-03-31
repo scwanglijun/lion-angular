@@ -1,4 +1,4 @@
-package com.newtouch.lion.admin.web.controller.monitor;
+package com.newtouch.lion.admin.web.controller.jvmmonitor;
 
 import com.newtouch.lion.admin.web.model.jvmmonitor.JvmMonitorReq;
 import com.newtouch.lion.admin.web.model.jvmmonitor.JvmMonitorResp;

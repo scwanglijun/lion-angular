@@ -118,7 +118,16 @@ public class ApplicationPropertyServiceImpl implements
 		Assert.notNull(applicationProperty);
 		this.applicationPropertyDao.update(applicationProperty);
 	}
-	
+
+	@Override
+	public int doDeleteByIds(Long[] ids) {
+		int i = 0;
+		for(Long id:ids){
+			this.doDeleteById(id);
+			i++;
+		}
+		return i;
+	}
 }
 
 	

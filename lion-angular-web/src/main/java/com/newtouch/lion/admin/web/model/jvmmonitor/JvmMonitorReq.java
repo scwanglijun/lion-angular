@@ -1,5 +1,7 @@
 package com.newtouch.lion.admin.web.model.jvmmonitor;
 
+import com.newtouch.lion.admin.web.model.query.QueryReq;
+
 /**
  * <p>
  * Title:
@@ -17,7 +19,7 @@ package com.newtouch.lion.admin.web.model.jvmmonitor;
  * @author ZhangYaKe
  * @version 1.0
  */
-public class JvmMonitorReq {
+public class JvmMonitorReq extends QueryReq{
     private Long id;
 
     public Long getId() {

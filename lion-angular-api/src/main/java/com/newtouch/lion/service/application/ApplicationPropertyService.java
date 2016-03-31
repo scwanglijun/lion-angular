@@ -53,15 +53,22 @@ public interface ApplicationPropertyService {
 	/***
 	 * 保存ApplicationProperty对象
 	 * @author maojiawei
-	 * @param ApplicationProperty
+	 * @param applicationProperty
 	 */
 	public void doCreate(ApplicationProperty applicationProperty);
 	/***
 	 * 修改ApplicationProperty对象
 	 * @author maojiawei
-	 * @param ApplicationProperty
+	 * @param applicationProperty
 	 */
 	public void doUpdate(ApplicationProperty applicationProperty);
+
+	/**
+	 * 根据ids删除ApplicationProperty对象
+	 * @param ids
+	 * @return
+     */
+	public int doDeleteByIds(Long[] ids);
 }
 
 	
