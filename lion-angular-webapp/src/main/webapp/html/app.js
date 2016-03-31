@@ -1049,7 +1049,21 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
-
+        .state('account/profile', {
+            url: "/account/profile",
+            views: {
+                "mainContentContainer": {
+                    controller: "accountDataCtrl",
+                    templateUrl: "views/admin/system/account/index.html"
+                }
+            },
+            data: {pageTitle: '个人资料', pageSubTitle: '账户管理|个人资料'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(["../resources/admin/controllers/account/accountDataCtrl.js"]);
+                }]
+            }
+        })
 
 
 }
