@@ -84,12 +84,7 @@ public class ApplicationPropertyController {
             list.add(applicationPropertiesGetResp);
         }
         PageResult<ApplicationPropertiesGetResp> pageResultResp = new PageResult<ApplicationPropertiesGetResp>();
-        pageResultResp.setTotalPage(pageResult.getTotalPage());
-        pageResultResp.setPageSize(pageResult.getPageSize());
-        pageResultResp.setCurrentIndex(pageResult.getCurrentIndex());
-        pageResultResp.setTotalCount(pageResult.getTotalCount());
-        pageResultResp.setCurrentPage(pageResult.getCurrentPage());
-
+        BeanUtils.copyProperties(pageResult,pageResultResp);
         pageResultResp.setContent(list);
 
         return new Page(pageResultResp);
