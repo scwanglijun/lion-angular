@@ -1,5 +1,7 @@
 package com.newtouch.lion.admin.web.model.application;
 
+import com.newtouch.lion.admin.web.model.query.QueryReq;
+
 /**
  * <p>
  * Title:
@@ -14,10 +16,10 @@ package com.newtouch.lion.admin.web.model.application;
  * Company: NewTouch
  * </p>
  *
- * @author ZhangYaKe
+ * @author ZhangYake
  * @version 1.0
  */
-public class ApplicationPropertyAddReq {
+public class ApplicationPropertiesAddReq extends QueryReq{
     /** 系统应用ID */
     private Long id;
 

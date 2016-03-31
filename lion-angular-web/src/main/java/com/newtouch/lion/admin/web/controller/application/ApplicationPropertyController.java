@@ -3,10 +3,7 @@ package com.newtouch.lion.admin.web.controller.application;
  * Created by Zhangyake on 2016/3/28.
  */
 
-import com.newtouch.lion.admin.web.model.application.ApplicationPropertiesGetReq;
-import com.newtouch.lion.admin.web.model.application.ApplicationPropertiesGetResp;
-import com.newtouch.lion.admin.web.model.application.ApplicationPropertyAddReq;
-import com.newtouch.lion.admin.web.model.application.ApplicationPropertyAddResp;
+import com.newtouch.lion.admin.web.model.application.*;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.model.application.ApplicationProperty;
 import com.newtouch.lion.page.PageResult;
@@ -46,6 +43,11 @@ public class ApplicationPropertyController {
     /** 默认排序字段 */
     private static final String DEFAULT_ORDER_FILED_NAME = "id";
 
+    /**
+     * 编辑项目属性列表
+     * @param req
+     * @return
+     */
     @Trans("system.applicationProperty.list")
     public Page<ApplicationPropertiesGetResp> list(ApplicationPropertiesGetReq req) {
 
@@ -93,14 +95,44 @@ public class ApplicationPropertyController {
         return new Page(pageResultResp);
     }
 
+    /**
+     * 编辑项目属性添加
+     * @param req
+     * @return
+     */
     @Trans("system.applicationProperty.add")
-    public ApplicationPropertyAddResp add(ApplicationPropertyAddReq  req){
+    public ApplicationPropertiesAddResp add(ApplicationPropertiesAddReq req){
 
         ApplicationProperty applicationProperty = new ApplicationProperty();
 
         BeanUtils.copyProperties(req, applicationProperty);
         applicationPropertyService.doCreate(applicationProperty);
 
-        return new ApplicationPropertyAddResp(ApplicationPropertyAddResp.SUCCESS_ROLE_ADD_CODE,ApplicationPropertyAddResp.SUCCESS_ROLE_ADD_MESSAGE);
+        return new ApplicationPropertiesAddResp(ApplicationPropertiesAddResp.SUCCESS_ROLE_ADD_CODE, ApplicationPropertiesAddResp.SUCCESS_ROLE_ADD_MESSAGE);
     }
+
+    /** 编辑项目属性配置 */
+    @Trans("system.applicationProperty.edit")
+    public ApplicationPropertiesEditResp edit(ApplicationPropertiesAddReq req) {
+       ApplicationProperty applicationProperty = applicationPropertyService.doFindById(req.getId());
+
+        if(applicationProperty == null) {
+            return new ApplicationPropertiesEditResp(ApplicationPropertiesEditResp.FAIL_ROLE_EDIT_CODE,ApplicationPropertiesEditResp.FAIL_ROLE_EDIT_MESSAGE);
+        }
+        BeanUtils.copyProperties(req, applicationProperty);
+        applicationPropertyService.doUpdate(applicationProperty);
+        return new ApplicationPropertiesEditResp(ApplicationPropertiesEditResp.SUCCESS_ROLE_EDIT_CODE,ApplicationPropertiesEditResp.SUCCESS_ROLE_EDIT_MESSAGE);
+    }
+
+    /** 删除项目属性配置 */
+    @Trans("system.applicationProperty.delete")
+    public ApplicationPropertiesDelResp delete(ApplicationPropertiesDelReq req) {
+        int updateRow = this.applicationPropertyService.doDeleteByIds(req.getIds());
+        if (updateRow > 0) {
+            return new ApplicationPropertiesDelResp(ApplicationPropertiesDelResp.SUCCESS_ROLE_DELETE_CODE, ApplicationPropertiesDelResp.SUCCESS_ROLE_DELETE_MESSAGE);
+        } else {
+            return new ApplicationPropertiesDelResp(ApplicationPropertiesDelResp.FAIL_ROLE_DELETE_CODE, ApplicationPropertiesDelResp.FAIL_ROLE_DELETE_MESSAGE);
+        }
+    }
+
 }

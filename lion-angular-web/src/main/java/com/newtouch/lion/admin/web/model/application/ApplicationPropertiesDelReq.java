@@ -1,5 +1,5 @@
 package com.newtouch.lion.admin.web.model.application;/**
- * Created by Zhangyake on 3/25/16.
+ * Created by jovi on 3/28/16.
  */
 
 import com.newtouch.lion.admin.web.model.query.QueryReq;
@@ -21,7 +21,7 @@ import com.newtouch.lion.admin.web.model.query.QueryReq;
  * @author ZhangYake
  * @version 1.0
  */
-public class ApplicationPropertiesGetResp extends QueryReq{
+public class ApplicationPropertiesDelReq extends QueryReq{
     /** 系统应用ID */
     private Long id;
 
@@ -33,10 +33,7 @@ public class ApplicationPropertiesGetResp extends QueryReq{
     private String value;
     /** 配置项描述 */
     private String description;
-    /**创建时间*/
-    private String createDateFormatter;
-    /**更新时间*/
-    private String updateDateFormatter;
+    private Long[] ids;
 
     public Long getId() {
         return id;
@@ -78,20 +75,11 @@ public class ApplicationPropertiesGetResp extends QueryReq{
         this.description = description;
     }
 
-    public String getCreateDateFormatter() {
-        return createDateFormatter;
+    public Long[] getIds() {
+        return ids;
     }
 
-    public void setCreateDateFormatter(String createDateFormatter) {
-        this.createDateFormatter = createDateFormatter;
+    public void setIds(Long[] ids) {
+        this.ids = ids;
     }
-
-    public String getUpdateDateFormatter() {
-        return updateDateFormatter;
-    }
-
-    public void setUpdateDateFormatter(String updateDateFormatter) {
-        this.updateDateFormatter = updateDateFormatter;
-    }
-
 }

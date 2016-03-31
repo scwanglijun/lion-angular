@@ -82,31 +82,31 @@ function appliPropertyCtrl($scope, $modal, dbUtils) {
             }
         });
         instance.result.then(function () {
-            $scope.dbFormGrid.reLoadData();
+            $scope.lionFormGrid.reLoadData();
         });
     }
 
     //编辑modal
     function editModal(row) {
-        if ($scope.lionFormGrid.getAllSelectRows().length == 0) {
+        if($scope.lionFormGrid.getAllSelectRows().length == 0){
             dbUtils.info('请选择要编辑的行数据');
-        } else {
-            dbUtils.post("roleModifyGet", {id: row['id']}, function (data) {
-                var instance = $modal.open({
-                    animation: true,
-                    templateUrl: 'views/admin/system/role/test.html',
-                    controller: 'roleEditCtrl',
-                    size: "md",
-                    backdrop: "static",
-                    resolve: {
-                        source: function () {
-                            return data;
-                        }
+        }else if($scope.lionFormGrid.getAllSelectRows().length > 1){
+            dbUtils.info('请选择一行数据');
+        }else {
+            var instance = $modal.open({
+                animation: true,
+                templateUrl: 'views/admin/system/application/appliPropertyEditorView.html',
+                controller: 'appliPropertyEditorCtrl',
+                size: "md",
+                backdrop: "static",
+                resolve: {
+                    source: function () {
+                        return $scope.lionFormGrid.getAllSelectRows();
                     }
-                });
-                instance.result.then(function () {
-                    $scope.dbFormGrid.reLoadData();
-                });
+                }
+            });
+            instance.result.then(function () {
+                $scope.lionFormGrid.reLoadData();
             });
         }
     }
@@ -117,39 +117,21 @@ function appliPropertyCtrl($scope, $modal, dbUtils) {
     function quit() {
         var selectRows = $scope.lionFormGrid.getAllSelectRows();
         if (selectRows.length === 0) {
-            return;
-        }
-        var ids = dbUtils.getFieldArray(selectRows, "id");
-        dbUtils.confirm("确定要对所选人员进行<span style='color: red'>删除</span>操作?", function () {
-            dbUtils.post('partyRoleQuit', {'ids': ids}, function (data) {
-                if (data) {
-                    dbUtils.error(data + "以上渠道维护人员不能删除，请先迁移其所辖的代理机构！")
-                } else {
-                    dbUtils.success("渠道维护人员删除成功！!");
-                }
-                $scope.lionFormGrid.reLoadData();
-            }, function (error) {
-                dbUtils.error("人员删除处理异常!" + error);
+            dbUtils.info('请选择要删除的行数据');
+        }else{
+            var ids = dbUtils.getFieldArray(selectRows, "id");
+            dbUtils.confirm("确定要对所选项目属性配置信息进行<span style='color: red'>删除</span>操作?", function () {
+                dbUtils.post('system.applicationProperty.delete', {'ids': ids}, function (data) {
+                    if (data.code==='200') {
+                        dbUtils.success("项目属性配置信息删除成功！!");
+                    } else {
+                        dbUtils.error("项目属性配置信息删除失败!");
+                    }
+                    $scope.lionFormGrid.reLoadData();
+                }, function (error) {
+                    dbUtils.error("项目属性配置信息删除处理异常!" + error);
+                });
             });
-        });
-    }
-
-    /**
-     * 查看审核记录
-     * @param currentRecord
-     */
-    function auditStatusHistory(currentRecord) {
-        $modal.open({
-            animation: true,
-            templateUrl: 'views/roles.json/partNoAuditHistoryView.html',
-            controller: 'partNoAuditHistoryCtrl',
-            size: "lg",
-            backdrop: "static",
-            resolve: {
-                source: function () {
-                    return currentRecord;
-                }
-            }
-        });
+        }
     }
 }

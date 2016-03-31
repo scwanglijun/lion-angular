@@ -16,9 +16,9 @@ function appliPropertyEditorCtrl($scope,$modalInstance,dbUtils,dbImService,sourc
             description: null
         };
     } else {
-        $scope.formDisabled = true;
+        $scope.formDisabled = false;
         $scope.editData = true;
-        $scope.data = angular.copy(source);
+        $scope.data = angular.copy(source)[0];
     }
 
     //取消Modal
@@ -33,7 +33,7 @@ function appliPropertyEditorCtrl($scope,$modalInstance,dbUtils,dbImService,sourc
         if (isValid) {
             var reqBody = angular.copy($scope.data);
 
-            dbUtils.post('system.applicationProperty.add',reqBody, function (data) {
+            dbUtils.post(angular.isUndefined(source) ? 'system.applicationProperty.add':'system.applicationProperty.edit',reqBody, function (data) {
                 dbUtils.success('添加系统配置信息成功!');
                 $modalInstance.close();
             }, function (error) {
