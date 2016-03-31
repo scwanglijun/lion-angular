@@ -413,3 +413,26 @@ dbServices.directive('dbValidator', ['$log', function ($log) {
         }
     }
 }]);
+
+/**
+ * 表单校验  验证唯一性
+ 在需要校验的表单input元素上添加：ensure-unique="username"
+ * */
+dbServices.directive('ensureUnique', ['$http', function ($http) {
+    return {
+        require: 'ngModel',
+        link: function(scope, ele, attrs, c) {
+            scope.$watch(attrs.ngModel, function() {
+                $http({
+                    method: 'POST',
+                    url: '/api/check/' + attrs.ensureUnique,
+                    data: {'field': attrs.ensureUnique}
+                }).success(function(data, status, headers, cfg) {
+                    c.$setValidity('unique', data.isUnique);
+                }).error(function(data, status, headers, cfg) {
+                    c.$setValidity('unique', false);
+                });
+            });
+        }
+    }
+}]);

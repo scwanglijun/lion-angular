@@ -21,8 +21,9 @@
                                 </label>
                                 <div class="col-md-9">
                                     <div class="input-group">
-                                        <input type="text" ng-model="data.nameZh" name="nameZh" db-validator="required"  maxlength="100" class="form-control" placeholder="角色名(中文)" ng-disabled="formDisabled"/>
+                                        <input type="text" ng-model="data.nameZh" name="nameZh" db-validator="required" ng-maxlength="100" class="form-control" placeholder="角色名(中文)" ng-disabled="formDisabled"/>
                                         <span class="help-block" ng-show="dataForm1.nameZh.$invalid && submited ">{{$dbForm.nameZh.msg}}</span>
+                                        <!--<span class="help-block" ng-show="dataForm1.nameZh.$error.unique">角色名必须唯一</span>-->
                                     </div>
                                 </div>
                             </div>
@@ -32,7 +33,7 @@
                                 </label>
                                 <div class="col-md-9">
                                     <div class="input-group">
-                                        <input type="text" ng-model="data.nameEn" db-validator="required" name="nameEn" maxlength="100" class="form-control" placeholder="角色名(英文)"  ng-disabled="formDisabled"/>
+                                        <input type="text" ng-model="data.nameEn" db-validator="required" name="nameEn" ng-maxlength="100" class="form-control" placeholder="角色名(英文)"  ng-disabled="formDisabled"/>
                                         <span class="help-block" ng-show="dataForm1.nameEn.$invalid && submited ">{{$dbForm.nameEn.msg}}</span>
                                     </div>
                                 </div>
@@ -43,7 +44,7 @@
                                 </label>
                                 <div class="col-md-9">
                                     <div class="input-group">
-                                        <input type="text" ng-model="data.description" db-validator="required" name="description" class="form-control" placeholder="描述" maxlength="255"  ng-disabled="formDisabled"/>
+                                        <input type="text" ng-model="data.description" db-validator="required" name="description" class="form-control" placeholder="描述" ng-maxlength="255"  ng-disabled="formDisabled"/>
                                         <span class="help-block" ng-show="dataForm1.description.$invalid && submited ">{{$dbForm.description.msg}}</span>
                                     </div>
                                 </div>

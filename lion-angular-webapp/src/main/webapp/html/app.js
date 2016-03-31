@@ -21,6 +21,8 @@ var DBApp = angular.module("DBApp", [
     "dbUtils",
     "ngAnimate",
     "ngStorage",
+    "ui.load",
+    "ui.jq",
     "pascalprecht.translate",
     "toaster"
 ]);
@@ -996,6 +998,38 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(['../resources/admin/controllers/parameter/parameterListCtrl.js']);
+                }]
+            }
+        })
+
+        .state('system/monitor/sessionlist', {
+            url: "/system/monitor/sessionlist",
+            views: {
+                "mainContentContainer": {
+                    controller: "sessionListCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'Session', pageSubTitle: '系统设置|系统参数'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/session/sessionListCtrl.js']);
+                }]
+            }
+        })
+
+        .state('system/monitor/druid', {
+            url: "/system/monitor/druid",
+            views: {
+                "mainContentContainer": {
+                    controller: "druidListCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'Druid', pageSubTitle: '系统设置|系统参数'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/druid/druidListCtrl.js']);
                 }]
             }
         })
