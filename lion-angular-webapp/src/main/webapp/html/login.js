@@ -15,13 +15,13 @@ function LoginController($scope, $http, $window,dbUtils) {
         password: '111aaa',
         validCode: "1111"
     };
+
     //登录请求
     $scope.submitDbForm = function (isValid) {
         $scope.submited = true;
 
         var userName = $scope.data.username;
         var password = $scope.data.password;
-        var validCode = $scope.data.validCode;
 
         if (!userName || !password ) {
             alert("登录信息不全,检查后重试!");
@@ -31,11 +31,10 @@ function LoginController($scope, $http, $window,dbUtils) {
         if (isValid) {
             var reqBody = angular.copy($scope.data);
             dbUtils.post('user.login',reqBody,function(data){
-                console.dir('qqq');
                if(data.code==='200'){
                    $window.sessionStorage.setItem("loginName", userName);
                    $window.location.href = "index.html";
-               } else{
+               }else{
                    alert(data.message);
                }
             });

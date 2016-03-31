@@ -38,7 +38,9 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
     var formGridEvents = {
         grid: {
             fieldEvents: {
-
+                "createdDateFormat":function(value,row){
+                    return formatDate(new Date(row));
+                }
             },
             operationEvents: [{
                 name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
@@ -104,6 +106,17 @@ function PartyRoleQuitCtrl($scope, $modal, dbUtils) {
                 }
             }
         });
+    }
+
+    function   formatDate(now)   {
+        console.dir(row);
+        var   year=now.getYear();
+        var   month=now.getMonth()+1;
+        var   date=now.getDate();
+        var   hour=now.getHours();
+        var   minute=now.getMinutes();
+        var   second=now.getSeconds();
+        return   year+"-"+month+"-"+date+"   "+hour+":"+minute+":"+second;
     }
 
 

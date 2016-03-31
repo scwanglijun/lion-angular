@@ -38,7 +38,9 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
     var formGridEvents = {
         grid: {
             fieldEvents: {
-
+                "createdDateFormat":function(value,row){
+                    return new Date(parseInt(row) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+                }
             },
             operationEvents: [{
                 name: "新增", class: "btn-success", icon: "tianjia", click: function () {

@@ -13,6 +13,7 @@ import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.application.ApplicationPropertyService;
 import com.newtouch.lion.web.page.Page;
+import com.newtouch.lion.web.util.QueryUtils;
 import com.newtouch.lion.webtrans.trans.Trans;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -47,12 +48,8 @@ public class ApplicationPropertyController {
 
     @Trans("system.applicationProperty.list")
     public Page<ApplicationPropertiesGetResp> list(ApplicationPropertiesGetReq req) {
-        QueryCriteria queryCriteria = new QueryCriteria();
 
-        // 设置分页 启始页
-        queryCriteria.setStartIndex(req.getPage().getPageNumber()-1);
-        // 每页大小
-        queryCriteria.setPageSize(req.getPage().getPageSize());
+        QueryCriteria queryCriteria = QueryUtils.pageFormat(new QueryCriteria() ,req);
 
         // 设置排序字段及排序方向
 //        if (StringUtils.isNotEmpty(req.getSort()) && StringUtils.isNotEmpty(req.getOrder())) {
