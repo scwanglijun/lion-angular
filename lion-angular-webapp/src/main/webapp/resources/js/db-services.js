@@ -257,8 +257,8 @@ function DialogUtil($modal, $http, $window, toaster) {
             var ApiRequest = {};
             ApiRequest["transCode"] = transCode;
             ApiRequest["requestBody"] = reqBody;
-            $http.post("../api.do", ApiRequest).success(function (data, status, headers, config) {
-                console.log(ApiRequest);
+            $http.post("http://localhost:8080/admin/api.do", ApiRequest).success(function (data, status, headers, config) {
+                console.log(data);
                 Metronic.stopPageLoading();
                 if (data.status == "401") {//用户未登录
                     $window.location.href = "login.html";

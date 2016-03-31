@@ -23,7 +23,7 @@ public class LoginUserReq {
     private String username;
     private String password;
     private String verifyCode;
-    private Boolean rememberMe;
+    private Boolean rememberMe=Boolean.FALSE;
 
     public String getUsername() {
         return username;
