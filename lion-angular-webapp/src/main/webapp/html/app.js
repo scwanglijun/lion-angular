@@ -1034,6 +1034,22 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             }
         })
 
+        .state('system/datatable', {
+            url: "/system/datatable",
+            views: {
+                "mainContentContainer": {
+                    controller: "datatableCtrl",
+                    templateUrl: "views/datatable.html"
+                }
+            },
+            data: {pageTitle: 'Datatable', pageSubTitle: '系统设置|Datatable'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/datatable/datatableCtrl.js']);
+                }]
+            }
+        })
+
 
 
 }

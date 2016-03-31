@@ -43,7 +43,8 @@
                     "CACHEMONITER" : "缓存监控"
                 },
                 "APPLIPROPERTY" : "项目属性配置",
-                "ICON" : "图标管理"
+                "ICON" : "图标管理",
+                "DATATABLE":"Datatable"
             },
             "account" : {
                 "ACCOUNT":"账户管理",

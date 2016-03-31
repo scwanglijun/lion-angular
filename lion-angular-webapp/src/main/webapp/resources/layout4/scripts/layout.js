@@ -681,6 +681,13 @@ var Layout = function () {
                     "icon":"star",
                     "open":"",
                     "url":"system/iconlist"
+                },
+                {
+                    "name":"Datatable",
+                    "translate":"aside.nav.system.DATATABLE",
+                    "icon":"star",
+                    "open":"",
+                    "url":"system/datatable"
                 }
             ]
         },{

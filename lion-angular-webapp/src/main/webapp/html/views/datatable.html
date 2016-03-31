@@ -1,0 +1,32 @@
+<div class="wrapper-md">
+    <div class="panel">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table ui-jq="dataTable" class="table table-hover table-stript" ui-options="{
+          sAjaxSource: '../resources/lib/global/plugins/datatables/datatable.json',
+          aoColumns: [
+            { mData: 'engine' },
+            { mData: 'browser' },
+            { mData: 'platform' },
+            { mData: 'version' },
+            { mData: 'grade' }
+          ]
+        }" class="table table-striped m-b-none">
+                        <thead>
+                        <tr>
+                            <th  style="width:20%">Rendering engine</th>
+                            <th  style="width:20%">Browser</th>
+                            <th  style="width:20%">Platform(s)</th>
+                            <th  style="width:20%">Engine version</th>
+                            <th  style="width:20%">CSS grade</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
