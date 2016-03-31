@@ -16,5 +16,6 @@ angular.module("DBApp")
         ],
         Morris:   ['../resources/lib/global/plugins/morris/morris.css',
             '../resources/lib/global/plugins/morris/morris.min.js',
-            '../resources/lib/global/plugins/morris/raphael-min.js']
+            '../resources/lib/global/plugins/morris/raphael-min.js'],
+        jstree:   ['../resources/css/tree/style.min.css','../resources/css/tree/jstree.min.js']
     })

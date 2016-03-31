@@ -871,6 +871,27 @@
 				</div>
 			</div>
 			<div class="portlet-body">
+
+				<div id="tree_2" class="tree-demo" ui-jq="jstree" ui-options='{
+						"plugins": ["wholerow", "checkbox", "types"],
+						"core": {
+							"themes" : {
+								"responsive": false
+							},
+							"data":{{treeData}}
+						},
+						"types" : {
+							"default" : {
+								"icon" : "fa fa-folder icon-state-warning icon-lg"
+							},
+							"file" : {
+								"icon" : "fa fa-file icon-state-warning icon-lg"
+							}
+						}
+					}'>
+				</div>
+
+
 				<div id="region_statistics_loading">
 					<img src="../resources/layout4/img/loading.gif" alt="loading"/>
 				</div>
@@ -911,6 +932,7 @@
 							</ul>
 						</div>
 					</div>
+
 					<!--<div id="vmap_world" class="vmaps" ui-jq="vectorMap" ui-options="{map: 'world_en',backgroundColor: null,borderColor: '#333333',borderOpacity: 0.5,borderWidth: 1,color: '#c6c6c6',enableZoom: true,hoverColor: '#c9dfaf',hoverOpacity: null,values: sample_data,normalizeFunction: 'linear',scaleColors: ['#b6da93', '#909cae'],selectedColor: '#c9dfaf',selectedRegion: null,showTooltip: true}">
 					</div>
 					<div id="vmap_usa" class="vmaps display-none">
