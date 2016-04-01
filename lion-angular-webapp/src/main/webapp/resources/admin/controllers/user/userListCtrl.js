@@ -111,8 +111,8 @@ function userListCtrl($scope, $modal, dbUtils) {
 
                 var instance = $modal.open({
                     animation: true,
-                    templateUrl: 'views/admin/system/role/test.html',
-                    controller: 'testCtrl',
+                    templateUrl: 'views/admin/system/role/userDetail.html',
+                    controller: 'userDetailCtrl',
                     size: "md",
                     backdrop: "static",
                     resolve: {
