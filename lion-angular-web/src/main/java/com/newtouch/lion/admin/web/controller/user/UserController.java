@@ -56,8 +56,11 @@ public class UserController {
 
 	        // 查询条件 
 	        if (StringUtils.isNotEmpty(req.getEmployeeCode())) {
-	            queryCriteria.addQueryCondition("employeeCode", "%"+req.getEmployeeCode()+"%");
-	        }
+				queryCriteria.addQueryCondition("id", "%"+req.getEmployeeCode()+"%");
+			}
+			if (StringUtils.isNotEmpty(req.getEmployeeCode())) {
+				queryCriteria.addQueryCondition("username", "%"+req.getEmployeeCode()+"%");
+			}
 
 	        PageResult<User> pageResult = userService.doFindByCriteria(queryCriteria);
 	        System.out.print(pageResult.getContent());

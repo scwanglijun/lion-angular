@@ -13,7 +13,8 @@ function userListCtrl($scope, $modal, dbUtils) {
                 cols: 2
             },
             fields: [
-                {name: "realnameZh", label: "用户名称", type: "text", required: true, placeholder: "用户名称", readonly: true, labelCols: "3"}
+                {name: "id", label: "用户ID", type: "text", required: true, placeholder: "用户ID", readonly: true, labelCols: "3"},
+                {name: "username", label: "用户登入名", type: "text", required: true, placeholder: "用户登入名", readonly: true, labelCols: "3"}
             ]
         },
         grid: {
@@ -24,9 +25,13 @@ function userListCtrl($scope, $modal, dbUtils) {
                 showCheckBox: true
             },
             header: [
-                {name: "用户名称(英文)", width: "18%", field: "realnameEn"},
+                {name: "用户ID", width: "12%", field: "id"},
+                {name:"用户登入名", width:"18%", field:"username"},
+                {name:"用户联系方式", width:"18%", field:"telephone"},
+                {name:"用户联系方式（手机）", width:"18%", field:"mobile"},
+                {name:"用户E-mail", width:"18%", field:"email"},
                 {name: "用户名称(中文)", width: "12%", field: "realnameZh"},
-                {name: "用户ID", width: "12%", field: "employeeCode"},
+                {name: "用户名称(英文)", width: "18%", field: "realnameEn"},
                 {name: "描述", width: "12%", field: "description"},
                 {name: "可编辑", width: "10%", field: "editable"},
                 {name: "创建时间", width: "18%", field: "createdDate"},
