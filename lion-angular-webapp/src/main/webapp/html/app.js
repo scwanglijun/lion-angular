@@ -934,6 +934,23 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+
+        .state('system/resource', {
+            url: "/system/resource",
+            views: {
+                "mainContentContainer": {
+                    controller: "resourceCtrl",
+                    templateUrl: "views/security/resourceModifyView.html"
+                }
+            },
+            data: {pageTitle: 'Resource', pageSubTitle: '系统设置 | 资源管理'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/resource/resourceCtrl.js']);
+                }]
+            }
+        })
+
         .state('system/department', {
             url: "/system/department",
             views: {
@@ -1076,6 +1093,22 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(['../resources/admin/controllers/hibernatemonitor/hibernateMonitorCtrl.js']);
+                }]
+            }
+        })
+
+        .state('account/notifications', {
+            url: "/account/notifications",
+            views: {
+                "mainContentContainer": {
+                    controller: "notificationCtrl",
+                    templateUrl: "views/admin/system/account/notification.html"
+                }
+            },
+            data: {pageTitle: '通知消息', pageSubTitle: '账户管理|通知消息'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(["../resources/admin/controllers/notification/notificationCtrl.js"]);
                 }]
             }
         })
