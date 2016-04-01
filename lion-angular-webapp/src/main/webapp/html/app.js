@@ -1082,6 +1082,22 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             }
         })
 
+        .state('account/notifications', {
+            url: "/account/notifications",
+            views: {
+                "mainContentContainer": {
+                    controller: "notificationCtrl",
+                    templateUrl: "views/admin/system/account/notification.html"
+                }
+            },
+            data: {pageTitle: '通知消息', pageSubTitle: '账户管理|通知消息'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(["../resources/admin/controllers/notification/notificationCtrl.js"]);
+                }]
+            }
+        })
+
 
 }
 
