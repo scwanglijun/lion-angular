@@ -145,9 +145,13 @@ function DbImService($resource, $http) {
 
 var dbUtils = angular.module("dbUtils", ["ngResource"]);
 
-dbUtils.factory("dbUtils", ["$modal", "$http", "$window", 'toaster', DialogUtil]);
+dbUtils.factory("dbUtils", ["$modal", "$http", "$window", 'toaster','$q', DialogUtil]);
 
-function DialogUtil($modal, $http, $window, toaster) {
+function DialogUtil($modal, $http, $window, toaster,$q) {
+
+    var promise = false;
+    var deferred = $q.defer();
+
     function getHtml(content, type) {
         var html = [];
         html.push('<div class="modal-header">');
@@ -257,8 +261,13 @@ function DialogUtil($modal, $http, $window, toaster) {
             var ApiRequest = {};
             ApiRequest["transCode"] = transCode;
             ApiRequest["requestBody"] = reqBody;
+
+            if(!promise){
+                promise = deferred.promise;
+            }
+
             $http.post("http://localhost:8080/admin/api.do", ApiRequest).success(function (data, status, headers, config) {
-                console.log(data);
+                //console.log(data);
                 Metronic.stopPageLoading();
                 if (data.status == "401") {//用户未登录
                     $window.location.href = "login.html";
@@ -270,6 +279,8 @@ function DialogUtil($modal, $http, $window, toaster) {
                     success(data.responseBody);
                 }
 
+                deferred.resolve(data);
+
                 //判断返回值是系统异常，还是业务异常，来决定是否需要调用error回调
             }).error(function (data, status, headers, config) {
                 doToasterTip('error', "提示", "系统异常!");
@@ -277,13 +288,23 @@ function DialogUtil($modal, $http, $window, toaster) {
                 if (angular.isFunction(error)) {
                     error(data);
                 }
+
+                deferred.reject();
             });
+
+            return deferred.promise;
+
         },
         get: function (transCode, reqBody, error) {
             Metronic.startPageLoading();
             var ApiRequest = {};
             ApiRequest["transCode"] = transCode;
             ApiRequest["requestBody"] = reqBody;
+
+            if(!promise){
+                promise = deferred.promise;
+            }
+
             $http.get("../api.do", ApiRequest).success(function (data) {
                 Metronic.stopPageLoading();
                 if (data.status == "401") {//用户未登录
@@ -293,6 +314,9 @@ function DialogUtil($modal, $http, $window, toaster) {
                 }else if (data.status == "500") {//用户没有权限
                     doToasterTip('error', "提示", "系统异常!");
                 }
+
+                deferred.resolve(data);
+
                 //判断返回值是系统异常，还是业务异常，来决定是否需要调用error回调
             }).error(function (data, status, headers, config) {
                 doToasterTip('error', "提示", "系统异常!");
@@ -300,7 +324,12 @@ function DialogUtil($modal, $http, $window, toaster) {
                 if (angular.isFunction(error)) {
                     error(data);
                 }
+
+                deferred.reject();
+
             });
+
+            return deferred.promise;
         },
         dateFormat: function (date) {
             var year = date.getFullYear();
