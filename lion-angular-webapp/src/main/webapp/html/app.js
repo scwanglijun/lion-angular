@@ -1064,6 +1064,21 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+        .state('system/monitor/hibernate', {
+            url: "/system/monitor/hibernate",
+            views: {
+                "mainContentContainer": {
+                    controller: "hibernateMonitorCtrl",
+                    templateUrl: "views/admin/system/hibernatemonitor/index.html"
+                }
+            },
+            data: {pageTitle: 'hibernateMonitor', pageSubTitle: '系统设置|监控系统|Hibernate监控'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/hibernatemonitor/hibernateMonitorCtrl.js']);
+                }]
+            }
+        })
 
 
 }
