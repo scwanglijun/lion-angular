@@ -1053,14 +1053,14 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             url: "/account/profile",
             views: {
                 "mainContentContainer": {
-                    controller: "accountDataCtrl",
+                    controller: "accountProfileCtrl",
                     templateUrl: "views/admin/system/account/index.html"
                 }
             },
             data: {pageTitle: '个人资料', pageSubTitle: '账户管理|个人资料'},
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(["../resources/admin/controllers/account/accountDataCtrl.js"]);
+                    return $ocLazyLoad.load(["../resources/admin/controllers/account/accountProfileCtrl.js"]);
                 }]
             }
         })

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 public class AccountController{
     @Autowired
     private UserService userService;
-    @Trans(value = "system.account.personaldata")
+    @Trans(value = "system.account.profile")
     public UserGetReq Account(LoginUserReq userReq){
         //查找登录的用户
         User user = userService.doFindByUserName(userReq.getUsername());
