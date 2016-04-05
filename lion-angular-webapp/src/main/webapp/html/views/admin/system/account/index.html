@@ -30,56 +30,56 @@
 							<form   class="form-horizontal" id="formuser" name="formuser" ng-submit="btnBaseInfoSave(formuser.$valid)">
 								<div class="form-group">
 									<label class="control-label col-md-3">真实姓名(中文)</label>
-									<div class="col-md-8 input-group">
-										<input type="text" class="form-control input-medium"  name="realnameZh" value={{realnameZh}}  maxlength="128" size="30"/>
+									<div class="col-md-8 input-group"><!--value={{realnameZh}}-->
+										<input type="text" class="form-control input-medium"  name="realnameZh" ng-model="data.realnameZh"  maxlength="128" size="30"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label  col-md-3">真实姓名(英文)</label>
-									<div class="col-md-8 input-group">
-										<input type="text" class="form-control input-medium" name="realnameEn" value={{realnameEn}} maxlength="128" size="30"/>
+									<div class="col-md-8 input-group"><!--value={{realnameEn}}-->
+										<input type="text" class="form-control input-medium" name="realnameEn" ng-model="data.realnameEn" maxlength="128" size="30"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">手机号</label>
-									<div class="col-md-8 input-group">
-										<input type="text"  class="form-control input-medium" name="mobile" value={{mobile}}  maxlength="30" size="30"/>
+									<div class="col-md-8 input-group"><!--value={{mobile}}-->
+										<input type="text"  class="form-control input-medium" name="mobile" ng-model="data.mobile"  maxlength="30" size="30"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">联系电话</label>
-									<div class="col-md-8 input-group">
-										<input type="text"   class="form-control input-medium" name="telephone" value={{telephone}} maxlength="30" size="30"/>
+									<div class="col-md-8 input-group"><!--value={{telephone}}-->
+										<input type="text"   class="form-control input-medium" name="telephone" ng-model="data.telephone" maxlength="30" size="30"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">办公室电话</label>
-									<div class="col-md-8 input-group">
-										<input type="text"   class="form-control input-medium" name="officePhone" value={{officePhone}} maxlength="30" size="30"/>
+									<div class="col-md-8 input-group"><!--value={{officePhone}}-->
+										<input type="text"   class="form-control input-medium" name="officePhone" ng-model="data.officePhone" maxlength="30" size="30"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">传真</label>
-									<div class="col-md-8 input-group">
-										<input type="text" class="form-control input-medium" name="fax" value={{fax}} maxlength="30" size="30"/>
+									<div class="col-md-8 input-group"><!--value={{fax}}-->
+										<input type="text" class="form-control input-medium" name="fax" ng-model="data.fax"  maxlength="30" size="30"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">邮编</label>
-									<div class="col-md-8 input-group">
-										<input type="text"  class="form-control input-medium" name="postcode" value={{postcode}} maxlength="6" size="6"/>
+									<div class="col-md-8 input-group"><!--value={{postcode}}-->
+										<input type="text"  class="form-control input-medium" name="postcode" ng-model="data.postcode"  maxlength="6" size="6"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">办公位置</label>
-									<div class="col-md-8 input-group">
-										<input type="text"  class="form-control input-medium" name="location" value={{location}} maxlength="256" size="30"/>
+									<div class="col-md-8 input-group"><!--value={{location}}-->
+										<input type="text"  class="form-control input-medium" name="location" ng-model="data.location"  maxlength="256" size="30"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">描述</label>
-									<div class="col-md-8 input-group">
-										<input type="text"  class="form-control input-medium" name="description"  value={{description}}  maxlength="256" size="30"/>
+									<div class="col-md-8 input-group"><!--value={{description}}-->
+										<input type="text"  class="form-control input-medium" name="description"  ng-model="data.description"  maxlength="256" size="30"/>
 									</div>
 								</div>
 								<div class=" form-group">
