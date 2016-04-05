@@ -88,8 +88,8 @@
 										<button type="submit" id="btnBaseInfoSave" class="btn blue">
 											<i class="fa fa-save"></i> 保存基本信息
 										</button>&nbsp; &nbsp;
-										<button type="cancel" id="btnBaseInfoCancel" class="btn default">
-											<i class="fa  fa-arrow-left"></i> 取 消
+										<button type="reset" id="btnBaseInfoCancel" class="btn default">
+											<i class="fa  fa-arrow-left" ></i> 取 消
 										</button>
 									</div>
 								</div>
@@ -98,25 +98,25 @@
 						<!-- END PERSONAL INFO TAB -->
 						<!-- CHANGE AVATAR TAB -->
 						<div class="tab-pane" id="tab_1_2">
-							<form id="formImg" enctype="multipart/form-data" action="#" >
+							<form id="formImg" name="formImg" enctype="multipart/form-data"ng-submit="btnImgUploadSave(formImg.$valid)" >
 								<div class="form-group">
 									<div class="fileinput fileinput-new" >
 										<div id="imgDiv" class="fileinput-new thumbnail" style="width: 300px; height: 300px;">
 											<img src="../resources/css/images/default.gif" style="width: 300px; height: 300px;"/>
 										</div>
 										<div>
-																<span class="btn default btn-file">
-																<span class="fileinput-new">
-																选择图片 </span>
-																<input id="image" name="image" type="file"/>
-																</span>
+											<span class="btn default btn-file">
+												<span class="fileinput-new" ng-click="show(this)">
+												选择图片 </span>
+												<input id="image" ng-model="image" name="image" type="file"/>
+											</span>
 										</div>
 									</div>
 								</div>
 								<div class="margin-top-10">
-									<button id="btnImgUploadSave" class="btn green-haze">
+									<button type="submit" id="btnImgUploadSave" class="btn green-haze">
 										提交 </button>
-									<button class="btn default">
+									<button class="btn default" type="reset">
 										取消 </button>
 								</div>
 							</form>
@@ -124,35 +124,35 @@
 						<!-- END CHANGE AVATAR TAB -->
 						<!-- CHANGE PASSWORD TAB -->
 						<div class="tab-pane" id="tab_1_3">
-							<form action="#"  id="formpassword" class="form-horizontal">
+							<form  id="formpassword" name="formpassword" class="form-horizontal" ng-submit="btnChanagePwdSave(formpassword.$valid)">
 								<div class="form-group">
 									<label class="control-label  col-md-3">旧密码</label>
 									<div class="col-md-4 input-group">
-										<input type="password" class="form-control" name="oldpassword" maxlength="30" size="30"/>
+										<input type="password" class="form-control" name="oldpassword" ng-model="pwd.oldpassword"  maxlength="30" size="30"/>
 									</div>
 									<div class="col-md-5"></div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">新密码</label>
 									<div class="col-md-4 input-group">
-										<input type="password" class="form-control" id="password" name="password" maxlength="30" size="30"/>
+										<input type="password" class="form-control" id="password" ng-model="pwd.password" name="password"  maxlength="30" size="30"/>
 									</div>
 									<div class="col-md-5"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">确认新密码</label>
 									<div class="col-md-4 input-group">
-										<input type="password" class="form-control" name="confirmpassword" maxlength="30" size="30"/>
+										<input type="password" class="form-control" ng-model="pwd.confirmpassword" name="confirmpassword"  maxlength="30" size="30"/>
 									</div>
 									<div class="col-md-5"></div>
 								</div>
 								<div class=" form-group">
 									<label class="col-md-3 control-label"></label>
 									<div class="col-md-9 input-group">
-										<button type="button" id="btnChanagePwdSave" class="btn blue">
+										<button type="submit" id="btnChanagePwdSave" class="btn blue">
 											<i class="fa fa-save"></i> 修改密码
 										</button>&nbsp; &nbsp;
-										<button type="button" id="btnPasswordCancel" class="btn default">
+										<button type="reset" id="btnPasswordCancel" class="btn default">
 											<i class="fa  fa-arrow-left"></i> 取 消
 										</button>
 									</div>
