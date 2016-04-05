@@ -3,7 +3,7 @@ package com.newtouch.lion.admin.web.model.user;
 /**
  * Created by Administrator on 2016/4/5.
  */
-public class UserGetReq {
+public class UserGetResp {
     /**用户ID*/
     private String id;
     /**用户登入名*/

@@ -8,6 +8,7 @@
 package com.newtouch.lion.admin.web.controller.user; 
 
 import com.newtouch.lion.admin.web.model.user.*;
+import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -19,7 +20,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,26 +51,41 @@ public class UserController {
 	private static final String DEFAULT_ORDER_FILED_NAME="id";
 	 
 	    @Trans("system.user.list")
-	    public Page<User> list(UserGetReq req) {
-	    	System.out.println("------------------------");
-	        QueryCriteria queryCriteria = new QueryCriteria();
+	    public Page<UserDelResp> list(UserGetReq req) {
 
-	        // 设置分页 启始页
-	        queryCriteria.setStartIndex(req.getPage().getPageNumber()-1);
-	        // 每页大小
-	        queryCriteria.setPageSize(req.getPage().getPageSize());
+	        QueryCriteria queryCriteria = new QueryCriteria();
+//
+//	        // 设置分页 启始页
+//	        queryCriteria.setStartIndex(req.getPage().getPageNumber()-1);
+//	        // 每页大小
+//	        queryCriteria.setPageSize(req.getPage().getPageSize());
 
 	        // 查询条件
-	        if (StringUtils.isNotEmpty(req.getEmployeeCode())) {
-				queryCriteria.addQueryCondition("id", "%"+req.getEmployeeCode()+"%");
+	        if (StringUtils.isNotEmpty(req.getId())) {
+				queryCriteria.addQueryCondition("id", "%"+req.getId()+"%");
 			}
-			if (StringUtils.isNotEmpty(req.getEmployeeCode())) {
-				queryCriteria.addQueryCondition("username", "%"+req.getEmployeeCode()+"%");
+			if (StringUtils.isNotEmpty(req.getUsername())) {
+				queryCriteria.addQueryCondition("username", "%"+req.getUsername()+"%");
 			}
 
 	        PageResult<User> pageResult = userService.doFindByCriteria(queryCriteria);
-	        System.out.print(pageResult.getContent());
+
+			List<UserGetResp> list = new ArrayList<UserGetResp>();
+			for (User user : pageResult.getContent()){
+				UserGetResp userGetResp = new UserGetResp();
+				BeanUtils.copyProperties(user,userGetResp);
+				String createDate = DateUtil.formatDate(user.getCreatedDate(),DateUtil.FORMAT_DATE_SLASH_YYYY_MM_DD);
+				String updateDate = DateUtil.formatDate(user.getUpdatedDate(),DateUtil.FORMAT_DATE_SLASH_YYYY_MM_DD);
+
+				userGetResp.setCreatedDate(createDate);
+				userGetResp.setUpdatedDate(updateDate);
+			}
+			PageResult<UserGetResp> pageResultResp = new PageResult<UserGetResp>();
+			BeanUtils.copyProperties(pageResult,pageResultResp);
+			pageResultResp.setContent(list);
+
 	        return new Page(pageResult);
+
 	    }
 	//添加用户信息
 	/** add*/
@@ -78,7 +96,6 @@ public class UserController {
 		return new UserAddResp(UserAddResp.SUCCESS_ROLE_ADD_CODE,UserAddResp.SUCCESS_ROLE_ADD_MESSAGE);
 	}
 
-
      //删除用户信息
     /** delete*/
 	@Trans("system.user.delete")
@@ -88,9 +105,9 @@ public class UserController {
 			return new UserDelResp(UserDelResp.SUCCESS_ROLE_DELETE_CODE, UserDelResp.SUCCESS_ROLE_DELETE_MESSAGE);
 		}else {
 			return new UserDelResp(UserDelResp.FAIL_ROLE_DELETE_CODE, UserDelResp.FAIL_ROLE_DELETE_MESSAGE);
-
 		}
 	}
+
 	//编辑用户信息
 	/**edit*/
 	@Trans("system.user.edit")
