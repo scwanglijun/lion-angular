@@ -51,15 +51,27 @@ public class UserController {
 	private static final String DEFAULT_ORDER_FILED_NAME="id";
 	 
 	    @Trans("system.user.list")
-	    public Page<UserDelResp> list(UserGetReq req) {
+	    public Page<User> list(UserGetReq req) {
 
 	        QueryCriteria queryCriteria = new QueryCriteria();
-//
-//	        // 设置分页 启始页
-//	        queryCriteria.setStartIndex(req.getPage().getPageNumber()-1);
-//	        // 每页大小
-//	        queryCriteria.setPageSize(req.getPage().getPageSize());
 
+	        // 设置分页 启始页
+	        queryCriteria.setStartIndex(req.getPage().getPageNumber()-1);
+	        // 每页大小
+	        queryCriteria.setPageSize(req.getPage().getPageSize());
+			// 设置排序字段及排序方向
+			if (req.getSort()==null){
+				queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+				queryCriteria.setOrderDirection(QueryCriteria.ASC);
+			}else {
+				if (StringUtils.isNotEmpty(req.getSort().getSort()) && StringUtils.isNotEmpty(req.getSort().getOrder())){
+					queryCriteria.setOrderField(req.getSort().getOrder());
+					queryCriteria.setOrderDirection(req.getSort().getSort());
+				}else {
+					queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+					queryCriteria.setOrderDirection(QueryCriteria.ASC);
+				}
+			}
 	        // 查询条件
 	        if (StringUtils.isNotEmpty(req.getId())) {
 				queryCriteria.addQueryCondition("id", "%"+req.getId()+"%");
@@ -76,15 +88,16 @@ public class UserController {
 				BeanUtils.copyProperties(user,userGetResp);
 				String createDate = DateUtil.formatDate(user.getCreatedDate(),DateUtil.FORMAT_DATE_SLASH_YYYY_MM_DD);
 				String updateDate = DateUtil.formatDate(user.getUpdatedDate(),DateUtil.FORMAT_DATE_SLASH_YYYY_MM_DD);
-
+//				userGetResp.get
 				userGetResp.setCreatedDate(createDate);
 				userGetResp.setUpdatedDate(updateDate);
+				list.add(userGetResp);
 			}
 			PageResult<UserGetResp> pageResultResp = new PageResult<UserGetResp>();
 			BeanUtils.copyProperties(pageResult,pageResultResp);
 			pageResultResp.setContent(list);
 
-	        return new Page(pageResult);
+	        return new Page(pageResultResp);
 
 	    }
 	//添加用户信息

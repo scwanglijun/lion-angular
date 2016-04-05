@@ -1,11 +1,13 @@
 package com.newtouch.lion.admin.web.model.user;
 
+import com.newtouch.lion.admin.web.model.query.QueryReq;
+
 /**
  * Created by Administrator on 2016/4/5.
  */
-public class UserGetResp {
+public class UserGetResp extends QueryReq {
     /**用户ID*/
-    private String id;
+    private long id;
     /**用户登入名*/
     private String username;
     /**用户登入密码*/
@@ -29,11 +31,11 @@ public class UserGetResp {
     /**更新时间*/
     private String updatedDate;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
