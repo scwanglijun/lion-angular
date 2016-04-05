@@ -41,15 +41,16 @@ function userListCtrl($scope, $modal, dbUtils) {
                 showCheckBox: true
             },
             header: [
-                {name: "用户ID", width: "12%", field: "id"},
-                {name: "用户登入名", width: "18%", field: "username"},
-                {name: "用户联系方式", width: "18%", field: "telephone"},
-                {name: "用户联系方式（手机）", width: "18%", field: "mobile"},
-                {name: "用户E-mail", width: "18%", field: "email"},
+                {name: "用户ID", width: "10%", field: "id"},
+                {name: "用户登入名", width: "12%", field: "username"},
+                {name: "用户登入密码", width: "12%", field: "password"},
+                {name: "用户联系方式", width: "11%", field: "telephone"},
+                {name: "用户联系方式（手机）", width: "11%", field: "mobile"},
+                {name: "用户E-mail", width: "12%", field: "email"},
                 {name: "用户名称(中文)", width: "12%", field: "realnameZh"},
-                {name: "用户名称(英文)", width: "18%", field: "realnameEn"},
-                {name: "描述", width: "12%", field: "description"},
-                {name: "可编辑", width: "10%", field: "editable"},
+                {name: "用户名称(英文)", width: "12%", field: "realnameEn"},
+                {name: "描述", width: "18%", field: "description"},
+                {name: "可编辑", width: "5%", field: "editable"},
                 {name: "创建时间", width: "18%", field: "createdDate"},
                 {name: "更新时间", width: "18%", field: "updatedDate"},
 
@@ -111,7 +112,7 @@ function userListCtrl($scope, $modal, dbUtils) {
 
                 var instance = $modal.open({
                     animation: true,
-                    templateUrl: 'views/admin/system/role/userDetail.html',
+                    templateUrl: 'views/admin/system/user/userDetail.html',
                     controller: 'userDetailCtrl',
                     size: "md",
                     backdrop: "static",
