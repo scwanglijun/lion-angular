@@ -1,9 +1,11 @@
 package com.newtouch.lion.admin.web.model.user;
 
+import com.newtouch.lion.admin.web.model.query.QueryReq;
+
 /**
  * Created by Administrator on 2016/4/5.
  */
-public class UserGetReq {
+public class UserGetReq extends QueryReq {
     /**用户ID*/
     private String id;
     /**用户登入名*/
