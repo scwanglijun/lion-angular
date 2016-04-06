@@ -14,6 +14,7 @@ import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.page.Page;
+import com.newtouch.lion.web.util.QueryUtils;
 import com.newtouch.lion.webtrans.trans.Trans;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -21,9 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -50,28 +49,30 @@ public class UserController {
 	/** 默认排序字段*/
 	private static final String DEFAULT_ORDER_FILED_NAME="id";
 	 
-	    @Trans("system.user.list")
-	    public Page<User> list(UserGetReq req) {
+	@Trans("system.user.list")
+	public Page<User> list(UserGetReq req) {
 
-	        QueryCriteria queryCriteria = new QueryCriteria();
+			QueryCriteria queryCriteria = QueryUtils.pageFormat(new QueryCriteria() ,req);
 
-	        // 设置分页 启始页
-	        queryCriteria.setStartIndex(req.getPage().getPageNumber()-1);
-	        // 每页大小
-	        queryCriteria.setPageSize(req.getPage().getPageSize());
-			// 设置排序字段及排序方向
-			if (req.getSort()==null){
-				queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-				queryCriteria.setOrderDirection(QueryCriteria.ASC);
-			}else {
-				if (StringUtils.isNotEmpty(req.getSort().getSort()) && StringUtils.isNotEmpty(req.getSort().getOrder())){
-					queryCriteria.setOrderField(req.getSort().getOrder());
-					queryCriteria.setOrderDirection(req.getSort().getSort());
-				}else {
-					queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-					queryCriteria.setOrderDirection(QueryCriteria.ASC);
-				}
-			}
+//	        QueryCriteria queryCriteria = new QueryCriteria();
+//
+//	        // 设置分页 启始页
+//	        queryCriteria.setStartIndex(req.getPage().getPageNumber()-1);
+//	        // 每页大小
+//	        queryCriteria.setPageSize(req.getPage().getPageSize());
+//			// 设置排序字段及排序方向
+//			if (req.getSort()==null){
+//				queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+//				queryCriteria.setOrderDirection(QueryCriteria.ASC);
+//			}else {
+//				if (StringUtils.isNotEmpty(req.getSort().getSort()) && StringUtils.isNotEmpty(req.getSort().getOrder())){
+//					queryCriteria.setOrderField(req.getSort().getOrder());
+//					queryCriteria.setOrderDirection(req.getSort().getSort());
+//				}else {
+//					queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+//					queryCriteria.setOrderDirection(QueryCriteria.ASC);
+//				}
+//			}
 	        // 查询条件
 	        if (StringUtils.isNotEmpty(req.getId())) {
 				queryCriteria.addQueryCondition("id", "%"+req.getId()+"%");
@@ -124,8 +125,8 @@ public class UserController {
 	//编辑用户信息
 	/**edit*/
 	@Trans("system.user.edit")
-	public UserEditResp edit(UserEditReq req){
-		Map<String, String> params = new HashMap<String, String>();
+	public UserEditResp edit(UserAddReq req){
+
 		User user = userService.doFindById(req.getId());
 		if(user==null){
 			return new UserEditResp(UserEditResp.FAIL_ROLE_EDIT_CODE,UserEditResp.FAIL_ROLE_EDIT_MESSAGE);
@@ -135,4 +136,3 @@ public class UserController {
 		return new UserEditResp(UserEditResp.SUCCESS_ROLE_EDIT_CODE,UserEditResp.SUCCESS_ROLE_EDIT_MESSAGE);
 	}
 }
-	
