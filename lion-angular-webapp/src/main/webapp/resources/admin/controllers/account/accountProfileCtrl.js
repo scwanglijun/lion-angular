@@ -35,10 +35,34 @@ function accountProfileCtrl($scope, $modal, dbUtils) {
 
 		}
 	}
-	$scope.cancel=function(){
-		$modal.dismiss('cancel');
+	$scope.PreviewImage = function(imgFile){
+		var filextension=imgFile.value.substring(imgFile.value.lastIndexOf("."),imgFile.value.length);
+		filextension=filextension.toLowerCase();
+		if ((filextension!='.jpg')&&(filextension!='.gif')&&(filextension!='.jpeg')&&(filextension!='.png')&&(filextension!='.bmp')){
+			alert("对不起，系统仅支持标准格式的照片，请您调整格式后重新上传，谢谢 !");
+			imgFile.focus();
+		}
+		else{
+			var path;
+			if(document.all){
+				imgFile.select();
+				path = document.selection.createRange().text;
+				document.getElementById("imgDiv").innerHTML="";
+				document.getElementById("imgDiv").style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")";//使用滤镜效果
+			}
+			else{
+				path=window.URL.createObjectURL(imgFile.files[0]);// FF 7.0以上
+				//path = imgFile.files[0].getAsDataURL();// FF 3.0
+				alert(path);
+				document.getElementById("imgDiv").innerHTML = "<img id='img1' width: 300px  height: 300px  src='"+path+"'/>";
+				//document.getElementById("img1").src = path;
+			}
+		}
 	}
-	$scope.show = function(t){
-
+	$scope.btnImgUploadSave = function(isValid){
+		if(isValid){
+			var reqBody = angular.copy($scope.image);
+			alert($scope.image);
+		}
 	}
 }

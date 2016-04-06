@@ -98,17 +98,17 @@
 						<!-- END PERSONAL INFO TAB -->
 						<!-- CHANGE AVATAR TAB -->
 						<div class="tab-pane" id="tab_1_2">
-							<form id="formImg" name="formImg" enctype="multipart/form-data"ng-submit="btnImgUploadSave(formImg.$valid)" >
+							<form id="formImg" name="formImg" enctype="multipart/form-data" ng-submit="btnImgUploadSave(formImg.$valid)" >
 								<div class="form-group">
 									<div class="fileinput fileinput-new" >
 										<div id="imgDiv" class="fileinput-new thumbnail" style="width: 300px; height: 300px;">
-											<img src="../resources/css/images/default.gif" style="width: 300px; height: 300px;"/>
+											<img src="../resources/css/images/default.gif" id="img1" style="width: 300px; height: 300px;"/>
 										</div>
 										<div>
 											<span class="btn default btn-file">
-												<span class="fileinput-new" ng-click="show(this)">
+												<span class="fileinput-new">
 												选择图片 </span>
-												<input id="image" ng-model="image" name="image" type="file"/>
+												<input ng-model="image" name="image" type="file" ng-change="PreviewImage(this)"/>
 											</span>
 										</div>
 									</div>
