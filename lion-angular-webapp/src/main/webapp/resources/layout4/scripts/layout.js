@@ -718,6 +718,20 @@ var Layout = function () {
                     "open":""
                 }
             ]
+        },{
+            "name": "文档说明",
+            "translate":"aside.nav.documents.DOCUMENT",
+            "icon": "star",
+            "open":"",
+            "subList": [
+                {
+                    "name": "Datagrid",
+                    "translate":"aside.nav.documents.DATAGRID",
+                    "icon": "star",
+                    "url": "documents/datagrid",
+                    "open":""
+                }
+            ]
         }];
 
 

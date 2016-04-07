@@ -51,6 +51,10 @@
                 "PROFILE": "个人资料",
                 "CALENDAR" : "待办事项",
                 "NOTIFICATIONS" : "通知消息"
+            },
+            "documents":{
+                "DOCUMENT":"文档说明",
+                "DATAGRID":"Datagrid"
             }
         }
     }
