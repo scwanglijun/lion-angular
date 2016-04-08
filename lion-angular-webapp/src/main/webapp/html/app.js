@@ -1121,7 +1121,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                     templateUrl: "views/admin/system/documents/docuDataGrid.html"
                 }
             },
-            data: {pageTitle: '文档说明', pageSubTitle: '文档说明|Datagrid'},
+            data: {pageTitle: '文档说明', pageSubTitle: '文档说明 | Datagrid'},
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(["../resources/admin/controllers/documents/docuDataGridCtrl.js"]);
