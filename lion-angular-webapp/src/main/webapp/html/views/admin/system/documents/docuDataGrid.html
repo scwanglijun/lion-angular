@@ -17,7 +17,7 @@
                             <a href="/#tab_1_4" data-toggle="tab">示例</a>
                         </li>
                         <li>
-                            <a href="/#tab_1_5" data-toggle="tab">使用说明</a>
+                            <a href="/#tab_1_5" data-toggle="tab">参数说明</a>
                         </li>
                     </ul>
 
@@ -28,35 +28,36 @@
                 </div>
                 <div class="portlet-body">
                     <div class="tab-content">
-                        <!-- PERSONAL INFO TAB -->
                         <div class="tab-pane active" id="tab_1_1">
-                            HTML部分
+                            <div hljs source="vm.htmlSource" language="html"></div>
                         </div>
-                        <!-- END PERSONAL INFO TAB -->
-                        <!-- CHANGE AVATAR TAB -->
                         <div class="tab-pane" id="tab_1_2">
-                            CSS部分
+                            <div hljs source="vm.cssSource" language="css"></div>
                         </div>
-                        <!-- END CHANGE AVATAR TAB -->
-                        <!-- CHANGE PASSWORD TAB -->
                         <div class="tab-pane" id="tab_1_3">
-                            JS部分
+                            <div hljs source="vm.jsSource" language="js"></div>
                         </div>
-                        <!-- END CHANGE PASSWORD TAB -->
-                        <!-- PRIVACY SETTINGS TAB -->
                         <div class="tab-pane" id="tab_1_4">
                            示例
-
                         </div>
-                        <!-- END PRIVACY SETTINGS TAB -->
-                        <!-- PRIVACY SETTINGS TAB -->
                         <div class="tab-pane" id="tab_1_5">
-                           使用说明
-
+                           参数说明
                         </div>
-                        <!-- END PRIVACY SETTINGS TAB -->
                     </div>
                 </div>
+
+                <!--<tabset>
+                    <tab heading="HTML">
+                        <div hljs source="vm.htmlSource" language="html"></div>
+                    </tab>
+                    <tab heading="js">
+                        <div hljs source="vm.jsSource" language="js"></div>
+                    </tab>
+                    <tab heading="less">
+                        <div hljs source="vm.lessSource" language="css"></div>
+                    </tab>
+                </tabset>-->
+
             </div>
         </div>
     </div>

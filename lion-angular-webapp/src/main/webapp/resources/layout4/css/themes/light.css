@@ -1,3 +1,17 @@
+pre{
+  background: #fff !important;
+  border-color:#eee !important;
+  border-radius: 0;
+}
+
+pre code{
+  background: #fff !important;
+  border:none !important;
+  box-shadow: none !important;
+}
+
+
+
 /***********
 Theme Colors
 ***********/

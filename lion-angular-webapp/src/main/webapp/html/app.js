@@ -24,7 +24,8 @@ var DBApp = angular.module("DBApp", [
     "ui.load",
     "ui.jq",
     "pascalprecht.translate",
-    "toaster"
+    "toaster",
+    "hljs"
 ]);
 
 
