@@ -1,0 +1,158 @@
+<form name="dataForm" novalidate ng-submit="submitDialogForm(dataForm.$valid)">
+    <div class="modal-body form-horizontal form">
+        <div class="form-body portlet light">
+            <div class="portlet-title">
+                <div class="caption font-green-sharp">
+                    <i class="icon-page1 iconfont font-green-sharp"></i>
+                    <span class="caption-subject bold uppercase">{{editData?(formDisabled?'查看':'编辑'):'新增'}}datacolumn</span>
+                </div>
+                <div class="tools">
+                    <i class="iconfont icon-guanbi" ng-click="cancel()"></i>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-12  margin-top-15">
+
+
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm.type.$invalid && submited }">
+
+                                <label class="col-md-3 control-label">
+                                    表格类型
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <ui-select ng-model="data.type" name="type" required  ng-disabled="formDisabled">
+                                            <ui-select-match placeholder="表格类型">{{$select.selected.name}}</ui-select-match>
+                                            <ui-select-choices  repeat="item in type | selectPropsFilter:{name:$select.search}">
+                                                <span ng-bind-html="item.name | highlight: $select.search"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span class="help-block" ng-show="dataForm.type.$invalid && submited ">不能为空!</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm.type.$invalid && submited }">
+
+                                <label class="col-md-3 control-label">
+                                    表格名称
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <ui-select ng-model="data.dataGridId" name="dataGridId" required  ng-disabled="formDisabled">
+                                            <ui-select-match placeholder="表格名称">{{$select.selected.name}}</ui-select-match>
+                                            <ui-select-choices  repeat="item in dataGridId | selectPropsFilter:{name:$select.search}">
+                                                <span ng-bind-html="item.name | highlight: $select.search"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span class="help-block" ng-show="dataForm.dataGridId.$invalid && submited ">不能为空!</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm.key.$invalid && submited }">
+
+                                <label class="col-md-3 control-label">
+                                    列字段名称
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="data.field" db-validator="required" name="field" maxlength="100" class="form-control" placeholder="列字段名称"  ng-disabled="formDisabled"/>
+                                        <span class="help-block" ng-show="dataForm.field.$invalid && submited ">{{$dbForm.field.msg}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm.key.$invalid && submited }">
+
+                                <label class="col-md-3 control-label">
+                                    列名
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="data.name" db-validator="required" name="name" maxlength="100" class="form-control" placeholder="列名"  ng-disabled="formDisabled"/>
+                                        <span class="help-block" ng-show="dataForm.name.$invalid && submited ">{{$dbForm.dataGridId.msg}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm.value.$invalid && submited }">
+
+                                <label class="col-md-3 control-label">
+                               显示顺序
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="data.showOrder" db-validator="required" name="showOrder" maxlength="100" class="form-control" placeholder="显示顺序"  ng-disabled="formDisabled"/>
+                                        <span class="help-block" ng-show="dataForm.showOrder.$invalid && submited ">{{$dbForm.showOrder.msg}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm.value.$invalid && submited }">
+
+                                <label class="col-md-3 control-label">
+                                    宽度
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="data.width" db-validator="required" name="width" maxlength="100" class="form-control" placeholder="宽度"  ng-disabled="formDisabled"/>
+                                        <span class="help-block" ng-show="dataForm.width.$invalid && submited ">{{$dbForm.width.msg}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group" ng-class="{ 'has-error' : dataForm.type.$invalid && submited }">
+
+                                <label class="col-md-3 control-label">
+                                    对齐
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+
+                                        <label class="radio-inline">
+                                            <input type="radio" name="align" id="align0" value="left" checked>
+                                            left
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="align" id="align1" value="center">
+                                            center
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="align" id="align2" value="right">
+                                            right
+                                        </label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn " ng-class="{'btn-primary':formDisabled,'btn-danger':!formDisabled}" ng-show="editData" type="button" ng-click="changeEdit()">
+            {{formDisabled?'编辑':'取消'}}
+        </button>
+        <button class="btn btn-primary" type="submit" ng-show="!editData||!formDisabled">确定</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+    </div>
+</form>

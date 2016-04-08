@@ -698,6 +698,46 @@
       "name": "高风险",
       "value": "高风险"
     }
+  ],
+  "type": [
+    {
+      "name": "用户管理",
+      "value": "users_datagrid"
+    },
+    {
+      "name": "编码管理",
+      "value": "code_datagrid"
+    },
+    {
+      "name": "DataGrid管理",
+      "value": "datagrid_datagrid "
+    }
+  ],
+  "dataGridId": [
+    {
+      "name": "DataGrid列管理列表",
+      "value": "6"
+    },
+    {
+      "name": "已关联用户组 ",
+      "value": "7"
+    },
+    {
+      "name": "编码列表",
+      "value": "25"
+    },
+    {
+      "name": "已关联角色",
+      "value": "8"
+    },
+    {
+      "name": "DataGrid表格",
+      "value": "10"
+    },
+    {
+      "name": "用户列表",
+      "value": "11"
+    }
   ]
 }
 

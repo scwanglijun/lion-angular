@@ -10,7 +10,7 @@ function ApplicationInfoCtrl($scope, $modal, dbUtils) {
     //编辑modal
     //function loadin() {
             dbUtils.post("system.applicationinfo",{id: '1'},function (data) {
-                console.dir(data)
+                console.dir(data);
                 $scope.applicationInfo = data.applicationInfo;
                 $scope.dataBaseInfo=data.dataBaseInfo;
             });

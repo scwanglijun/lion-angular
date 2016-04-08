@@ -1,4 +1,4 @@
-package com.newtouch.lion.admin.web.controller.systemapplicationinfo;
+package com.newtouch.lion.admin.web.controller.applicationinfo;
 
 import com.alibaba.druid.support.logging.Log;
 import com.newtouch.lion.admin.web.model.systemapplication.ApplicationInfoReq;
