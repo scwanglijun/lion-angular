@@ -1,0 +1,84 @@
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
+	<!-- BEGIN PAGE CONTENT INNER -->
+	<div class="row">
+		<div class="col-md-12">
+			<!-- BEGIN SAMPLE TABLE PORTLET-->
+			<div class="portlet box green">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class="fa fa-cogs"></i>缓存概要统计信息
+					</div>
+					<div class="tools">
+						<a href="javascript:;" class="collapse">
+						</a>
+					</div>
+				</div>
+				<div class="portlet-body">
+					<div class="table-scrollable">
+						<table class="table  table-hover">
+                            <thead>
+                                <tr>
+                                    <th>名称</th>
+                                    <th>总的缓存数</th>
+                                    <th>缓存状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>{{managerModel.name}}</th>
+                                    <th>{{managerModel.size}}</th>
+                                    <td>{{managerModel.statusName}}</td>
+                                </tr>
+                            </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+        </div>
+			<!-- END SAMPLE TABLE PORTLET-->
+		<div class="col-md-12">
+			<!-- BEGIN SAMPLE TABLE PORTLET-->
+			<div class="portlet box green">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class="fa fa-cogs"></i>缓存详细信息
+					</div>
+					<div class="tools">
+						<a href="javascript:;" class="collapse">
+						</a>
+					</div>
+				</div>
+				<div class="portlet-body">
+					<div class="table-scrollable">
+						<table class="table  table-hover">
+							<thead>
+							<tr>
+								<th>名称</th>
+								<th>缓存数量</th>
+								<th>内存使用量</th>
+								<th>磁盘使用量</th>
+								<th>内存命中次数</th>
+								<th>磁盘命中次数</th>
+								<th>缓存策略</th>
+							</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in managerModel.cacheModels">
+									<td>{{item.name}}</td>
+									<th>{{item.size}}</th>
+									<td>{{item.memoryStoreSize}}</td>
+									<td>{{item.diskStoreSize}}</td>
+									<td>{{item.cacheHits}}</td>
+									<td>{{item.inMemoryHits}}</td>
+									<td>{{item.memoryStoreEvictionPolicy}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- END SAMPLE TABLE PORTLET-->
+		</div>
+	</div>
+<!-- END PAGE CONTENT INNER -->
+</body>
