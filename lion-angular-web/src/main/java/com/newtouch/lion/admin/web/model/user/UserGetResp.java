@@ -25,7 +25,7 @@ public class UserGetResp extends QueryReq {
     /**描述*/
     private String description;
     /**可编辑*/
-    private String editable;
+    private Boolean editable;
     /**创建时间*/
     private String createdDate;
     /**更新时间*/
@@ -103,11 +103,11 @@ public class UserGetResp extends QueryReq {
         this.description = description;
     }
 
-    public String getEditable() {
+    public Boolean getEditable() {
         return editable;
     }
 
-    public void setEditable(String editable) {
+    public void setEditable(Boolean editable) {
         this.editable = editable;
     }
 

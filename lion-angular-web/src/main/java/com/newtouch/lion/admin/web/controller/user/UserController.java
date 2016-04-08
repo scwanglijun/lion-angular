@@ -103,9 +103,10 @@ public class UserController {
 	    }
 	//添加用户信息
 	/** add*/
+	@Trans("system.user.add")
 	public UserAddResp add(UserAddReq req){
 		User user = new User();
-		BeanUtils.copyProperties(req, user);
+		BeanUtils.copyProperties(user, req);
 		userService.doCreateUser(user);
 		return new UserAddResp(UserAddResp.SUCCESS_ROLE_ADD_CODE,UserAddResp.SUCCESS_ROLE_ADD_MESSAGE);
 	}
