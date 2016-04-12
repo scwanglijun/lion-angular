@@ -187,7 +187,7 @@ textarea::-webkit-input-placeholder {
 }
 
 .portlet.light .portlet-body {
-     padding-top: 0px;
+    padding-top: 0px;
 }
 
 
@@ -266,7 +266,8 @@ textarea::-webkit-input-placeholder {
     height: 20px;
     position: relative;
     top: 4px;
-    left: 10px;
+    left: -10px;
+    float: right;
 }
 .sorting_asc {
 
