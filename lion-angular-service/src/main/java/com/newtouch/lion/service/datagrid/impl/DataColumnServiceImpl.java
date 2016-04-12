@@ -103,7 +103,10 @@ public class DataColumnServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		 return this.doDeleteById(id);
+		String hql = "delete from DataColumn p where p.id=:id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		return this.dataColumnDao.updateHQL(hql, params);
 	}
 
 	/*

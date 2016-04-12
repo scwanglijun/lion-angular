@@ -329,7 +329,7 @@ public class Resource extends VersionEntity<Long> {
 	}
 
 	/**
-	 * @param tsResources
+	 * @param resources
 	 *            the tsResources to set
 	 */
 	public void setResources(Set<Resource> resources) {
@@ -337,10 +337,32 @@ public class Resource extends VersionEntity<Long> {
 	}
 
 	/**
-	 * @param tsRoles
+	 * @param roles
 	 *            the tsRoles to set
 	 */
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Resource{" +
+				"id=" + id +
+				", parentResourceId=" + parentResourceId +
+				", type='" + type + '\'' +
+				", path='" + path + '\'' +
+				", nameZh='" + nameZh + '\'' +
+				", nameEn='" + nameEn + '\'' +
+				", description='" + description + '\'' +
+				", seqNum=" + seqNum +
+				", isLeaf=" + isLeaf +
+				", editable=" + editable +
+				", target='" + target + '\'' +
+				", icon='" + icon + '\'' +
+				", attributes=" + attributes +
+				", resource=" + resource +
+				", permission='" + permission + '\'' +
+				'}';
 	}
 }

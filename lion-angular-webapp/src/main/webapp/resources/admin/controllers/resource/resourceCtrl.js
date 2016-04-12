@@ -3,11 +3,11 @@
  */
 var DBApp = angular.module('DBApp');
 
-DBApp.controller("resourceCtrl", ['$scope', 'dbUtils', '$timeout', ResourceCtrl]);
-
-function ResourceCtrl($scope, dbUtils, $timeout) {
+//DBApp.controller("resourceCtrl", ['$scope', 'dbUtils', '$timeout', ResourceCtrl]);
+DBApp.controller("resourceCtrl", ['$scope', 'dbUtils','dbImService', '$timeout', ResourceCtrl]);
+function ResourceCtrl($scope, dbUtils, dbImService,$timeout) {
     var formData = {
-        code: '',
+       code: '',
         parentNamePath: '',
         type: '',
         isMenu: '',
@@ -25,27 +25,54 @@ function ResourceCtrl($scope, dbUtils, $timeout) {
             return;
         }
         var originData = angular.copy(formData);
-        dbUtils.post("resourceGet", {id: item['resourceId']}, function (data) {
+        dbUtils.post("system.resource.resourceGet", {id: item['resourceId']}, function (data) {
             originData = angular.extend({}, originData, data);
+            console.dir(data)
+
+            //配置资源类型
+            dbImService.bindByJSON($scope,'resourcetype',function(data){
+                console.log(data);
+            });
+            //配置target
+            dbImService.bindByJSON($scope,'resourcetarget',function(data){
+                console.log(data);
+            });
+            //配置icon
+            dbImService.bindByJSON($scope,'resourceicon',function(data){
+                console.log(data);
+            });
+            //配置editable
+            dbImService.bindByJSON($scope,'resourceeditable',function(data){
+                console.log(data);
+            });
             $scope.dbForm.setOriginData(originData);
+
         });
     };
 
     //!!FORM--START!!
     $scope.dbForm = {
-        settings: {transCode: "resourceModify", cols: 3, showClose: false},
+        settings: {transCode: "system.resource.resourceEditor", cols: 3, showClose: false},
         title: {label: "权限资源", icon: "fujiaxinxi"},
         sections: [{
             sectionTitle: {show: true, icon: "gengduo", label: "资源"},
             fields: [
-                {name: "parentName", label: "上级资源", type: "text", required: true, placeholder: "请选择上级菜单资源", disabled: true},
-                {name: "type", label: "资源类型", type: "select", dropDownItemType: "json", dropDownItem: "resourceType", required: true},
-                {name: "isMenu", label: "是否菜单", type: "select", dropDownItemType: "json", dropDownItem: "yesOrNo", required: true},
-                {name: "name", label: "资源名称", type: "text", required: true, placeholder: "资源中文名称"},
-                {name: "permission", label: "资源", type: "text", required: true, placeholder: "菜单资源URL/权限识别码"},
-                {name: "sortNo", label: "排序", type: "text", required: true, placeholder: "排序(纯数字有效)"}]
+                {name: "parentResourceId", label: "上级资源", type: "resourceTree", required: true, placeholder: "请选择上级菜单资源", readonly: true},
+                {name: "type", label: "资源类型", type: "select", dropDownItemType: "json", dropDownItem: "resourcetype", required: true},
+                {name: "nameZh", label: "资源名称（中文）", type: "text", required: true, placeholder: "请输入资源中文名称"},
+                {name: "nameEn", label: "资源名称（英文）", type: "text", required: true, placeholder: "请输入资源英文名称"},
+                {name: "path", label: "路径", type: "text", required: true, placeholder: "请输入资源路径"},
+                {name: "target", label: "Target", type: "select", dropDownItemType: "json", dropDownItem: "resourcetarget", required: true},
+                {name: "permission", label: "权限配置", type: "text", required: true, placeholder: "请输入权限配置"},
+                {name: "seqNum", label: "显示顺序", type: "text", required: true, placeholder: "请输入显示顺序"},
+                {name: "description", label: "资源描述", type: "text", required: false, placeholder: "请输入资源描述"},
+                {name: "editable", label: "是否可编辑", type: "select", dropDownItemType: "json", dropDownItem: "resourceeditable", required: true},
+                {name: "icon", label: "资源图标", type: "select", dropDownItemType: "json", dropDownItem: "resourceicon", required: true}
+            ]
         }]
     };
+
+
     //!!FORM-END!!
     //表单处理事件
     $scope.dbForm.events = {
@@ -55,25 +82,34 @@ function ResourceCtrl($scope, dbUtils, $timeout) {
         }
     };
 
+    //机构树选择后的回调事件
+    $scope.dbResourceTree = {settings: {noCache: true}};
+    $scope.dbResourceTree.onResourceSelected = function (item) {
+        $scope.dbForm.setFormDataField("parentName", item.name);
+        $scope.dbForm.setFormDataField("parentCode", item.code);
+    };
     //临时解决编辑按钮不出现的问题
     $timeout(function () {
         $scope.dbForm.setOriginData(formData);
     }, 500);
 
     function doGetResourceTreeData() {
-        /*dbUtils.post("resourceList", {}, function (resourceData) {
+        dbUtils.post("system.resource.list", {}, function (resourceData) {
             initDbResourceTree(resourceData);
-        });*/
+        });
     }
 
+
     //初始化树形结构的数据
+
+
     function initDbResourceTree(resourceData) {
         //构造树结构
         //1.查找root
         var root = null;
         angular.forEach(resourceData, function (item) {
-            if (angular.isUndefined(item['parentCode']) || !item['parentCode']) {
-                root = {text: item['name'], parentCode: item['parentCode'], code: item['code'], attr: item, resourceId: item['id'], opened: true, iconClass: "icon-state-warning", treeId: item['code']};
+            if (angular.isUndefined(item['parentResourceId']) || !item['parentResourceId']) {
+                root = {text: item['nameZh'], parentCode: item['parentResourceId'], code: item['id'], attr: item, resourceId: item['id'],types:item['type'],paths:item['path'], opened: true, iconClass: "icon-state-warning", treeId: item['id']};
                 return false;
             }
         });
@@ -85,10 +121,12 @@ function ResourceCtrl($scope, dbUtils, $timeout) {
         function getChildren(parentCode) {
             var child = [];
 
-            angular.forEach(resourceData, function (item) {
-                if (item['parentCode'] == parentCode) {
-                    var iconClass = item['isMenu'] == "是" ? 'icon-state-warning' : 'icon-state-success';
-                    var o = {text: item['name'], parentCode: item['parentCode'], code: item['code'], attr: item, resourceId: item['id'], children: [], iconClass: iconClass, treeId: item['code'], canSelect: true};
+           angular.forEach(resourceData, function (item) {
+               //console.log(item['parentResourceId']);
+                if (item['parentResourceId'] == parentCode) {
+                    //var iconClass = item['isLeaf'] == true ? 'icon-state-warning' : 'icon-state-success';
+                    var iconClass = 'icon-state-success';
+                    var o = {text: item['nameZh'], parentCode: item['parentResourceId'], code: item['id'], attr: item, resourceId: item['id'],type:item['type'],path:item['path'], children: [], iconClass: iconClass, treeId: item['id'], canSelect: true};
                     child.push(o);
                 }
             });

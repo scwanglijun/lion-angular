@@ -20,7 +20,7 @@ function DbImService($resource, $http) {
         var ApiRequest = {};
         ApiRequest["transCode"] = transcode;
         ApiRequest["requestBody"] = {"typeCode": typeCode};
-        $http.post("localhost:8080/admin/api.do", ApiRequest).success(function (data, status, headers, config) {
+        $http.post("http://localhost:8080/admin/api.do", ApiRequest).success(function (data, status, headers, config) {
             var dicts = [];
             angular.forEach(data.responseBody, function (dict) {
                 dicts.push({"name": dict.nameCn, "value": dict.code});
@@ -68,6 +68,7 @@ function DbImService($resource, $http) {
          * @param dictName 下拉框默认选中的值对应的name名称
          */
         bindSelectByJSON: function ($scope, categoryCode, sourceObject, dictName) {
+
             this.bindByJSON($scope, categoryCode, function (dictS) {
                 if (!categoryCode) {
                     return;
@@ -266,7 +267,7 @@ function DialogUtil($modal, $http, $window, toaster,$q) {
                 promise = deferred.promise;
             }
 
-            $http.post("http://localhost:8080/admin/api.do", ApiRequest).success(function (data, status, headers, config) {
+            $http.post("../api.do", ApiRequest).success(function (data, status, headers, config) {
                 //console.log(data);
                 Metronic.stopPageLoading();
                 if (data.status == "401") {//用户未登录

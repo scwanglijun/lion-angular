@@ -47,7 +47,10 @@ dbResourceTreeDirectives.directive('dbResourceTree', ['dbUtils', function (dbUti
                     var fieldName = item.field.name;
                     //机构选择后回调调用方
                     if (!angular.isUndefined($scope.dbResourceTree.onResourceSelected)) {
-                        if (item['isMenu'] === "否") {
+                        //if (item['isMenu'] === "否") {
+                        //    return;
+                        //}
+                        if (item['isLeaf']) {
                             return;
                         }
                         $scope.dbResourceTree.onResourceSelected(item, fieldName);
@@ -62,7 +65,7 @@ dbResourceTreeDirectives.directive('dbResourceTree', ['dbUtils', function (dbUti
                 //获取树结构数据
                 function doGetResourceTreeData() {
                     if ($scope.dbResourceTree.settings.noCache) {
-                        dbUtils.post("resourceSelectList", {}, function (retval) {
+                        dbUtils.post("system.resource.list", {}, function (retval) {
                             $scope.dbResourceTree.resourceNamePaths = retval;
                             dbResourceTreeDirectives.dbResourceTreeCaches = retval;
                             initDbResourceTree();
@@ -79,8 +82,12 @@ dbResourceTreeDirectives.directive('dbResourceTree', ['dbUtils', function (dbUti
                     //1.查找root
                     var root = null;
                     angular.forEach($scope.dbResourceTree.resourceNamePaths, function (item) {
-                        if (angular.isUndefined(item['parentCode']) || !item['parentCode']) {
-                            root = {text: item['name'], code: item['code'], attr: item, opened: true, iconClass: "icon-state-warning", treeId: item['code'], isMenu: item['isMenu'], canSelect: true};
+                        //if (angular.isUndefined(item['parentCode']) || !item['parentCode']) {
+                        //    root = {text: item['name'], code: item['code'], attr: item, opened: true, iconClass: "icon-state-warning", treeId: item['code'], isMenu: item['isMenu'], canSelect: true};
+                        //    return false;
+                        //}
+                        if (angular.isUndefined(item['parentResourceId']) || !item['parentResourceId']) {
+                            root = {text: item['nameZh'], code: item['id'], attr: item, opened: true, iconClass: "icon-state-warning", treeId: item['id'], isMenu: item['isMenu'], canSelect: true};
                             return false;
                         }
                     });
@@ -93,9 +100,15 @@ dbResourceTreeDirectives.directive('dbResourceTree', ['dbUtils', function (dbUti
                         var child = [];
 
                         angular.forEach($scope.dbResourceTree.resourceNamePaths, function (item) {
-                            if (item['parentCode'] == parentCode) {
-                                var iconClass = item['isMenu'] == "是" ? 'icon-state-warning' : 'icon-state-success';
-                                var o = {text: item['name'], code: item['code'], attr: item, children: [], iconClass: iconClass, treeId: item['code'], isMenu: item['isMenu']};
+                            if (item['parentResourceId'] == parentCode) {
+                                //var iconClass = item['isMenu'] == "是" ? 'icon-state-warning' : 'icon-state-success';
+                                //var o = {text: item['name'], code: item['code'], attr: item, children: [], iconClass: iconClass, treeId: item['code'], isMenu: item['isMenu']};
+                                ////当树是部门时,只有菜单数据数据可以选择
+                                //o.canSelect = item['isMenu'] === "是";
+                                //child.push(o);
+                                //var iconClass = item['isMenu'] == "是" ? 'icon-state-warning' : 'icon-state-success';
+                                var iconClass = 'icon-state-warning';
+                                var o = {text: item['nameZh'], code: item['id'], attr: item, children: [], iconClass: iconClass, treeId: item['id'], isMenu: item['isMenu']};
                                 //当树是部门时,只有菜单数据数据可以选择
                                 o.canSelect = item['isMenu'] === "是";
                                 child.push(o);
@@ -106,6 +119,7 @@ dbResourceTreeDirectives.directive('dbResourceTree', ['dbUtils', function (dbUti
                         });
                         return child;
                     }
+
 
                     //生成树结构数据
                     root.children = getChildren(root['code']);
