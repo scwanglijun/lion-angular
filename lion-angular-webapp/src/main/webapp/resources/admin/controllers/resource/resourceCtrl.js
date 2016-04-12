@@ -47,6 +47,9 @@ function ResourceCtrl($scope, dbUtils, dbImService,$timeout) {
             });
             $scope.dbForm.setOriginData(originData);
 
+            $scope.dbForm.setFormDataField("parentResourceName",data.nameZh);
+            $scope.dbForm.setFormDataField("parentResourceId",data.id);
+
         });
     };
 
@@ -57,7 +60,7 @@ function ResourceCtrl($scope, dbUtils, dbImService,$timeout) {
         sections: [{
             sectionTitle: {show: true, icon: "gengduo", label: "资源"},
             fields: [
-                {name: "parentResourceId", label: "上级资源", type: "resourceTree", required: true, placeholder: "请选择上级菜单资源", readonly: true},
+                {name: "parentResourceName", label: "上级资源", type: "resourceTree", required: true, placeholder: "请选择上级菜单资源", readonly: true},
                 {name: "type", label: "资源类型", type: "select", dropDownItemType: "json", dropDownItem: "resourcetype", required: true},
                 {name: "nameZh", label: "资源名称（中文）", type: "text", required: true, placeholder: "请输入资源中文名称"},
                 {name: "nameEn", label: "资源名称（英文）", type: "text", required: true, placeholder: "请输入资源英文名称"},
@@ -66,12 +69,11 @@ function ResourceCtrl($scope, dbUtils, dbImService,$timeout) {
                 {name: "permission", label: "权限配置", type: "text", required: true, placeholder: "请输入权限配置"},
                 {name: "seqNum", label: "显示顺序", type: "text", required: true, placeholder: "请输入显示顺序"},
                 {name: "description", label: "资源描述", type: "text", required: false, placeholder: "请输入资源描述"},
-                {name: "editable", label: "是否可编辑", type: "select", dropDownItemType: "json", dropDownItem: "resourceeditable", required: true},
+                {name: "editable", label: "是否可编辑", type: "checkbox"},
                 {name: "icon", label: "资源图标", type: "select", dropDownItemType: "json", dropDownItem: "resourceicon", required: true}
             ]
         }]
     };
-
 
     //!!FORM-END!!
     //表单处理事件
@@ -85,12 +87,13 @@ function ResourceCtrl($scope, dbUtils, dbImService,$timeout) {
     //机构树选择后的回调事件
     $scope.dbResourceTree = {settings: {noCache: true}};
     $scope.dbResourceTree.onResourceSelected = function (item) {
-        $scope.dbForm.setFormDataField("parentName", item.name);
-        $scope.dbForm.setFormDataField("parentCode", item.code);
+        $scope.dbForm.setFormDataField("parentResourceName",item.nameZh);
+        $scope.dbForm.setFormDataField("parentResourceId",item.id);
     };
     //临时解决编辑按钮不出现的问题
     $timeout(function () {
         $scope.dbForm.setOriginData(formData);
+
     }, 500);
 
     function doGetResourceTreeData() {

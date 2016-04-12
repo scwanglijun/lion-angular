@@ -593,6 +593,13 @@ var Layout = function () {
                     "url":"system/resource"
                 },
                 {
+                    "name":"添加资源",
+                    "translate":"添加资源",
+                    "icon":"star",
+                    "open":"",
+                    "url":"system/resourceEntity"
+                },
+                {
                     "name":"系统参数",
                     "translate":"aside.nav.system.PARAMETER",
                     "icon":"star",
