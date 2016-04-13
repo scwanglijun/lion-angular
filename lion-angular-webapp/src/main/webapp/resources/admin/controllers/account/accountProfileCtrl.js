@@ -1,4 +1,4 @@
-var DBApp = angular.module('DBApp');
+var DBApp = angular.module('DBApp',["ngImgCrop"]);
 
 DBApp.controller("accountProfileCtrl", ['$scope','$modal', 'dbUtils',accountProfileCtrl]);
 function accountProfileCtrl($scope, $modal, dbUtils) {
