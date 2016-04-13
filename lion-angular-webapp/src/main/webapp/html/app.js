@@ -984,8 +984,6 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             }
         })
 
-
-
         .state('system/appliProperty', {
             url: "/system/appliProperty",
             views: {
@@ -1002,6 +1000,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+
         .state('system/iconlist', {
             url: "/system/iconlist",
             views: {
@@ -1109,6 +1108,66 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(['../resources/admin/controllers/hibernatemonitor/hibernateMonitorCtrl.js']);
+                }]
+            }
+        })
+        .state('system/monitor/jvmmemory', {
+            url: "/system/monitor/jvmmemory",
+            views: {
+                "mainContentContainer": {
+                    controller: "jvmMemoryMonitorCtrl",
+                    templateUrl: "views/admin/system/jvmmonitor/memory.html"
+                }
+            },
+            data: {pageTitle: 'JvmMemoryMonitor', pageSubTitle: '系统设置|监控系统|JVM内存监控'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/jvmmonitor/jvmMemoryMonitorCtrl.js']);
+                }]
+            }
+        })
+        .state('system/monitor/jvmmoniter', {
+            url: "/system/monitor/jvmmoniter",
+            views: {
+                "mainContentContainer": {
+                    controller: "jvmMonitorCtrl",
+                    templateUrl: "views/admin/system/jvmmonitor/index.html"
+                }
+            },
+            data: {pageTitle: 'JvmMonitor', pageSubTitle: '系统设置|监控系统|JVM监控'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/jvmmonitor/jvmMonitorCtrl.js']);
+                }]
+            }
+        })
+        .state('system/monitor/jvmthread', {
+            url: "/system/monitor/jvmthread",
+            views: {
+                "mainContentContainer": {
+                    controller: "jvmThreadMonitorCtrl",
+                    templateUrl: "views/admin/system/jvmmonitor/thread.html"
+                }
+            },
+            data: {pageTitle: 'JvmThreadMonitor', pageSubTitle: '系统设置|监控系统|JVM线程监控'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/jvmmonitor/jvmThreadMonitorCtrl.js']);
+                }]
+            }
+        })
+        .state('system/monitor/cachemoniter', {
+            url: "/system/monitor/cachemoniter",
+            views: {
+                "mainContentContainer": {
+                    controller: "cacheMonitorCtrl",
+                    templateUrl: "views/admin/system/cachemonitor/index.html"
+                }
+            },
+            data: {pageTitle: 'CacheMonitor', pageSubTitle: '系统设置|监控系统|缓存监控'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(["../resources/admin/controllers/cachemonitor/cacheMonitorCtrl.js"]);
                 }]
             }
         })
