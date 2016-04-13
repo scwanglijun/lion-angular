@@ -4,6 +4,21 @@ DBApp.controller("accountProfileCtrl", ['$scope','$modal', 'dbUtils',accountProf
 function accountProfileCtrl($scope, $modal, dbUtils) {
 	dbUtils.post("system.account.profile",{id: '1'},function (data) {
 		$scope.data = data;
+
+		$scope.myImage='';
+		$scope.myCroppedImage='';
+
+		var handleFileSelect=function(evt) {
+			var file=evt.currentTarget.files[0];
+			var reader = new FileReader();
+			reader.onload = function (evt) {
+				$scope.$apply(function($scope){
+					$scope.myImage=evt.target.result;
+				});
+			};
+			reader.readAsDataURL(file);
+		};
+		angular.element(document.querySelector('#image')).on('change',handleFileSelect);
 	});
 
 	$scope.btnBaseInfoSave = function(isValid) {

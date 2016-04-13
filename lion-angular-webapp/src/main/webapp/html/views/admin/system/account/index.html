@@ -102,13 +102,15 @@
 								<div class="form-group">
 									<div class="fileinput fileinput-new" >
 										<div id="imgDiv" class="fileinput-new thumbnail" style="width: 300px; height: 300px;">
-											<img src="../resources/css/images/default.gif" id="img1" style="width: 300px; height: 300px;"/>
+											<!--<img src="../resources/css/images/default.gif" id="img1" style="width: 300px; height: 300px;"/>-->
+											<img-crop image="myImage" result-image="myCroppedImage"></img-crop>
 										</div>
+										<div><img ng-src="{{myCroppedImage}}"/></div>
 										<div>
 											<span class="btn default btn-file">
 												<span class="fileinput-new">
 												选择图片 </span>
-												<input ng-model="image" name="image" type="file" ng-change="PreviewImage(this)"/>
+												<input ng-model="image" name="image" id="image" type="file"/>
 											</span>
 										</div>
 									</div>
