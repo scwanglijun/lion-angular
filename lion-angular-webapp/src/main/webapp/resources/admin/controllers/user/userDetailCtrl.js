@@ -35,7 +35,7 @@ function userDetailCtrl($scope,$modalInstance,dbUtils,dbImService,source){
         if (isValid) {
             var reqBody = angular.copy($scope.data);
 
-            dbUtils.post(angular.isUndefined(source) ? 'system.role.add' : 'system.role.edit',reqBody, function (data) {
+            dbUtils.post(angular.isUndefined(source) ? 'system.user.add' : 'system.user.edit',reqBody, function (data) {
                 dbUtils.success('操作成功!');
                 $modalInstance.close();
             }, function (error) {

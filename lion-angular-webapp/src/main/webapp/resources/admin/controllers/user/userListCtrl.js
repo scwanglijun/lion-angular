@@ -14,23 +14,15 @@ function userListCtrl($scope, $modal, dbUtils) {
             },
             fields: [
                 {
-                    name: "id",
-                    label: "用户ID",
+                    name: "employeeCode",
+                    label: "用户编号",
                     type: "text",
                     required: true,
-                    placeholder: "用户ID",
+                    placeholder: "用户编号",
                     readonly: true,
                     labelCols: "3"
                 },
-                {
-                    name: "username",
-                    label: "用户登入名",
-                    type: "text",
-                    required: true,
-                    placeholder: "用户登入名",
-                    readonly: true,
-                    labelCols: "3"
-                }
+
             ]
         },
         grid: {
@@ -41,19 +33,13 @@ function userListCtrl($scope, $modal, dbUtils) {
                 showCheckBox: true
             },
             header: [
-                {name: "用户ID", width: "10%", field: "id"},
+                {name: "用户编号", width: "10%", field: "employeeCode"},
                 {name: "用户登入名", width: "12%", field: "username"},
-                {name: "用户登入密码", width: "12%", field: "password"},
-                {name: "用户联系方式", width: "11%", field: "telephone"},
-                {name: "用户联系方式（手机）", width: "11%", field: "mobile"},
-                {name: "用户E-mail", width: "12%", field: "email"},
                 {name: "用户名称(中文)", width: "12%", field: "realnameZh"},
                 {name: "用户名称(英文)", width: "12%", field: "realnameEn"},
                 {name: "描述", width: "18%", field: "description"},
                 {name: "可编辑", width: "5%", field: "editable"},
                 {name: "创建时间", width: "18%", field: "createdDate"},
-                {name: "更新时间", width: "18%", field: "updatedDate"},
-
             ],
             rowOperation: {show: false}
         }
@@ -100,6 +86,7 @@ function userListCtrl($scope, $modal, dbUtils) {
                 }
             }
         });
+    }
         //编辑modal
         function editModal(row) {
             if ($scope.lionFormGrid.getAllSelectRows().length == 0) {
@@ -172,5 +159,5 @@ function userListCtrl($scope, $modal, dbUtils) {
 //        });
 //    }
 //
-    }
+
 }

@@ -4,32 +4,54 @@ package com.newtouch.lion.admin.web.model.user;
  * Created by Administrator on 2016/4/1.
  */
 public class UserEditReq {
-    /*** USERID */
-    private Long id;
-    /** 登录用户名 */
-    private String username;
+    /**用户ID*/
+    private long id;
+    /**用户编号*/
     private String employeeCode;
-    /** 用户真实姓名－中文 */
+    /**用户登入名*/
+    private String username;
+    /**用户名称(中文)*/
     private String realnameZh;
-    /** 用户真实姓名－英文 */
+    /**用户名称(英文)*/
     private String realnameEn;
-    private String authtype;
-    /** 联系电话 */
-    private String telephone;
-    /** 联系电话－手机 */
-    private String mobile;
-    /** E-mail */
-    private String email;
-    /** 是否可编辑 */
-    private Boolean editable;
-    /** 用户描述 */
+    /**描述*/
     private String description;
+    /**可编辑*/
+    private Boolean editable;
+    /**创建时间*/
+    private String createdDate;
+    /**更新时间*/
+    private String updatedDate;
 
-    public Long getId() {
+    public String getEmployeeCode() {
+        return employeeCode;
+    }
+
+    public void setEmployeeCode(String employeeCode) {
+        this.employeeCode = employeeCode;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -39,14 +61,6 @@ public class UserEditReq {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getEmployeeCode() {
-        return employeeCode;
-    }
-
-    public void setEmployeeCode(String employeeCode) {
-        this.employeeCode = employeeCode;
     }
 
     public String getRealnameZh() {
@@ -63,38 +77,6 @@ public class UserEditReq {
 
     public void setRealnameEn(String realnameEn) {
         this.realnameEn = realnameEn;
-    }
-
-    public String getAuthtype() {
-        return authtype;
-    }
-
-    public void setAuthtype(String authtype) {
-        this.authtype = authtype;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Boolean getEditable() {
