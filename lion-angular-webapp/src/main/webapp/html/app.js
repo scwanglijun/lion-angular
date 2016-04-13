@@ -1092,7 +1092,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             data: {pageTitle: '个人资料', pageSubTitle: '账户管理|个人资料'},
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(["../resources/admin/controllers/account/accountProfileCtrl.js"]);
+                    return $ocLazyLoad.load(["../resources/js/ng-img-crop.js","../resources/admin/controllers/account/accountProfileCtrl.js"]);
                 }]
             }
         })
