@@ -7,6 +7,10 @@ function accountProfileCtrl($scope, $modal, dbUtils) {
 
 		$scope.myImage='';
 		$scope.myCroppedImage='';
+		$scope.size='small';
+		$scope.resImgQuality=1;
+		$scope.selMinSize=100;
+		$scope.resImgSize=100;
 
 		var handleFileSelect=function(evt) {
 			var file=evt.currentTarget.files[0];
@@ -69,7 +73,7 @@ function accountProfileCtrl($scope, $modal, dbUtils) {
 				path=window.URL.createObjectURL(imgFile.files[0]);// FF 7.0以上
 				//path = imgFile.files[0].getAsDataURL();// FF 3.0
 				alert(path);
-				document.getElementById("imgDiv").innerHTML = "<img id='img1' width: 300px  height: 300px  src='"+path+"'/>";
+				document.getElementById("imgDiv").innerHTML = "<img id='img1' width: 100px  height: 100px  src='"+path+"'/>";
 				//document.getElementById("img1").src = path;
 			}
 		}
