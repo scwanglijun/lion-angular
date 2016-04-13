@@ -22,16 +22,29 @@
 
                 <!-- input -->
                 <div class="col-md-{{field.labelCols==''?'':12-field.labelCols}} dbFormItem" ng-if="field.type!='select' && field.type!='date' && field.type!='dateTime' && field.type!='orgTree' && field.type!='resourceTree'">
-                    <input ng-if="!field.clickEvent" ng-model='dbForm.formData[field.name]' name="{{field.name}}" type="{{field.type}}" placeholder="{{field.placeholder}}" ng-required="field.required"
+                    <input ng-if="!field.clickEvent && field.type!='checkbox'" ng-model='dbForm.formData[field.name]' name="{{field.name}}" type="{{field.type}}" placeholder="{{field.placeholder}}" ng-required="field.required"
                            ng-disabled="field.disabled?field.disabled:(dbForm.isEditView?(field.editable?dbForm.globalFieldEditor:true):dbForm.globalFieldEditor)" class="form-control"
                            ng-class="{'form-control-readonly':field.readonly}"
                            ng-readonly="field.readonly">
                     <input ng-if="field.clickEvent" ng-click="field.click(field.name,field)" ng-model='dbForm.formData[field.name]' name="{{field.name}}" ng-class="{'form-control-readonly':field.readonly}"
                            ng-readonly="field.readonly" type="{{field.type}}" placeholder="{{field.placeholder}}" ng-required="field.required"
                            ng-disabled="dbForm.isEditView?(field.editable?dbForm.globalFieldEditor:true):dbForm.globalFieldEditor" class="form-control">
-
                     <span class="help-block" ng-show="dataForm[field.name].$invalid && dbForm.submited">{{field.label}}字段为必录项!</span>
                 </div>
+                <div class="col-md-{{field.labelCols==''?'': (12 - field.labelCols - 1)}} control-label"
+                     ng-if="field.type==='checkbox'">
+                    <div class="input-group">
+                        <div class="checker">
+                            <span ng-class="{'checked':lionFormGrid.queryParams.editable}">
+                                <input ng-model="lionFormGrid.queryParams.editable" name="{{lionFormGrid.queryParams[field.name]}}"
+                                       class="form-control" placeholder="{{field.placeholder}}" type="checkbox"
+                                       data-date-format="yyyy-mm-dd">
+                            </span>
+                        </div>
+                    </div>
+                    <span class="help-block" ng-show="dataForm[field.name].$invalid && dbForm.submited">{{field.label}}字段为必录项!</span>
+                </div>
+
                 <!-- select -->
                 <div class="col-md-{{field.labelCols==''?'':12-field.labelCols}} dbFormItem" ng-if="field.type=='select'">
 

@@ -55,9 +55,14 @@
                                 </label>
                                 <div class="col-md-9 control-label">
                                     <div class="input-group">
-                                        <input type="checkbox" ng-model="data.editable" class="form-control" name="editable" checked="true" value="1"/>
+                                        <div class="checker">
+                                            <span ng-class="{'checked':data.editable}">
+                                                <input type="checkbox" ng-model="data.editable" class="form-control" name="editable" checked="true" value="1"/>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
 
                         </div>

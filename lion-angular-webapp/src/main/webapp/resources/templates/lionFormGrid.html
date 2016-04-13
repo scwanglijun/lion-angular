@@ -61,7 +61,22 @@
                                        class="form-control date-picker" placeholder="{{field.placeholder}}" type="text"
                                        data-date-format="yyyy-mm-dd">
                             </div>
+
+                            <div class="col-md-{{field.labelCols==''?'': (12 - field.labelCols - 1)}} control-label"
+                                 ng-if="field.type==='checkbox'">
+                                <div class="input-group">
+                                    <div class="checker">
+                                        <span ng-class="{'checked':lionFormGrid.queryParams.editable}">
+                                            <input ng-model="lionFormGrid.queryParams.editable" name="{{lionFormGrid.queryParams[field.name]}}"
+                                                   class="form-control" placeholder="{{field.placeholder}}" type="checkbox"
+                                                   data-date-format="yyyy-mm-dd">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
                 <div class="col-md-2 text-center">

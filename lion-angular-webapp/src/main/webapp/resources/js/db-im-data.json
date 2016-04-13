@@ -738,6 +738,79 @@
       "name": "用户列表",
       "value": "11"
     }
+  ],
+  "resourcetype": [
+    {
+      "name": "应用层",
+      "value": "application"
+    },
+    {
+      "name": "模块",
+      "value": "module"
+    },
+    {
+      "name": "菜单项",
+      "value": "module_menu_category "
+    },
+    {
+      "name": "菜单子项",
+      "value": "module_menu_category_item"
+    },
+    {
+      "name": "按钮项",
+      "value": "module_menu_category_item_button "
+    }
+  ],
+  "resourcetarget": [
+  {
+    "name": "_blank",
+    "value": "_blank"
+  },
+  {
+    "name": "_self",
+    "value": "_self"
+  },
+  {
+    "name": "_parent",
+    "value": "_parent "
+  }
+]
+,
+  "resourceicon": [
+    {
+      "name": "icon-star",
+      "value": "icon-star"
+    },
+    {
+      "name": "icon-home",
+      "value": "icon-home"
+    },
+    {
+      "name": "icon-user",
+      "value": "icon-user "
+    },
+    {
+      "name": "icon-calendar",
+      "value": "icon-calendar"
+    },
+    {
+      "name": "icon-bell",
+      "value": "icon-bell"
+    },
+    {
+      "name": "icon-settings",
+      "value": "icon-settings "
+    }
+  ],
+  "resourceeditable": [
+    {
+      "name": "是",
+      "value": true
+    },
+    {
+      "name": "否",
+      "value": false
+    }
   ]
 }
 

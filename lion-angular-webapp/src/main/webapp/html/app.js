@@ -951,6 +951,21 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+        .state('system/resourceEntity', {
+            url: "/system/resourceEntity",
+            views: {
+                "mainContentContainer": {
+                    controller: "resourceEntryCtrl",
+                    templateUrl: "db/db-form.html"
+                }
+            },
+            data: {pageTitle: 'Resource', pageSubTitle: '系统设置 |添加资源'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/resource/resourceEntityCtrl.js']);
+                }]
+            }
+        })
 
         .state('system/department', {
             url: "/system/department",
@@ -969,8 +984,6 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             }
         })
 
-
-
         .state('system/appliProperty', {
             url: "/system/appliProperty",
             views: {
@@ -987,6 +1000,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+
         .state('system/iconlist', {
             url: "/system/iconlist",
             views: {
@@ -1097,6 +1111,66 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+        .state('system/monitor/jvmmemory', {
+            url: "/system/monitor/jvmmemory",
+            views: {
+                "mainContentContainer": {
+                    controller: "jvmMemoryMonitorCtrl",
+                    templateUrl: "views/admin/system/jvmmonitor/memory.html"
+                }
+            },
+            data: {pageTitle: 'JvmMemoryMonitor', pageSubTitle: '系统设置|监控系统|JVM内存监控'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/jvmmonitor/jvmMemoryMonitorCtrl.js']);
+                }]
+            }
+        })
+        .state('system/monitor/jvmmoniter', {
+            url: "/system/monitor/jvmmoniter",
+            views: {
+                "mainContentContainer": {
+                    controller: "jvmMonitorCtrl",
+                    templateUrl: "views/admin/system/jvmmonitor/index.html"
+                }
+            },
+            data: {pageTitle: 'JvmMonitor', pageSubTitle: '系统设置|监控系统|JVM监控'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/jvmmonitor/jvmMonitorCtrl.js']);
+                }]
+            }
+        })
+        .state('system/monitor/jvmthread', {
+            url: "/system/monitor/jvmthread",
+            views: {
+                "mainContentContainer": {
+                    controller: "jvmThreadMonitorCtrl",
+                    templateUrl: "views/admin/system/jvmmonitor/thread.html"
+                }
+            },
+            data: {pageTitle: 'JvmThreadMonitor', pageSubTitle: '系统设置|监控系统|JVM线程监控'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/jvmmonitor/jvmThreadMonitorCtrl.js']);
+                }]
+            }
+        })
+        .state('system/monitor/cachemoniter', {
+            url: "/system/monitor/cachemoniter",
+            views: {
+                "mainContentContainer": {
+                    controller: "cacheMonitorCtrl",
+                    templateUrl: "views/admin/system/cachemonitor/index.html"
+                }
+            },
+            data: {pageTitle: 'CacheMonitor', pageSubTitle: '系统设置|监控系统|缓存监控'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(["../resources/admin/controllers/cachemonitor/cacheMonitorCtrl.js"]);
+                }]
+            }
+        })
 
         .state('account/notifications', {
             url: "/account/notifications",
@@ -1126,6 +1200,53 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(["../resources/admin/controllers/documents/docuDataGridCtrl.js"]);
+                }]
+            }
+        })
+        .state('system/datagrid/datagridlist', {
+            url: "/system/datagrid/datagridlist",
+            views: {
+                "mainContentContainer": {
+                    controller: "dataGridCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'DataGrid', pageSubTitle: 'DataGrid管理|DataGrid'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/datagrid/dataGridCtrl.js',
+                        '../resources/admin/controllers/datagrid/dataGridEditorCtrl.js']);
+                }]
+            }
+        })
+        .state('system/datagrid/datacolumnlist', {
+            url: "/system/datagrid/datacolumnlist",
+            views: {
+                "mainContentContainer": {
+                    controller: "dataColumnCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: 'dataColumn', pageSubTitle: 'DataGrid管理|dataColumn'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/datacolumn/dataColumnCtrl.js',
+                        '../resources/admin/controllers/datacolumn/dataColumnEditorCtrl.js']);
+                }]
+            }
+        })
+        .state('system/application', {
+            url: "/system/application",
+            views: {
+                "mainContentContainer": {
+                    controller: "systemApplicationInfoCtrl",
+                    templateUrl: "../html/views/admin/system/applicationinfo/index.html"
+                }
+            },
+            data: {pageTitle: '系统信息', pageSubTitle: '系统信息'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/systemapplicationinfo/systemApplicationInfoCtrl.js']);
                 }]
             }
         })
