@@ -74,12 +74,12 @@ public class UserController {
 //				}
 //			}
 	        // 查询条件
-	        if (StringUtils.isNotEmpty(req.getId())) {
-				queryCriteria.addQueryCondition("id", "%"+req.getId()+"%");
+	        if (StringUtils.isNotEmpty(req.getEmployeeCode())) {
+				queryCriteria.addQueryCondition("getEmployeeCode", "%"+req.getEmployeeCode()+"%");
 			}
-			if (StringUtils.isNotEmpty(req.getUsername())) {
-				queryCriteria.addQueryCondition("username", "%"+req.getUsername()+"%");
-			}
+//			if (StringUtils.isNotEmpty(req.getUsername())) {
+//				queryCriteria.addQueryCondition("username", "%"+req.getUsername()+"%");
+//			}
 
 	        PageResult<User> pageResult = userService.doFindByCriteria(queryCriteria);
 
@@ -91,7 +91,7 @@ public class UserController {
 				String updateDate = DateUtil.formatDate(user.getUpdatedDate(),DateUtil.FORMAT_DATE_SLASH_YYYY_MM_DD);
 //				userGetResp.get
 				userGetResp.setCreatedDate(createDate);
-				userGetResp.setUpdatedDate(updateDate);
+//				userGetResp.setUpdatedDate(updateDate);
 				list.add(userGetResp);
 			}
 			PageResult<UserGetResp> pageResultResp = new PageResult<UserGetResp>();
@@ -112,7 +112,13 @@ public class UserController {
 	}
 
      //删除用户信息
-    /** delete*/
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/** delete*/
 	@Trans("system.user.delete")
 	public UserDelResp del(UserDelReq req){
 		int updateRow = this.userService.doDeleteById(req.getId());
@@ -128,7 +134,7 @@ public class UserController {
 	@Trans("system.user.edit")
 	public UserEditResp edit(UserAddReq req){
 
-		User user = userService.doFindById(req.getId());
+		User user = userService.doFindByEmpolyeeCode(req.getEmployeeCode());
 		if(user==null){
 			return new UserEditResp(UserEditResp.FAIL_ROLE_EDIT_CODE,UserEditResp.FAIL_ROLE_EDIT_MESSAGE);
 		}
