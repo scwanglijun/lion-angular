@@ -14,7 +14,7 @@ function parameterListCtrl($scope, $modal, dbUtils) {
             },
             fields: [
                 {name: "nameZh", label: "名称（中文）", type: "text", required: true, placeholder: "请输入中文名", readonly: true, labelCols: "3"},
-                {name: "type", label: "参数类型", type: "text", required: true, placeholder: "请输入参数类型", readonly: true, labelCols: "3"}
+                {name: "type", label: "资源类型", type: "select", dropDownItemType: "json", dropDownItem: "systemParameterType", required: true}
             ]
         },
         grid: {
