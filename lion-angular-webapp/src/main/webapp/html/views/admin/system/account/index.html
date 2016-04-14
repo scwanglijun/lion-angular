@@ -110,15 +110,17 @@
 													class="img-crop"></img-crop>
 										</div>
 										<div><img ng-src="{{myCroppedImage}}" class="ng-img-show"/></div>
+										<!--<input hidden="false" ng-model="img.imagefile" />-->
 										<div>
 											<span class="btn default btn-file ng-img-size">
 												<span class="fileinput-new">
 												选择图片 </span>
-												<input ng-model="image" name="image" id="image" type="file" class="ng-img-size ng-img-select"/>
+												<input name="image1" id="image1" type="file" class="ng-img-size ng-img-select"/>
 											</span>
 										</div>
 									</div>
 								</div>
+								<input type="text"  ng-model="img.icon" name="icon" hidden/>
 								<div class="margin-top-10">
 									<button type="submit" id="btnImgUploadSave" class="btn green-haze">
 										提交 </button>

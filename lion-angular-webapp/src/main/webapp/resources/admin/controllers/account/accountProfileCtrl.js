@@ -2,6 +2,7 @@ var DBApp = angular.module('DBApp',["ngImgCrop"]);
 
 DBApp.controller("accountProfileCtrl", ['$scope','$modal', 'dbUtils',accountProfileCtrl]);
 function accountProfileCtrl($scope, $modal, dbUtils) {
+
 	dbUtils.post("system.account.profile",{id: '1'},function (data) {
 		$scope.data = data;
 
@@ -19,10 +20,14 @@ function accountProfileCtrl($scope, $modal, dbUtils) {
 				$scope.$apply(function($scope){
 					$scope.myImage=evt.target.result;
 				});
-			};
+			};;
 			reader.readAsDataURL(file);
+			var image = document.querySelector(".ng-img-show").src;
+			$scope.img={icon:image};
+			console.log($scope.img);
 		};
-		angular.element(document.querySelector('#image')).on('change',handleFileSelect);
+		angular.element(document.querySelector('#image1')).on('change',handleFileSelect);
+
 	});
 
 	$scope.btnBaseInfoSave = function(isValid) {
@@ -34,6 +39,7 @@ function accountProfileCtrl($scope, $modal, dbUtils) {
 				dbUtils.success('修改用户信息成功!');
 			}, function (error) {
 				dbUtils.error(error);
+
 			});
 		}
 	}
@@ -54,7 +60,7 @@ function accountProfileCtrl($scope, $modal, dbUtils) {
 
 		}
 	}
-	$scope.PreviewImage = function(imgFile){
+	/*$scope.PreviewImage = function(imgFile){
 		var filextension=imgFile.value.substring(imgFile.value.lastIndexOf("."),imgFile.value.length);
 		filextension=filextension.toLowerCase();
 		if ((filextension!='.jpg')&&(filextension!='.gif')&&(filextension!='.jpeg')&&(filextension!='.png')&&(filextension!='.bmp')){
@@ -77,11 +83,16 @@ function accountProfileCtrl($scope, $modal, dbUtils) {
 				//document.getElementById("img1").src = path;
 			}
 		}
-	}
+	}*/
 	$scope.btnImgUploadSave = function(isValid){
 		if(isValid){
-			var reqBody = angular.copy($scope.image);
-			alert($scope.image);
+			var reqBody = angular.copy($scope.img);
+			console.log($scope.img);
+			dbUtils.post('system.account.editImage',reqBody,function(img){
+				dbUtils.success('修改成功!');
+			},function (error) {
+					dbUtils.error(error);
+				});
 		}
 	}
 }

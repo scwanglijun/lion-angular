@@ -9,6 +9,7 @@ import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.shiro.model.LoginUser;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
 import com.newtouch.lion.webtrans.trans.Trans;
+import com.sun.deploy.util.StringUtils;
 import org.apache.poi.util.SystemOutLogger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +73,16 @@ public class AccountController{
         }else{
             return new ProfileEditPwdGetResq(ProfileEditPwdGetResq.FAIL_ROLE_EDIT_CODE,ProfileEditPwdGetResq.FAIL_ROLE_EDIT_MESSAGE);
         }
+    }
+    @Trans("system.account.editImage")
+    public ProfileEditImageResq editImage(ProfileEditImageReq req){
+        if(req.getIcon()==null){
+            return new ProfileEditImageResq(ProfileEditImageResq.FAIL_ROLE_EDIT_CODE,ProfileEditImageResq.FAIL_ROLE_EDIT_MESSAGE);
+        }
+        User user = this.userService.doFindById((long) 1);
+        String image = req.getIcon();
+        user.setImage(image);
+        this.userService.doUpdate(user);
+        return new ProfileEditImageResq(ProfileEditImageResq.SUCCESS_ROLE_EDIT_CODE,ProfileEditImageResq.SUCCESS_ROLE_EDIT_MESSAGE);
     }
 }
