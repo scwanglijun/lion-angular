@@ -27,23 +27,28 @@ function ResourceCtrl($scope, dbUtils, dbImService,$timeout) {
         var originData = angular.copy(formData);
         dbUtils.post("system.resource.resourceGet", {id: item['resourceId']}, function (data) {
             originData = angular.extend({}, originData, data);
-            console.dir(data)
-
             //配置资源类型
             dbImService.bindByJSON($scope,'resourcetype',function(data){
-                console.log(data);
             });
             //配置target
             dbImService.bindByJSON($scope,'resourcetarget',function(data){
-                console.log(data);
             });
+
             //配置icon
-            dbImService.bindByJSON($scope,'resourceicon',function(data){
-                console.log(data);
-            });
+            //dbUtils.post( 'system.code.icon',{iconType: "RESOURCE_ICON"}, function (data) {
+            //    console.log(data);
+            //    //dbImService.bindSelectByJSON($scope, "icon", data, "iconClass");
+            //    //dbImService.bindByJSON($scope,'resourceicon',function(data){
+            //    //});
+            //}, function (error) {
+            //    dbUtils.error(error);
+            //});
+
+
+
+
             //配置editable
             dbImService.bindByJSON($scope,'resourceeditable',function(data){
-                console.log(data);
             });
             $scope.dbForm.setOriginData(originData);
 
@@ -56,7 +61,7 @@ function ResourceCtrl($scope, dbUtils, dbImService,$timeout) {
     //!!FORM--START!!
     $scope.dbForm = {
         settings: {transCode: "system.resource.resourceEditor", cols: 3, showClose: false},
-        title: {label: "权限资源", icon: "fujiaxinxi"},
+        title: {label: "资源", icon: "fujiaxinxi"},
         sections: [{
             sectionTitle: {show: true, icon: "gengduo", label: "资源"},
             fields: [
@@ -93,7 +98,6 @@ function ResourceCtrl($scope, dbUtils, dbImService,$timeout) {
     //临时解决编辑按钮不出现的问题
     $timeout(function () {
         $scope.dbForm.setOriginData(formData);
-
     }, 500);
 
     function doGetResourceTreeData() {
@@ -125,7 +129,6 @@ function ResourceCtrl($scope, dbUtils, dbImService,$timeout) {
             var child = [];
 
            angular.forEach(resourceData, function (item) {
-               //console.log(item['parentResourceId']);
                 if (item['parentResourceId'] == parentCode) {
                     //var iconClass = item['isLeaf'] == true ? 'icon-state-warning' : 'icon-state-success';
                     var iconClass = 'icon-state-success';

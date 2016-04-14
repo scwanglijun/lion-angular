@@ -33,7 +33,6 @@ DBApp.controller("resourceEntryCtrl", ['$scope', 'dbUtils', function ($scope, db
     //表单处理事件
     $scope.dbForm.events = {
         beforeSubmit: function (reqBody) {
-            console.dir(reqBody);
         },
         "afterSubmit": function (retval) {
             dbUtils.success("添加成功", "提示");

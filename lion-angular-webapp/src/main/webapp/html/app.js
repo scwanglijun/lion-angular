@@ -941,31 +941,32 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             views: {
                 "mainContentContainer": {
                     controller: "resourceCtrl",
-                    templateUrl: "views/security/resourceModifyView.html"
+                    templateUrl: "views/admin/system/resource/resourceModifyView.html"
                 }
             },
             data: {pageTitle: 'Resource', pageSubTitle: '系统设置 | 资源管理'},
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(['../resources/admin/controllers/resource/resourceCtrl.js']);
+                    return $ocLazyLoad.load(['../resources/admin/controllers/resource/resourceCtrl.js',
+                        '../resources/admin/controllers/resource/resourceEntityCtrl.js']);
                 }]
             }
         })
-        .state('system/resourceEntity', {
-            url: "/system/resourceEntity",
-            views: {
-                "mainContentContainer": {
-                    controller: "resourceEntryCtrl",
-                    templateUrl: "db/db-form.html"
-                }
-            },
-            data: {pageTitle: 'Resource', pageSubTitle: '系统设置 |添加资源'},
-            resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(['../resources/admin/controllers/resource/resourceEntityCtrl.js']);
-                }]
-            }
-        })
+        //.state('system/resourceEntity', {
+        //    url: "/system/resourceEntity",
+        //    views: {
+        //        "mainContentContainer": {
+        //            controller: "resourceEntryCtrl",
+        //            templateUrl: "db/db-form.html"
+        //        }
+        //    },
+        //    data: {pageTitle: 'Resource', pageSubTitle: '系统设置 |添加资源'},
+        //    resolve: {
+        //        loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+        //            return $ocLazyLoad.load(['../resources/admin/controllers/resource/resourceEntityCtrl.js']);
+        //        }]
+        //    }
+        //})
 
         .state('system/department', {
             url: "/system/department",
@@ -1014,22 +1015,6 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(['../resources/admin/controllers/icon/iconListCtrl.js',
                         '../resources/admin/controllers/icon/iconDetailCtrl.js']);
-                }]
-            }
-        })
-
-        .state('system/parameterlist', {
-            url: "/system/parameterlist",
-            views: {
-                "mainContentContainer": {
-                    controller: "parameterListCtrl",
-                    templateUrl: "db/lion-form-grid.html"
-                }
-            },
-            data: {pageTitle: 'Parameter', pageSubTitle: '系统设置|系统参数'},
-            resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(['../resources/admin/controllers/parameter/parameterListCtrl.js']);
                 }]
             }
         })
@@ -1250,7 +1235,22 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
-
+        .state('system/parameterlist', {
+            url: "/system/parameterlist",
+            views: {
+                "mainContentContainer": {
+                    controller: "parameterListCtrl",
+                    templateUrl: "db/lion-form-grid.html"
+                }
+            },
+            data: {pageTitle: '系统参数', pageSubTitle: '系统设置|系统参数'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/parameter/parameterListCtrl.js',
+                        '../resources/admin/controllers/parameter/parameterEditorCtrl.js']);
+                }]
+            }
+        })
 
 }
 

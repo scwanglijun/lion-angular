@@ -21,7 +21,6 @@ dbResourceTreeDirectives.directive('dbResourceTree', ['dbUtils', function (dbUti
         transclude: true,
         controller: ['$scope', '$modal', function ($scope, $modal) {
 
-
             if (angular.isUndefined($scope.dbResourceTree)) {
                 $scope.dbResourceTree = {settings: {}};
             }

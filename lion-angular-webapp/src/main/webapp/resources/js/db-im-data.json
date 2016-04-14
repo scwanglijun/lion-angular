@@ -811,6 +811,23 @@
       "name": "否",
       "value": false
     }
+  ],
+  "systemParameterType": [
+    {
+      "name": "用户",
+      "value": "Users"
+    },
+    {
+      "name": "文件类",
+      "value": "Files"
+    },{
+      "name": "系统类",
+      "value": "systems"
+    },
+    {
+      "name": "接口管理",
+      "value": "sysInterface"
+    }
   ]
 }
 
