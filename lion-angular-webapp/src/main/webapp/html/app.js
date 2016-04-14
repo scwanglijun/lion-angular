@@ -1023,14 +1023,14 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             url: "/system/monitor/sessionlist",
             views: {
                 "mainContentContainer": {
-                    controller: "sessionListCtrl",
+                    controller: "sessionMonitorCtrl",
                     templateUrl: "db/lion-form-grid.html"
                 }
             },
-            data: {pageTitle: 'Session', pageSubTitle: '系统设置|系统参数'},
+            data: {pageTitle: 'Session', pageSubTitle: '系统设置|监控系统|用户会话监控'},
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(['../resources/admin/controllers/session/sessionListCtrl.js']);
+                    return $ocLazyLoad.load(['../resources/admin/controllers/sessionmonitor/sessionMonitorCtrl.js']);
                 }]
             }
         })
@@ -1081,6 +1081,8 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+
+
         .state('system/monitor/hibernate', {
             url: "/system/monitor/hibernate",
             views: {
