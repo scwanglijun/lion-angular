@@ -106,7 +106,7 @@ public class UserController {
 	@Trans("system.user.add")
 	public UserAddResp add(UserAddReq req){
 		User user = new User();
-		BeanUtils.copyProperties(user, req);
+		BeanUtils.copyProperties(req, user);
 		userService.doCreateUser(user);
 		return new UserAddResp(UserAddResp.SUCCESS_USER_ADD_CODE,UserAddResp.SUCCESS_USER_ADD_MESSAGE);
 	}

@@ -49,7 +49,7 @@
 				<prop key="hibernate.max_fetch_depth">${hibernate.max_fetch_depth}</prop>
 				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
 				<prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
-				<prop key="hibernate.cache.provider_class">${hibernate.cache.provider_class}</prop>
+				<!--<prop key="hibernate.cache.provider_class">${hibernate.cache.provider_class}</prop>-->
 				<prop key="hibernate.cache.region.factory_class">${hibernate.cache.region.factory_class}</prop>
 				<prop key="current_session_context_class">thread</prop>
 			</props>
