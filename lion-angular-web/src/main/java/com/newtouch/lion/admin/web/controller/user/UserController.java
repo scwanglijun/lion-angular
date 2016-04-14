@@ -74,8 +74,8 @@ public class UserController {
 //				}
 //			}
 	        // 查询条件
-	        if (StringUtils.isNotEmpty(req.getEmployeeCode())) {
-				queryCriteria.addQueryCondition("getEmployeeCode", "%"+req.getEmployeeCode()+"%");
+	        if (StringUtils.isNotEmpty(req.getRealnameZh())) {
+				queryCriteria.addQueryCondition("RealnameZh", "%"+req.getRealnameZh()+"%");
 			}
 //			if (StringUtils.isNotEmpty(req.getUsername())) {
 //				queryCriteria.addQueryCondition("username", "%"+req.getUsername()+"%");
@@ -108,7 +108,7 @@ public class UserController {
 		User user = new User();
 		BeanUtils.copyProperties(user, req);
 		userService.doCreateUser(user);
-		return new UserAddResp(UserAddResp.SUCCESS_ROLE_ADD_CODE,UserAddResp.SUCCESS_ROLE_ADD_MESSAGE);
+		return new UserAddResp(UserAddResp.SUCCESS_USER_ADD_CODE,UserAddResp.SUCCESS_USER_ADD_MESSAGE);
 	}
 
      //删除用户信息
@@ -123,9 +123,9 @@ public class UserController {
 	public UserDelResp del(UserDelReq req){
 		int updateRow = this.userService.doDeleteById(req.getId());
 		if (updateRow>0) {
-			return new UserDelResp(UserDelResp.SUCCESS_ROLE_DELETE_CODE, UserDelResp.SUCCESS_ROLE_DELETE_MESSAGE);
+			return new UserDelResp(UserDelResp.SUCCESS_USER_DELETE_CODE, UserDelResp.SUCCESS_USER_DELETE_MESSAGE);
 		}else {
-			return new UserDelResp(UserDelResp.FAIL_ROLE_DELETE_CODE, UserDelResp.FAIL_ROLE_DELETE_MESSAGE);
+			return new UserDelResp(UserDelResp.FAIL_USER_DELETE_CODE, UserDelResp.FAIL_USER_DELETE_MESSAGE);
 		}
 	}
 
@@ -136,10 +136,10 @@ public class UserController {
 
 		User user = userService.doFindByEmpolyeeCode(req.getEmployeeCode());
 		if(user==null){
-			return new UserEditResp(UserEditResp.FAIL_ROLE_EDIT_CODE,UserEditResp.FAIL_ROLE_EDIT_MESSAGE);
+			return new UserEditResp(UserEditResp.FAIL_USER_EDIT_CODE,UserEditResp.FAIL_USER_EDIT_MESSAGE);
 		}
 		BeanUtils.copyProperties(req, user);
 		userService.doUpdate(user);
-		return new UserEditResp(UserEditResp.SUCCESS_ROLE_EDIT_CODE,UserEditResp.SUCCESS_ROLE_EDIT_MESSAGE);
+		return new UserEditResp(UserEditResp.SUCCESS_USER_EDIT_CODE,UserEditResp.SUCCESS_USER_EDIT_MESSAGE);
 	}
 }
