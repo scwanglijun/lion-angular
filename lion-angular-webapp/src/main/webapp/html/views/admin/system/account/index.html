@@ -101,14 +101,20 @@
 							<form id="formImg" name="formImg" enctype="multipart/form-data" ng-submit="btnImgUploadSave(formImg.$valid)" >
 								<div class="form-group">
 									<div class="fileinput fileinput-new" >
-										<div id="imgDiv" class="fileinput-new thumbnail" style="width: 300px; height: 300px;">
-											<img src="../resources/css/images/default.gif" id="img1" style="width: 300px; height: 300px;"/>
+										<div id="imgDiv" class="fileinput-new thumbnail" style="width: 290px; height: 217px;overflow: hidden;;">
+											<img-crop image="myImage" result-image="myCroppedImage" area-type="square"
+													  area-min-size="selMinSize"
+													  result-image-format="image/png"
+													  result-image-quality="resImgQuality"
+													  result-image-size="resImgSize"
+													class="img-crop"></img-crop>
 										</div>
+										<div><img ng-src="{{myCroppedImage}}" class="ng-img-show"/></div>
 										<div>
-											<span class="btn default btn-file">
+											<span class="btn default btn-file ng-img-size">
 												<span class="fileinput-new">
 												选择图片 </span>
-												<input ng-model="image" name="image" type="file" ng-change="PreviewImage(this)"/>
+												<input ng-model="image" name="image" id="image" type="file" class="ng-img-size ng-img-select"/>
 											</span>
 										</div>
 									</div>
