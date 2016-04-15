@@ -91,7 +91,8 @@ public class UserController {
 				String updateDate = DateUtil.formatDate(user.getUpdatedDate(),DateUtil.FORMAT_DATE_SLASH_YYYY_MM_DD);
 //				userGetResp.get
 				userGetResp.setCreatedDate(createDate);
-//				userGetResp.setUpdatedDate(updateDate);
+				userGetResp.setUpdatedDate(updateDate);
+
 				list.add(userGetResp);
 			}
 			PageResult<UserGetResp> pageResultResp = new PageResult<UserGetResp>();

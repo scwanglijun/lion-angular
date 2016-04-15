@@ -36,7 +36,7 @@ function usergroupListCtrl($scope, $modal, dbUtils) {
                 {name: "描述", width: "18%", field: "description"},
                 {name: "可编辑", width: "10%", field: "editable"},
                 {name: "创建时间", width: "18%", field: "createdDate"},
-                {name: "更新时间", width: "18%", field: "updateDateFormatter"},
+                {name: "更新时间", width: "18%", field: "updatedDate"},
             ],
             rowOperation: {show: false}
         }
@@ -70,10 +70,11 @@ function usergroupListCtrl($scope, $modal, dbUtils) {
         $scope.lionFormGrid.setFormDataField("departmentId", item['departId']);
     };
     //打开modal
+
     function openModal(source) {
         var instance = $modal.open({
             animation: true,
-            templateUrl: 'views/admin/system/user/usergroupDetail.html',
+            templateUrl: 'views/admin/system/usergroup/usergroupDetail.html',
             controller: 'usergroupDetailCtrl',
             size: "md",
             backdrop: "static",
@@ -87,7 +88,7 @@ function usergroupListCtrl($scope, $modal, dbUtils) {
     //编辑modal
     function editModal(row) {
         if ($scope.lionFormGrid.getAllSelectRows().length == 0) {
-            dbUtils.info('请选择要编辑的行数据');
+            dbUtils.info('请选择要编辑的数据');
         } else if ($scope.lionFormGrid.getAllSelectRows().length > 1) {
             dbUtils.info('请选择一行数据');
         } else {
@@ -96,7 +97,7 @@ function usergroupListCtrl($scope, $modal, dbUtils) {
 
             var instance = $modal.open({
                 animation: true,
-                templateUrl: 'views/admin/system/user/usergroupDetail.html',
+                templateUrl: 'views/admin/system/usergroup/usergroupDetail.html',
                 controller: 'usergroupDetailCtrl',
                 size: "md",
                 backdrop: "static",

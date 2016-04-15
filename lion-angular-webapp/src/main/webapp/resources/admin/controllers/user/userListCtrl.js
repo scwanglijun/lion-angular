@@ -39,7 +39,7 @@ function userListCtrl($scope, $modal, dbUtils) {
                 {name: "描述", width: "18%", field: "description"},
                 {name: "可编辑", width: "10%", field: "editable"},
                 {name: "创建时间", width: "18%", field: "createdDate"},
-                {name: "更新时间", width: "18%", field: "updateDateFormatter"},
+                {name: "更新时间", width: "18%", field: "updatedDate"},
             ],
             rowOperation: {show: false}
         }
