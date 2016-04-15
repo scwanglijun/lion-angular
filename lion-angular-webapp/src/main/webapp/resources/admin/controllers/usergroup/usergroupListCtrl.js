@@ -11,7 +11,7 @@ function usergroupListCtrl($scope, $modal, dbUtils) {
             },
             fields: [
                 {
-                    name: "realnameZh",
+                    name: "nameZh",
                     label: "用户组名称",
                     type: "text",
                     required: true,
@@ -31,8 +31,8 @@ function usergroupListCtrl($scope, $modal, dbUtils) {
             },
             header: [
 
-                {name: "用户组(中文)", width: "18%", field: "realnameZh"},
-                {name: "用户组(英文)", width: "18%", field: "realnameEn"},
+                {name: "用户组(中文)", width: "18%", field: "nameZh"},
+                {name: "用户组(英文)", width: "18%", field: "nameEn"},
                 {name: "描述", width: "18%", field: "description"},
                 {name: "可编辑", width: "10%", field: "editable"},
                 {name: "创建时间", width: "18%", field: "createdDate"},

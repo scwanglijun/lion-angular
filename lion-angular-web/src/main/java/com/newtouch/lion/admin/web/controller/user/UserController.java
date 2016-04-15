@@ -92,7 +92,6 @@ public class UserController {
 //				userGetResp.get
 				userGetResp.setCreatedDate(createDate);
 				userGetResp.setUpdatedDate(updateDate);
-
 				list.add(userGetResp);
 			}
 			PageResult<UserGetResp> pageResultResp = new PageResult<UserGetResp>();

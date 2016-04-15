@@ -38,8 +38,8 @@ public class UserGroupController {
         QueryCriteria queryCriteria = QueryUtils.pageFormat(new QueryCriteria() ,req);
 
         //查询条件
-        if (StringUtils.isNotEmpty(req.getRealnameZh())) {
-            queryCriteria.addQueryCondition("RealnameZh", "%"+req.getRealnameZh()+"%");
+        if (StringUtils.isNotEmpty(req.getNameZh())) {
+            queryCriteria.addQueryCondition("nameZh", "%"+req.getNameZh()+"%");
         }
 
         PageResult<Group> pageResult = groupService.doFindByCriteria(queryCriteria);

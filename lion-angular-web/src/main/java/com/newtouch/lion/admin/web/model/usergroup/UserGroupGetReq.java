@@ -10,9 +10,9 @@ public class UserGroupGetReq extends QueryReq{
     private long id;
 
     /**用户组名称(中文)*/
-    private String realnameZh;
+    private String nameZh;
     /**用户组名称(英文)*/
-    private String realnameEn;
+    private String nameEn;
     /**描述*/
     private String description;
     /**可编辑*/
@@ -30,20 +30,20 @@ public class UserGroupGetReq extends QueryReq{
         this.id = id;
     }
 
-    public String getRealnameZh() {
-        return realnameZh;
+    public String getNameZh() {
+        return nameZh;
     }
 
-    public void setRealnameZh(String realnameZh) {
-        this.realnameZh = realnameZh;
+    public void setNameZh(String nameZh) {
+        this.nameZh = nameZh;
     }
 
-    public String getRealnameEn() {
-        return realnameEn;
+    public String getNameEn() {
+        return nameEn;
     }
 
-    public void setRealnameEn(String realnameEn) {
-        this.realnameEn = realnameEn;
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
     }
 
     public String getDescription() {
