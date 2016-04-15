@@ -81,6 +81,16 @@ public class CodeListServiceImpl extends AbstractService implements
 		return this.codeListDao.doDeleteById(id);
 	}
 
+	@Override
+	public int doDeleteByIds(Long[] ids) {
+		int i = 0;
+		for (Long id : ids){
+			this.doDeleteById(id);
+			i++;
+		}
+		return i;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

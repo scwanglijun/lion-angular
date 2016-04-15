@@ -6,11 +6,11 @@
  */
 package com.newtouch.lion.service.system;
 
-import java.util.List;
-
 import com.newtouch.lion.model.system.CodeList;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
+
+import java.util.List;
 
 /**
  * <p>
@@ -47,6 +47,13 @@ public interface CodeListService {
 	 * @return
 	 * */
 	public int doDeleteById(Long id);
+	/**
+	 * 根据Ids删除CodeList对象
+	 *
+	 * @param ids
+	 * @return
+	 * */
+	public int doDeleteByIds(Long[] ids);
 
 	/**
 	 * 删除CodeList
