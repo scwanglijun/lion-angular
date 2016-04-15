@@ -23,6 +23,16 @@ public class UserDelReq {
     /**更新时间*/
     private String updatedDate;
 
+    private Long[] ids;
+
+    public Long[] getIds() {
+        return ids;
+    }
+
+    public void setIds(Long[] ids) {
+        this.ids = ids;
+    }
+
     public String getEmployeeCode() {
         return employeeCode;
     }

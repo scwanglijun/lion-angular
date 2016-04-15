@@ -121,6 +121,9 @@ public interface GroupService {
 
 	public void doDelete(Group group);
 
+	//批量删除
+	public int doDeleteByIds(Long[] ids);
+
 	public int doDeleteById(Long id);
 
 	public Group doUpdate(Group group);

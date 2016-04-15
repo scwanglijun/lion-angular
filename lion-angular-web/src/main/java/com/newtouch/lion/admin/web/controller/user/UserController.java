@@ -5,7 +5,7 @@
 *
 * $id: UserController.java 9552 2016年3月30日 上午9:54:07 LiJie$
 */
-package com.newtouch.lion.admin.web.controller.user; 
+package com.newtouch.lion.admin.web.controller.user;
 
 import com.newtouch.lion.admin.web.model.user.*;
 import com.newtouch.lion.common.date.DateUtil;
@@ -52,48 +52,29 @@ public class UserController {
 	@Trans("system.user.list")
 	public Page<User> list(UserGetReq req) {
 
-			QueryCriteria queryCriteria = QueryUtils.pageFormat(new QueryCriteria() ,req);
+		//排序
+		QueryCriteria queryCriteria = QueryUtils.pageFormat(new QueryCriteria() ,req);
 
-//	        QueryCriteria queryCriteria = new QueryCriteria();
-//
-//	        // 设置分页 启始页
-//	        queryCriteria.setStartIndex(req.getPage().getPageNumber()-1);
-//	        // 每页大小
-//	        queryCriteria.setPageSize(req.getPage().getPageSize());
-//			// 设置排序字段及排序方向
-//			if (req.getSort()==null){
-//				queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-//				queryCriteria.setOrderDirection(QueryCriteria.ASC);
-//			}else {
-//				if (StringUtils.isNotEmpty(req.getSort().getSort()) && StringUtils.isNotEmpty(req.getSort().getOrder())){
-//					queryCriteria.setOrderField(req.getSort().getOrder());
-//					queryCriteria.setOrderDirection(req.getSort().getSort());
-//				}else {
-//					queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-//					queryCriteria.setOrderDirection(QueryCriteria.ASC);
-//				}
-//			}
 	        // 查询条件
-	        if (StringUtils.isNotEmpty(req.getRealnameZh())) {
-				queryCriteria.addQueryCondition("RealnameZh", "%"+req.getRealnameZh()+"%");
-			}
-//			if (StringUtils.isNotEmpty(req.getUsername())) {
-//				queryCriteria.addQueryCondition("username", "%"+req.getUsername()+"%");
-//			}
+		if (StringUtils.isNotEmpty(req.getRealnameZh())){
+			queryCriteria.addQueryCondition("RealnameZh","%"+req.getRealnameZh()+"%");
+		}
 
-	        PageResult<User> pageResult = userService.doFindByCriteria(queryCriteria);
+		PageResult<User> pageResult = userService.doFindByCriteria(queryCriteria);
+		List<UserGetResp> list = new ArrayList<UserGetResp>();
 
-			List<UserGetResp> list = new ArrayList<UserGetResp>();
-			for (User user : pageResult.getContent()){
-				UserGetResp userGetResp = new UserGetResp();
-				BeanUtils.copyProperties(user,userGetResp);
-				String createDate = DateUtil.formatDate(user.getCreatedDate(),DateUtil.FORMAT_DATE_SLASH_YYYY_MM_DD);
-				String updateDate = DateUtil.formatDate(user.getUpdatedDate(),DateUtil.FORMAT_DATE_SLASH_YYYY_MM_DD);
-//				userGetResp.get
-				userGetResp.setCreatedDate(createDate);
-				userGetResp.setUpdatedDate(updateDate);
+		for (User user : pageResult.getContent()){
+			UserGetResp userGetResp = new UserGetResp();
+			BeanUtils.copyProperties(user,userGetResp);
+
+			String createDate = DateUtil.formatDate(user.getCreatedDate(),DateUtil.FORMAT_DATE_SLASH_YYYY_MM_DD);
+			String updateDate = DateUtil.formatDate(user.getUpdatedDate(),DateUtil.FORMAT_DATE_SLASH_YYYY_MM_DD);
+			userGetResp.setCreatedDate(createDate);
+			userGetResp.setUpdatedDate(updateDate);
+
 				list.add(userGetResp);
 			}
+
 			PageResult<UserGetResp> pageResultResp = new PageResult<UserGetResp>();
 			BeanUtils.copyProperties(pageResult,pageResultResp);
 			pageResultResp.setContent(list);
@@ -121,7 +102,14 @@ public class UserController {
 	/** delete*/
 	@Trans("system.user.delete")
 	public UserDelResp del(UserDelReq req){
-		int updateRow = this.userService.doDeleteById(req.getId());
+
+		/**
+		 * 根据id获取值
+		 * */
+		//return id
+//		int updateRow = this.userService.doDeleteById(req.getId());
+		//return ids(ids[])
+		int updateRow = this.userService.doDeleteByIds(req.getIds());
 		if (updateRow>0) {
 			return new UserDelResp(UserDelResp.SUCCESS_USER_DELETE_CODE, UserDelResp.SUCCESS_USER_DELETE_MESSAGE);
 		}else {

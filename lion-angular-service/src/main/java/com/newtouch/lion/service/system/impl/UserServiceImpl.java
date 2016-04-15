@@ -307,6 +307,16 @@ public class UserServiceImpl extends AbstractService implements UserService {
 		return userDao.doDeleteById(id);
 	}
 
+	@Override
+	public int doDeleteByIds(Long[] ids) {
+		int i = 0;
+		for (Long id : ids){
+			this.doDeleteById(id);
+			i++;
+		}
+		return i;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -71,7 +71,7 @@ public class UserGroupController {
         Group group = new Group();
         BeanUtils.copyProperties(req,group);
         groupService.doCreate(group);
-        return new UserGroupAddResp(UserGroupAddResp.SUCCESS_GROUP_ADD_CODE,UserGroupAddResp.FAIL_GROUP_ADD_MESSAGE);
+        return new UserGroupAddResp(UserGroupAddResp.SUCCESS_GROUP_ADD_CODE,UserGroupAddResp.SUCCESS_GROUP_ADD_MESSAGE);
     }
     /**
      * 用户组编辑
@@ -92,7 +92,13 @@ public class UserGroupController {
      * */
     @Trans("system.usergroup.delete")
     public UserGroupDelResp delete(UserGroupDelReq req){
-        int updateRow = this.groupService.doDeleteById(req.getId());
+        /**
+         * 根据id获取值
+         * */
+        //return id
+//        int updateRow = this.groupService.doDeleteById(req.getId());
+        //return ids(ids[])
+        int updateRow = this.groupService.doDeleteByIds(req.getIds());
         if (updateRow > 0){
             return new UserGroupDelResp(UserGroupDelResp.SUCCESS_GROUP_DELETE_CODE,UserGroupDelResp.SUCCESS_GROUP_DELETE_MESSAGE);
         }else {

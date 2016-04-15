@@ -295,6 +295,16 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 		this.groupDao.remove(group);
 	}
 
+	@Override
+	public int doDeleteByIds(Long[] ids) {
+		int i = 0;
+		for (Long id : ids){
+			this.doDeleteById(id);
+			i++;
+		}
+		return i;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

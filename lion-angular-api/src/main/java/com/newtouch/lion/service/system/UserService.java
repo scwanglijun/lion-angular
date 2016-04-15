@@ -169,6 +169,9 @@ public interface UserService {
 	 */
 	public int doDeleteById(Long id);
 
+	//批量删除
+	public int doDeleteByIds(Long[] ids);
+
 	public User doFindById(Long id);
 
 	public User doGetById(Long id);
