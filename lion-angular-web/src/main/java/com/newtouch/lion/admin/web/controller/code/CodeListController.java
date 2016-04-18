@@ -42,7 +42,7 @@ public class CodeListController {
 
         // 设置查询条件
         if (StringUtils.isNotEmpty(req.getCodeType())) {
-            queryCriteria.addQueryCondition("type", req.getCodeType());
+            queryCriteria.addQueryCondition("codeType", req.getCodeType());
         }
 
         PageResult<CodeList> pageResult = codeListService.doFindByCriteria(queryCriteria);
