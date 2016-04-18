@@ -8,12 +8,19 @@ DBApp.controller("codeDetailCtrl", ['$scope','$modalInstance','dbUtils','dbImSer
 //显示数据
 function codeDetailCtrl($scope,$modalInstance,dbUtils,dbImService,source){
 
+    dbImService.bindByJSON($scope,'codeListType',function(data){
+        console.log(data);
+    });
+
     if (angular.isUndefined(source)) {
         $scope.data = {
+            codeListType: null,
+            codeValue: null,
             nameZh: null,
             nameEn: null,
-            description: null,
-            editable:true
+            sortNo: null,
+            editable:true,
+            selected:false
         };
     } else {
         $scope.formDisabled = false;
@@ -29,8 +36,17 @@ function codeDetailCtrl($scope,$modalInstance,dbUtils,dbImService,source){
 
     //提交成功
     $scope.submitDialogForm = function (isValid) {
-        console.log($scope.data);
-        console.log(source);
+
+        //表格类型
+        if($scope.data.codeListType==null){
+            dbUtils.info('编码类型不能为空！');
+            return;
+        }
+        //$scope.dbForm.setFormDataField("type",$scope.data.systemParameterType.value);
+        $scope.data.codeType = $scope.data.codeListType.value;
+        if($scope.data.editable==null || $scope.data.editable==undefined){
+            $scope.data.editable=false;
+        }
         $scope.submited = true;
         if (isValid) {
             var reqBody = angular.copy($scope.data);

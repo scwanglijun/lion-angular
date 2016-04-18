@@ -15,24 +15,21 @@ function codeListCtrl($scope, $modal, dbUtils) {
             fields: [
                 {
                     name: "nameZh",
-                    label: "编码名称(中文)",
+                    label: "编码名称",
                     type: "text",
                     required: true,
                     placeholder: "编码名称(中文)",
                     readonly: true,
                     labelCols: "3"
                 },
-            ],
-            fields: [
                 {
                     name: "codeType",
-                    label: "编码类型",
-                    type: "text",
-                    required: true,
-                    placeholder: "编码类型",
-                    readonly: true,
-                    labelCols: "3"
-                },
+                    label: "编码列表类型",
+                    type: "select",
+                    dropDownItemType: "json",
+                    dropDownItem: "codeListType",
+                    required: true
+                }
             ]
         },
         grid: {

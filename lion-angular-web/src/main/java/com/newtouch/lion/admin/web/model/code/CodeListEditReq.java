@@ -1,7 +1,5 @@
 package com.newtouch.lion.admin.web.model.code;
 
-import com.newtouch.lion.model.system.CodeType;
-
 /**
  * Created by Administrator on 2016/4/15.
  */
@@ -20,7 +18,7 @@ public class CodeListEditReq {
     /** 是否可编辑 */
     private Boolean editable;
     /** 编码类型对象 */
-    private CodeType codeType;
+    private String codeType;
     /** 默认选择 */
     private Boolean selected;
     /** 编辑类型ID */
@@ -74,11 +72,11 @@ public class CodeListEditReq {
         this.editable = editable;
     }
 
-    public CodeType getCodeType() {
+    public String getCodeType() {
         return codeType;
     }
 
-    public void setCodeType(CodeType codeType) {
+    public void setCodeType(String codeType) {
         this.codeType = codeType;
     }
 

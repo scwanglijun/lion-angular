@@ -828,6 +828,57 @@
       "name": "接口管理",
       "value": "sysInterface"
     }
+  ],
+
+  "codeListType": [
+    {
+      "name": "客户管理",
+      "value": "customerManagement"
+    },
+    {
+      "name": "系统参数",
+      "value": "systemParameter"
+    },
+    {
+      "name": "通用编码类型",
+      "value": "currencyCodetype"
+    },
+    {
+      "name": "参数类型",
+      "value": "parameterType"
+    },
+    {
+      "name": "产品管理",
+      "value": "productManagement"
+    },
+    {
+      "name": "报表中心",
+      "value": "reportCenter"
+    },
+    {
+      "name": "Target",
+      "value": "target"
+    },
+    {
+      "name": "资源类型",
+      "value": "resourceType"
+    },
+    {
+      "name": "接口管理",
+      "value": "interfaceManagement"
+    },
+    {
+      "name": "图标管理",
+      "value": "iconManagement"
+    },
+    {
+      "name": "图标类型",
+      "value": "iconType"
+    },
+    {
+      "name": "Dategrid类型",
+      "value": "dategridType"
+    }
   ]
 }
 
