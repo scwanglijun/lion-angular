@@ -914,8 +914,8 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             data: {pageTitle: 'CodeType', pageSubTitle: '编码管理|编码类型'},
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(['../resources/admin/controllers/code/codeTypeListCtrl.js',
-                        '../resources/admin/controllers/code/codeTypeDetailCtrl.js']);
+                    return $ocLazyLoad.load(['../resources/admin/controllers/codetype/codeTypeListCtrl.js',
+                        '../resources/admin/controllers/codetype/codeTypeEditorCtrl.js']);
                 }]
             }
         })
