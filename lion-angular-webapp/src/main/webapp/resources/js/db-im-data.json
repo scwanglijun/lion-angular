@@ -847,6 +847,39 @@
       "name": "报表中心",
       "value": "ReportsCenter"
     }
+  ],
+
+  "codeType": [
+  {
+    "name":"系统类型",
+    "value":"system"
+  },
+  {
+    "name":"产品管理",
+    "value":"Products"
+  },
+  {
+    "name":"客户中心",
+    "value":"Customers"
+  },
+  {
+    "name":"客户管理",
+    "value":"customerManage"
+  },
+  {
+    "name":"报表中心",
+    "value":"ReportsCenter"
+  }
+],
+  "systemIconType": [
+    {
+      "name":"按钮",
+      "value":"RESOURCE_ICON"
+    },
+    {
+      "name":"下拉列表",
+      "value":"RESOURCE_ICON"
+    }
   ]
 }
 
