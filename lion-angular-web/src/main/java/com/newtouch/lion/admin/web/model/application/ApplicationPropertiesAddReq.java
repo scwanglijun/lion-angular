@@ -1,6 +1,7 @@
 package com.newtouch.lion.admin.web.model.application;
 
 import com.newtouch.lion.admin.web.model.query.QueryReq;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * <p>
@@ -24,12 +25,16 @@ public class ApplicationPropertiesAddReq extends QueryReq{
     private Long id;
 
     /** 应用名称 */
+    @Length(max = 20,min = 0,message = "{sys.applicationProperty.form.appId.length.message}")
     private String appId;
     /** 配置项-key */
+    @Length(max = 60,min = 2, message = "{sys.applicationProperty.form.key.length.message}")
     private String key;
     /** 配置项-value */
+    @Length(max = 120, min = 2, message = "{sys.applicationProperty.form.value.length.message}")
     private String value;
     /** 配置项描述 */
+    @Length(min = 0, max = 120, message = "{sys.applicationProperty.form.description.length.message}")
     private String description;
 
     public Long getId() {

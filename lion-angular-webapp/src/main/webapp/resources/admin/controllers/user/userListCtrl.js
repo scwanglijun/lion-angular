@@ -10,19 +10,12 @@ function userListCtrl($scope, $modal, dbUtils) {
     var formGridOptions = {
         form: {
             settings: {
-                cols: 2
+                cols: 3
             },
             fields: [
-                {
-                    name: "realnameZh",
-                    label: "用户名称",
-                    type: "text",
-                    required: true,
-                    placeholder: "用户名称",
-                    readonly: true,
-                    labelCols: "3"
-                },
-
+                {name: "username", label: "用户名", type: "text", required: true, placeholder: "用户名", readonly: true, labelCols: "3"},
+                {name: "employeeCode", label: "员工号", type: "text", required: true, placeholder: "员工号", readonly: true, labelCols: "3"},
+                {name: "email", label: "邮箱", type: "text", required: true, placeholder: "邮箱", readonly: true, labelCols: "3"}
             ]
         },
         grid: {
@@ -33,13 +26,14 @@ function userListCtrl($scope, $modal, dbUtils) {
                 showCheckBox: true
             },
             header: [
-
-                {name: "用户名称(中文)", width: "18%", field: "realnameZh"},
-                {name: "用户名称(英文)", width: "18%", field: "realnameEn"},
-                {name: "描述", width: "18%", field: "description"},
-                {name: "可编辑", width: "10%", field: "editable"},
-                {name: "创建时间", width: "18%", field: "createdDate"},
-                {name: "更新时间", width: "18%", field: "updatedDate"},
+                {name: "用户名", width: "12%", field: "username"},
+                {name: "姓名(中文)", width: "12%", field: "realnameZh"},
+                {name: "姓名(英文)", width: "12%", field: "realnameEn"},
+                {name: "员工号", width: "10%", field: "employeeCode"},
+                {name: "所属部门", width: "12%", field: "department"},
+                {name: "锁定状态", width: "12%", field: "accountLocked"},
+                {name: "账户状态", width: "12%", field: "accountExpired"},
+                {name: "账户有效日期", width: "18%", field: "accountExpiredDate"}
             ],
             rowOperation: {show: false}
         }
@@ -76,8 +70,8 @@ function userListCtrl($scope, $modal, dbUtils) {
     function openModal(source) {
         var instance = $modal.open({
             animation: true,
-            templateUrl: 'views/admin/system/user/userDetail.html',
-            controller: 'userDetailCtrl',
+            templateUrl: 'views/admin/system/user/userEditorView.html',
+            controller: 'userEditorCtrl',
             size: "md",
             backdrop: "static",
             resolve: {
@@ -94,13 +88,10 @@ function userListCtrl($scope, $modal, dbUtils) {
             } else if ($scope.lionFormGrid.getAllSelectRows().length > 1) {
                 dbUtils.info('请选择一行数据');
             } else {
-
-                console.log($scope.lionFormGrid.getAllSelectRows());
-
                 var instance = $modal.open({
                     animation: true,
-                    templateUrl: 'views/admin/system/user/userDetail.html',
-                    controller: 'userDetailCtrl',
+                    templateUrl: 'views/admin/system/user/userEditorView.html',
+                    controller: 'userEditorCtrl',
                     size: "md",
                     backdrop: "static",
                     resolve: {
@@ -113,7 +104,6 @@ function userListCtrl($scope, $modal, dbUtils) {
                     $scope.lionFormGrid.reLoadData();
                 });
             }
-            ;
         }
 
 
@@ -140,25 +130,5 @@ function userListCtrl($scope, $modal, dbUtils) {
                 });
             }
         }
-
-//    /**
-//     * 查看审核记录
-//     * @param currentRecord
-//     */
-//    function auditStatusHistory(currentRecord) {
-//        $modal.open({
-//            animation: true,
-//            templateUrl: 'views/roles.json/partNoAuditHistoryView.html',
-//            controller: 'partNoAuditHistoryCtrl',
-//            size: "lg",
-//            backdrop: "static",
-//            resolve: {
-//                source: function () {
-//                    return currentRecord;
-//                }
-//            }
-//        });
-//    }
-//
 
 }

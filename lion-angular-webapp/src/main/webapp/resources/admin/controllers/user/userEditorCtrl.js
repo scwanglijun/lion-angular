@@ -3,17 +3,32 @@
  */
 var DBApp = angular.module('DBApp');
 
-DBApp.controller("userDetailCtrl", ['$scope','$modalInstance','dbUtils','dbImService', 'source', userDetailCtrl]);
+DBApp.controller("userEditorCtrl", ['$scope','$modalInstance','dbUtils','dbImService', 'source', userEditorCtrl]);
 
 //显示数据
-function userDetailCtrl($scope,$modalInstance,dbUtils,dbImService,source){
+function userEditorCtrl($scope,$modalInstance,dbUtils,dbImService,source){
 
     if (angular.isUndefined(source)) {
         $scope.data = {
+            username: null,
+            email: null,
+            credentialExpiredDate: null,
+            credentialExpired: null,
+            accountExpiredDate: null,
+            accountExpired: null,
             nameZh: null,
             nameEn: null,
+            telephone: null,
+            officePhone: null,
+            location: null,
+            mobile: null,
             description: null,
-            editable:true
+            gender: null,
+            employeeCode: null,
+            depement: null,
+            fax: null,
+            postcode: null,
+            editable: null,
         };
     } else {
         $scope.formDisabled = false;

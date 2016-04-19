@@ -54,13 +54,8 @@ public class ApplicationPropertyController {
         QueryCriteria queryCriteria = QueryUtils.pageFormat(new QueryCriteria() ,req);
 
         // 设置排序字段及排序方向
-//        if (StringUtils.isNotEmpty(req.getSort()) && StringUtils.isNotEmpty(req.getOrder())) {
-//            queryCriteria.setOrderField(req.getSort());
-//            queryCriteria.setOrderDirection(req.getOrder());
-//        } else {
-//            queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-//            queryCriteria.setOrderDirection(QueryCriteria.ASC);
-//        }
+        queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+        queryCriteria.setOrderDirection(QueryCriteria.ASC);
 
         // 查询条件 appId
         if (StringUtils.isNotEmpty(req.getAppId())) {
