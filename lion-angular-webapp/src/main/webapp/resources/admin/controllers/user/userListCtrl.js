@@ -110,25 +110,30 @@ function userListCtrl($scope, $modal, dbUtils) {
         /**
          * 删除操作
          */
-        function quit() {
-            var selectRows = $scope.lionFormGrid.getAllSelectRows();
-            if (selectRows.length === 0) {
-                dbUtils.info('请选择要删除的用户数据');
-            }else{
-                var ids = dbUtils.getFieldArray(selectRows, "id");
-                dbUtils.confirm("确定要对所选项目用户信息进行<span style='color: red'>删除</span>操作?", function () {
-                    dbUtils.post('system.user.delete', {'ids': ids}, function (data) {
-                        if (data.code==='200') {
-                            dbUtils.success("用户删除成功！!");
-                        } else {
-                            dbUtils.error("用户删除失败!");
-                        }
-                        $scope.lionFormGrid.reLoadData();
-                    }, function (error) {
-                        dbUtils.error("用户删除处理异常!" + error);
-                    });
-                });
-            }
+    function quit() {
+        var selectRows = $scope.lionFormGrid.getAllSelectRows();
+        if (selectRows.length === 0) {
+            dbUtils.info('  请选择需要删除的行');
+            return;
         }
+        if(selectRows.length>1){
+            dbUtils.info('只能选择一行');
+            return;
+        }
+        var ids = dbUtils.getFieldArray(selectRows, "id");
+
+        dbUtils.confirm("确定要对所选用户进行<span style='color: red'>删除</span>操作?", function () {
+            dbUtils.post('system.user.delete',{'id': ids[0]}, function (data) {
+                if (data) {
+                    dbUtils.success("用户删除成功！!");
+                } else {
+                    dbUtils.error(data + "以上用户不能删除，请先迁移其所辖的代理机构！");
+                }
+                $scope.lionFormGrid.reLoadData();
+            }, function (error) {
+                dbUtils.error("用户删除处理异常!" + error);
+            });
+        });
+    }
 
 }

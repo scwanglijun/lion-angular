@@ -8,14 +8,10 @@
 package com.newtouch.lion.admin.web.controller.user;
 
 import com.newtouch.lion.admin.web.model.user.*;
-import com.newtouch.lion.cache.system.ParameterUtil;
-import com.newtouch.lion.common.constant.Constants;
 import com.newtouch.lion.common.date.DateUtil;
-import com.newtouch.lion.model.system.Department;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
-import com.newtouch.lion.service.system.DepartmentService;
 import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.page.Page;
 import com.newtouch.lion.web.shiro.credentials.PasswordEncoder;
@@ -57,7 +53,8 @@ public class UserController {
 	/** 默认排序字段*/
 	private static final String DEFAULT_ORDER_FILED_NAME="id";
 	/** 默认密码 */
-	private static final String DEFAULT_PASSWORD = ParameterUtil.getValue(Constants.DEFLAUT_PASSWORD_KEY);
+//	private static final String DEFAULT_PASSWORD = ParameterUtil.getValue(Constants.DEFLAUT_PASSWORD_KEY);
+	private static final String DEFAULT_PASSWORD = "5c2fa855c6460cd50f66d953831f438810b5a7fc";
 	 
 	@Trans("system.user.list")
 	public Page<UserGetResp> list(UserGetReq req) {
@@ -157,15 +154,17 @@ public class UserController {
 	public UserDelResp del(UserDelReq req){
 
 		//检查用户是否超级删除
-		if(this.userService.checkSuperUserById(req.getId())){
+
+		if(userService.checkSuperUserById(req.getId())){
 			return new UserDelResp(UserDelResp.FAIL_USER_DELETE_CODE,UserDelResp.FAIL_USER_DELETE_MESSAGE);
 		}
 
 		int updateRow= this.userService.doDeleteById(req.getId());
 		if (updateRow>0) {
 			return new UserDelResp(UserDelResp.SUCCESS_USER_DELETE_CODE, UserDelResp.SUCCESS_USER_DELETE_MESSAGE);
+		}else {
+			return new UserDelResp(UserDelResp.FAIL_USER_DELETE_CODE, UserDelResp.FAIL_USER_DELETE_MESSAGE);
 		}
-		return new UserDelResp(UserDelResp.FAIL_USER_DELETE_CODE, UserDelResp.FAIL_USER_DELETE_MESSAGE);
 	}
 
 	//编辑用户信息
