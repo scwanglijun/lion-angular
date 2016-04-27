@@ -19,13 +19,14 @@ function test($scope,$modalInstance,dbUtils,dbImService,source){
         $scope.formDisabled = false;
         $scope.editData = true;
         $scope.data = angular.copy(source)[0];
-        //console.log($scope.data[0].nameZh);
+        console.log(source);
     }
 
     //取消Modal
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
+
 
     //提交成功
     $scope.submitDialogForm = function (isValid) {
@@ -34,7 +35,6 @@ function test($scope,$modalInstance,dbUtils,dbImService,source){
         $scope.submited = true;
         if (isValid) {
             var reqBody = angular.copy($scope.data);
-
             dbUtils.post(angular.isUndefined(source) ? 'system.role.add' : 'system.role.edit',reqBody, function (data) {
                 dbUtils.success('操作成功!');
                 $modalInstance.close();

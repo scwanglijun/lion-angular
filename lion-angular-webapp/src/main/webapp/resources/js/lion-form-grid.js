@@ -154,7 +154,7 @@
 var lionFormGridDirectives = angular.module('db.components.form.grid', ['dbUtils']);
 lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) {
     return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: Metronic.getResourcesPath() + "templates/lionFormGrid.html",
         replace: true,
         controller: ['$scope', 'dbImService', function ($scope, dbImService) {
@@ -201,7 +201,7 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
             //定义grid的Page对象
             $scope.lionFormGrid.page = {
                 pageNumber: 1,
-                pageSize: $scope.lionFormGrid.options.grid.settings.pageSize || 10,
+                pageSize: $scope.lionFormGrid.options.grid.settings.page.pageSize || 10,
                 prevPageDisabled: 'disabled',
                 nextPageDisabled: 'disabled'
             };
@@ -405,6 +405,8 @@ lionFormGridDirectives.directive('lionFormGrid', ['dbUtils', function (dbUtils) 
             $scope.lionFormGrid.getAllSelectRows = function () {
                 return getAllSelectRows();
             };
+
+
 
             /**
              * 为表单对象设置值

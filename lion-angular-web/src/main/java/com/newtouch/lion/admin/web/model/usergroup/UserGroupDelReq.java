@@ -5,7 +5,7 @@ package com.newtouch.lion.admin.web.model.usergroup;
  */
 public class UserGroupDelReq {
     /**用户ID*/
-    private long id;
+    private Long id;
 
     /**用户组名称(中文)*/
     private String nameZh;
@@ -30,11 +30,11 @@ public class UserGroupDelReq {
         this.ids = ids;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

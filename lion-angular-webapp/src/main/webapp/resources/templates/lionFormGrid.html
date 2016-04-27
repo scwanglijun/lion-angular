@@ -1,6 +1,7 @@
 <div role="form" class="form-horizontal form">
     <div class="portlet dbLight form-body" style="margin-bottom: 0px;">
-        <div class="portlet-title">
+
+        <div class="portlet-title" ng-show="!showPortlet" >
             <div class="caption font-green-sharp" style="padding: 0px;margin: 20px 0 0 0;">
                 <i class="icon-guolv101 iconfont font-green-sharp"></i>
                 <span class="caption-subject bold uppercase">查询条件</span>
@@ -11,7 +12,8 @@
                 <i class="iconfont icon-guanbi" ng-click="lionFormGrid.events.modalClose()" ng-if="lionFormGrid.options.form.settings.showClose"></i>
             </div>
         </div>
-        <div class="portlet-body" style="border-bottom: 1px solid #eee;">
+
+        <div class="portlet-body" style="border-bottom: 1px solid #eee;" ng-show="!showPortlet" >
             <div class="row dbRow">
                 <div class="col-md-10">
                     <div class="col-md-{{field.cols}}" ng-repeat="field in lionFormGrid.options.form.fields">
@@ -90,7 +92,7 @@
         <div class="portlet-title" style="border-bottom: 0px;">
             <div class="caption font-green-sharp" style="padding: 0px;margin: 20px 0 0 0;">
                 <i class="icon-kuajingzhifuiconliebiao iconfont font-green-sharp"></i>
-                <span class="caption-subject bold uppercase">数据列表</span>
+                <span class="caption-subject bold uppercase">{{gridTile||"数据列表"}}</span>
             </div>
             <div class="tools">
                 <button ng-if="lionFormGrid.events.grid.operationEvents.length > 0"

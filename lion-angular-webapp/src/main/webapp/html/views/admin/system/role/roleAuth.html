@@ -1,0 +1,83 @@
+<div class="profile-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light">
+                <div class="portlet-title tabbable-line">
+                    <div class="caption caption-md">
+                        <i class="icon-globe theme-font hide"></i>
+                        <span class="caption-subject font-blue-madison bold uppercase">角色授权</span>
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="/#tab_1_1" data-toggle="tab">已授权信息</a>
+                        </li>
+                        <li>
+                            <a href="/#tab_1_2" data-toggle="tab">关联用户组</a>
+                        </li>
+                        <li>
+                            <a href="/#tab_1_3" data-toggle="tab">关联用户</a>
+                        </li>
+                        <li>
+                            <a href="/#tab_1_4" data-toggle="tab">关联资源</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="tab-content">
+                        <!-- PERSONAL INFO TAB -->
+                          <div class="tab-pane active" id="tab_1_1">
+
+                              <lion-form-grid ng-controller="roleGroupCtrl" ></lion-form-grid>
+                              <lion-form-grid ng-controller="roleUserCtrl" ></lion-form-grid>
+                              <div class="modal-footer">
+                                  <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+                              </div>
+
+                          </div>
+
+                          <div class="tab-pane" id="tab_1_2" ng-controller="authGroupCtrl" >
+                                <lion-form-grid></lion-form-grid>
+                                 <div class="modal-footer">
+                                     <button  class="btn btn-success" type="button" ng-click="submitDialog()" >确定</button>
+                                     <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+                                 </div>
+                          </div>
+
+                          <div class="tab-pane" id="tab_1_3" ng-controller="authUserCtrl">
+                              <lion-form-grid></lion-form-grid>
+                              <div class="modal-footer">
+                                  <button  class="btn btn-primary" type="submit" ng-click="submitDialog()">确定</button>
+                                  <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+                              </div>
+                          </div>
+                        <!-- END PERSONAL INFO TAB -->
+                        <!-- CHANGE AVATAR TAB -->
+                        <div class="tab-pane" id="tab_1_4" ng-controller="authResourceCtrl" >
+                                <form name="dataForm" novalidate class="form-horizontal form">
+                                    <div class="modal-body form-horizontal form">
+                                        <div class="form-body portlet dbLight">
+                                            <db-tree></db-tree>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit" ng-click="submitDialog()">确定</button>
+                                <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+                            </div>
+                        </div>
+                        <!-- END CHANGE AVATAR TAB -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PROFILE CONTENT -->
+
+
+
+
+

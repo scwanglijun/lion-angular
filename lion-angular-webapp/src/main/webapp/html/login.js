@@ -31,6 +31,7 @@ function LoginController($scope, $http, $window,dbUtils) {
         if (isValid) {
             var reqBody = angular.copy($scope.data);
             dbUtils.post('user.login',reqBody,function(data){
+                console.log(data.code);
                if(data.code==='200'){
                    $window.sessionStorage.setItem("loginName", userName);
                    $window.location.href = "index.html";

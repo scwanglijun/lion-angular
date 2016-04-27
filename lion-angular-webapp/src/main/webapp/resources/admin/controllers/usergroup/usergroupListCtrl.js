@@ -56,6 +56,10 @@ function usergroupListCtrl($scope, $modal, dbUtils) {
                 name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
                     quit();
                 }
+            },{
+                name: "授权", class: "btn-primary", icon: "queding", click: function (row) {
+                    openAuthModal(row);
+                }
             }]
         }
     };
@@ -137,6 +141,32 @@ function usergroupListCtrl($scope, $modal, dbUtils) {
                 });
             });
         }
+    }
+
+    //授权
+
+    function openAuthModal(row) {
+        if($scope.lionFormGrid.getAllSelectRows().length == 0){
+            dbUtils.info('请选择要授权的行数据');
+        }else if($scope.lionFormGrid.getAllSelectRows().length > 1){
+            dbUtils.info('请选择一行数据');
+        }else{
+            var instance = $modal.open({
+                animation: true,
+                templateUrl: 'views/admin/system/usergroup/groupAuth.html',
+                controller: 'usergroupDetailCtrl',
+                size: "md",
+                backdrop: "static",
+                resolve: {
+                    source: function(){
+                        return row;
+                    }
+                }
+            });
+            instance.result.then(function () {
+                $scope.lionFormGrid.reLoadData();
+            });
+        };
     }
 
 }

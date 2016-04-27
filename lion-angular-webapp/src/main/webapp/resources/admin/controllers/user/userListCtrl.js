@@ -92,7 +92,7 @@ function userListCtrl($scope, $modal, dbUtils) {
                     animation: true,
                     templateUrl: 'views/admin/system/user/userEditorView.html',
                     controller: 'userEditorCtrl',
-                    size: "md",
+                    size: "lg",
                     backdrop: "static",
                     resolve: {
                         source: function () {

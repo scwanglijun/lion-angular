@@ -1,19 +1,22 @@
 package com.newtouch.lion.admin.web.controller.account;
 
-import ch.qos.logback.core.db.dialect.DBUtil;
-import com.newtouch.lion.admin.web.model.account.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.newtouch.lion.admin.web.model.account.ProfileEditGetReq;
+import com.newtouch.lion.admin.web.model.account.ProfileEditGetResq;
+import com.newtouch.lion.admin.web.model.account.ProfileEditImageReq;
+import com.newtouch.lion.admin.web.model.account.ProfileEditImageResq;
+import com.newtouch.lion.admin.web.model.account.ProfileEditPwdGetReq;
+import com.newtouch.lion.admin.web.model.account.ProfileEditPwdGetResq;
+import com.newtouch.lion.admin.web.model.account.ProfileReq;
+import com.newtouch.lion.admin.web.model.account.ProfileResq;
 import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.service.system.PasswordEncoderService;
 import com.newtouch.lion.service.system.UserService;
-import com.newtouch.lion.web.shiro.model.LoginUser;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
 import com.newtouch.lion.webtrans.trans.Trans;
-import com.sun.deploy.util.StringUtils;
-import org.apache.poi.util.SystemOutLogger;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 @Controller
 public class AccountController{

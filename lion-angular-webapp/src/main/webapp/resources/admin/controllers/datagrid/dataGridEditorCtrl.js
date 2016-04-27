@@ -11,13 +11,10 @@ DBApp.controller("dataGridEditorCtrl", ['$scope','$modalInstance','dbUtils','dbI
 function dataGridEditorCtrl($scope,$modalInstance,dbUtils,dbImService,source){
 
     dbImService.bindByJSON($scope,'type',function(data){
-        console.log(data);
     });
 
 
     if (angular.isUndefined(source)) {
-
-
         $scope.data = {
             type: null,
             tableId: null,
@@ -43,7 +40,6 @@ function dataGridEditorCtrl($scope,$modalInstance,dbUtils,dbImService,source){
             return;
         }
         $scope.data.type = $scope.data.type.value;
-        console.log($scope.data);
         //console.log(source);
         $scope.submited = true;
         if (isValid) {

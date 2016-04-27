@@ -880,6 +880,16 @@
       "name":"下拉列表",
       "value":"RESOURCE_ICON"
     }
+  ],
+  "gender": [
+    {
+      "name":"男",
+      "value":"0"
+    },
+    {
+      "name":"女",
+      "value":"1"
+    }
   ]
 }
 

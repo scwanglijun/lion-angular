@@ -7,7 +7,7 @@ import com.newtouch.lion.admin.web.model.query.QueryReq;
  */
 public class UserGroupGetReq extends QueryReq{
     /**用户ID*/
-    private long id;
+    private Long id;
 
     /**用户组名称(中文)*/
     private String nameZh;
@@ -22,11 +22,11 @@ public class UserGroupGetReq extends QueryReq{
     /**更新时间*/
     private String updatedDate;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

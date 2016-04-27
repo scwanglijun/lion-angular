@@ -25,25 +25,14 @@ function ResourceCtrl($scope, dbUtils, dbImService,$timeout) {
             return;
         }
         var originData = angular.copy(formData);
-        dbUtils.post("system.resource.resourceGet", {id: item['resourceId']}, function (data) {
-            originData = angular.extend({}, originData, data);
+        dbUtils.post("system.resource.resourceGet", {id: item['parentCode']}, function (data) {
+            originData = angular.extend({}, originData, item.attr);
             //配置资源类型
             dbImService.bindByJSON($scope,'resourcetype',function(data){
             });
             //配置target
             dbImService.bindByJSON($scope,'resourcetarget',function(data){
             });
-
-            //配置icon
-            //dbUtils.post( 'system.code.icon',{iconType: "RESOURCE_ICON"}, function (data) {
-            //    console.log(data);
-            //    //dbImService.bindSelectByJSON($scope, "icon", data, "iconClass");
-            //    //dbImService.bindByJSON($scope,'resourceicon',function(data){
-            //    //});
-            //}, function (error) {
-            //    dbUtils.error(error);
-            //});
-
 
 
 

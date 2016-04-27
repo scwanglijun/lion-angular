@@ -11,9 +11,11 @@ import com.newtouch.lion.admin.web.model.user.*;
 import com.newtouch.lion.cache.system.ParameterUtil;
 import com.newtouch.lion.common.constant.Constants;
 import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.model.system.Department;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
+import com.newtouch.lion.service.system.DepartmentService;
 import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.page.Page;
 import com.newtouch.lion.web.shiro.credentials.PasswordEncoder;
@@ -198,4 +200,7 @@ public class UserController {
 		userService.doUpdate(user);
 		return new UserEditResp(UserEditResp.SUCCESS_USER_EDIT_CODE,UserEditResp.SUCCESS_USER_EDIT_MESSAGE);
 	}
+
+
+
 }

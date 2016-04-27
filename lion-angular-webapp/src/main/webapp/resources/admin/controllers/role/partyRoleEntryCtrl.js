@@ -5,7 +5,9 @@ var DBApp = angular.module('DBApp');
 
 DBApp.controller("partyRoleEntryCtrl", ['$scope', '$modal', 'dbUtils', PartyRoleEntryCtrl]);
 
-function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
+function PartyRoleEntryCtrl($scope,$modal, dbUtils) {
+
+
     //!!formGridOptions-START!!
     var formGridOptions = {
         form: {
@@ -20,7 +22,7 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
             settings: {
                 transCode: "system.role.list",
                 autoLoad: true,
-                page: {pageSize: 10},
+                page: {pageSize:10},
                 showCheckBox: true
             },
             header: [
@@ -54,20 +56,15 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
                 name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
                     quit();
                 }
+            },{
+                name: "授权", class: "btn-primary", icon: "queding", click: function (row) {
+                    openAuthModal(row);
+                }
             }]
         }
     };
 
     $scope.lionFormGrid = {options: formGridOptions, events: formGridEvents};
-
-    //机构树选择后的回调事件
-    $scope.dbOrgTree = {settings: {noCache: true, showDivision: true, showDepartment: true}};
-    $scope.dbOrgTree.onOrgSelected = function (item) {
-        $scope.lionFormGrid.setFormDataField("organizationName", item['orgNamePath']);
-        $scope.lionFormGrid.setFormDataField("organizationId", item['orgId']);
-        $scope.lionFormGrid.setFormDataField("departmentId", item['departId']);
-    };
-
     //打开modal
     function openModal(source) {
         var instance = $modal.open({
@@ -95,9 +92,7 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
         }else if($scope.lionFormGrid.getAllSelectRows().length > 1){
             dbUtils.info('请选择一行数据');
         }else{
-
-            console.log($scope.lionFormGrid.getAllSelectRows());
-
+            //console.log($scope.lionFormGrid.getAllSelectRows());
             var instance = $modal.open({
                 animation: true,
                 templateUrl: 'views/admin/system/role/test.html',
@@ -115,23 +110,6 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
             });
 
 
-            /*dbUtils.post("roleModifyGet", {id: row['id']}, function (data) {
-             var instance = $modal.open({
-             animation: true,
-             templateUrl: 'views/admin/system/role/test.html',
-             controller: 'roleEditCtrl',
-             size: "md",
-             backdrop: "static",
-             resolve: {
-             source: function () {
-             return data;
-             }
-             }
-             });
-             instance.result.then(function () {
-             $scope.dbFormGrid.reLoadData();
-             });
-             });*/
         };
     }
 
@@ -162,24 +140,31 @@ function PartyRoleEntryCtrl($scope, $modal, dbUtils) {
         }
     }
 
-    /**
-     * 查看审核记录
-     * @param currentRecord
-     */
-    /*function auditStatusHistory(currentRecord) {
-        $modal.open({
-            animation: true,
-            templateUrl: 'views/roles.json/partNoAuditHistoryView.html',
-            controller: 'partNoAuditHistoryCtrl',
-            size: "lg",
-            backdrop: "static",
-            resolve: {
-                source: function () {
-                    return currentRecord;
-                }
-            }
-        });
-    }*/
 
+//授权
+
+    function openAuthModal(row) {
+        if($scope.lionFormGrid.getAllSelectRows().length == 0){
+            dbUtils.info('请选择要授权的行数据');
+        }else if($scope.lionFormGrid.getAllSelectRows().length > 1){
+            dbUtils.info('请选择一行数据');
+        }else{
+            var instance = $modal.open({
+                animation: true,
+                templateUrl: 'views/admin/system/role/roleAuth.html',
+                controller: 'testCtrl',
+                size: "md",
+                backdrop: "static",
+                resolve: {
+                    source: function(){
+                        return row;
+                    }
+                }
+            });
+            instance.result.then(function () {
+                $scope.lionFormGrid.reLoadData();
+            });
+        };
+    }
 
 }

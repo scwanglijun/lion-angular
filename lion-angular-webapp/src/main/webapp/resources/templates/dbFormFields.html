@@ -19,9 +19,13 @@
                 <div class="col-md-{{field.labelCols==''?'':12-field.labelCols}} dbFormItem" ng-if="field.type==='resourceTree'">
                     <db-resource-tree></db-resource-tree>
                 </div>
+                <!-- departmentTree -->
+                <div class="col-md-{{field.labelCols==''?'':12-field.labelCols}} dbFormItem" ng-if="field.type==='departmentTree'">
+                    <db-department-tree></db-department-tree>
+                </div>
 
                 <!-- input -->
-                <div class="col-md-{{field.labelCols==''?'':12-field.labelCols}} dbFormItem" ng-if="field.type!='select' && field.type!='date' && field.type!='dateTime' && field.type!='orgTree' && field.type!='resourceTree'">
+                <div class="col-md-{{field.labelCols==''?'':12-field.labelCols}} dbFormItem" ng-if="field.type==='text'">
                     <input ng-if="!field.clickEvent && field.type!='checkbox'" ng-model='dbForm.formData[field.name]' name="{{field.name}}" type="{{field.type}}" placeholder="{{field.placeholder}}" ng-required="field.required"
                            ng-disabled="field.disabled?field.disabled:(dbForm.isEditView?(field.editable?dbForm.globalFieldEditor:true):dbForm.globalFieldEditor)" class="form-control"
                            ng-class="{'form-control-readonly':field.readonly}"

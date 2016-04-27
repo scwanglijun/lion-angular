@@ -14,6 +14,8 @@ var DBApp = angular.module("DBApp", [
     "db.components.form.fields",
     "db.components.orgTree",
     "db.components.resourceTree",
+    "db.components.departmentTree",
+    "db.components.datetimepicker",
     "db.components.tree",
     "ui.select",
     "ngSanitize",
@@ -278,8 +280,7 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(['../resources/admin/controllers/user/userListCtrl.js',
-                        '../resources/admin/controllers/user/userEditorCtrl.js',
-                        '../resources/admin/controllers/user/userDepartmentCtrl.js']);
+                        '../resources/admin/controllers/user/userEditorCtrl.js']);
                 }]
             }
         })
@@ -329,23 +330,6 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(['../resources/admin/controllers/resource/resourceCtrl.js',
                         '../resources/admin/controllers/resource/resourceEntityCtrl.js']);
-                }]
-            }
-        })
-
-        .state('system/department', {
-            url: "/system/department",
-            views: {
-                "mainContentContainer": {
-                    controller: "departmentCtrl",
-                    templateUrl: "db/lion-form-grid.html"
-                }
-            },
-            data: {pageTitle: 'Department', pageSubTitle: '系统设置|部门管理'},
-            resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(['../resources/admin/controllers/department/departmentCtrl.js',
-                        '../resources/admin/controllers/department/departmentDetailCtrl.js']);
                 }]
             }
         })
@@ -615,6 +599,22 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(['../resources/admin/controllers/parameter/parameterListCtrl.js',
                         '../resources/admin/controllers/parameter/parameterEditorCtrl.js']);
+                }]
+            }
+        })
+        .state('system/department', {
+            url: "/system/department",
+            views: {
+                "mainContentContainer": {
+                    controller: "departmentCtrl",
+                    templateUrl: "views/admin/system/department/departmentModifyView.html"
+                }
+            },
+            data: {pageTitle: 'Department', pageSubTitle: '系统设置|部门管理'},
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(['../resources/admin/controllers/department/departmentCtrl.js',
+                        '../resources/admin/controllers/department/departmentEntityCtrl.js']);
                 }]
             }
         })

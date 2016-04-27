@@ -12,9 +12,10 @@ import java.util.Date;
  */
 public class UserAddReq extends QueryReq {
     /**用户ID*/
-    private long id;
+    private Long id;
     /**用户编号*/
-    @NotNull(message="${sys.user.employeecode.missing}")
+    @NotNull(message="${sys.user.departement.missing}")
+    private Long departmentId;
     @Length(max=30,min=4,message="{sys.user.employeecode.length}")
     private String employeeCode;
     /**用户登入名*/
@@ -25,6 +26,7 @@ public class UserAddReq extends QueryReq {
     private String realnameZh;
     /**用户名称(英文)*/
     private String realnameEn;
+
     /**描述*/
     private String description;
     /**可编辑*/
@@ -58,11 +60,11 @@ public class UserAddReq extends QueryReq {
     /** 办公室位置 */
     private String location;
     /** 账户是否有效 */
-    private Boolean accountExpired;
+    private Boolean accountExpired=Boolean.FALSE;
     /** 账户是否被锁定 */
-    private Boolean accountLocked;
+    private Boolean accountLocked=Boolean.FALSE;
     /** 账户密码是否有效 */
-    private Boolean credentialExpired;
+    private Boolean credentialExpired=Boolean.FALSE;
     /** 账户密码有效日期 */
     private Date credentialExpiredDate;
     /** 账户有效日期 */
@@ -70,7 +72,7 @@ public class UserAddReq extends QueryReq {
     /**用户头像*/
     private String image;
     /** 该用户部门 */
-    private Department department;
+//    private Department department;
 
     public String getEmployeeCode() {
         return employeeCode;
@@ -80,11 +82,11 @@ public class UserAddReq extends QueryReq {
         this.employeeCode = employeeCode;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -95,6 +97,22 @@ public class UserAddReq extends QueryReq {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+//    public Department getDepartment() {
+//        return department;
+//    }
+//
+//    public void setDepartment(Department department) {
+//        this.department = department;
+//    }
 
     public String getRealnameZh() {
         return realnameZh;

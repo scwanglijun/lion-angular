@@ -1,12 +1,12 @@
 package com.newtouch.lion.admin.web.model.parameter;
 
-import com.newtouch.lion.admin.web.model.query.QueryReq;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
+import com.newtouch.lion.admin.web.model.query.QueryReq;
 
 /**
  * <p>

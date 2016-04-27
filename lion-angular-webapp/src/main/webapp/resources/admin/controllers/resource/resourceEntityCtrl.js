@@ -7,7 +7,7 @@ DBApp.controller("resourceEntryCtrl", ['$scope', 'dbUtils', function ($scope, db
 
     //!!FORM--START!!
     $scope.dbForm = {
-        settings: {transCode: "system.resource.add", cols: 3, showClose: false},
+        settings: {transCode: "system.resource.resourceEditor", cols: 3, showClose: false},
         title: {label: "资源", icon: "fujiaxinxi"},
         sections: [{
             sectionTitle: {show: true, icon: "gengduo", label: "资源"},
