@@ -7,7 +7,6 @@ DBApp.controller("partyRoleEntryCtrl", ['$scope', '$modal', 'dbUtils', PartyRole
 
 function PartyRoleEntryCtrl($scope,$modal, dbUtils) {
 
-
     //!!formGridOptions-START!!
     var formGridOptions = {
         form: {
@@ -55,6 +54,10 @@ function PartyRoleEntryCtrl($scope,$modal, dbUtils) {
             },{
                 name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
                     quit();
+                }
+            },{
+                name: "Excel", class: "btn-primary", icon: "queding", click: function (row) {
+                    imports();
                 }
             },{
                 name: "授权", class: "btn-primary", icon: "queding", click: function (row) {
@@ -139,6 +142,24 @@ function PartyRoleEntryCtrl($scope,$modal, dbUtils) {
             });
         }
     }
+
+    /**
+     * 导出操作
+     */
+    function imports() {
+        //dbUtils.post('system.role.delete', {'ids': ""}, function (data) {
+        //    console.dir(data);
+        //    if (data.code==='200') {
+        //        dbUtils.success("角色删除成功！!");
+        //    } else {
+        //        dbUtils.error("删除失败!");
+        //    }
+        //    $scope.lionFormGrid.reLoadData();
+        //}, function (error) {
+        //    dbUtils.error("角色删除处理异常!" + error);
+        //});
+    }
+
 
 
 //授权

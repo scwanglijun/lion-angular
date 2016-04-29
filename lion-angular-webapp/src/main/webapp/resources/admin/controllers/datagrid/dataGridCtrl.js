@@ -142,23 +142,20 @@ function DataGridCtrl($scope, $modal, dbUtils) {
     }
 
     /**
-     * 查看审核记录
-     * @param currentRecord
+     * 导出Excel
      */
-    function auditStatusHistory(currentRecord) {
-        $modal.open({
-            animation: true,
-            templateUrl: 'views/roles.json/partNoAuditHistoryView.html',
-            controller: 'partNoAuditHistoryCtrl',
-            size: "lg",
-            backdrop: "static",
-            resolve: {
-                source: function () {
-                    return currentRecord;
-                }
+    function imports(){
+        dbUtils.post('system.role.delete', {'tableId': "datagrid_dt"}, function (data) {
+            console.dir(data);
+            if (data.code==='200') {
+                dbUtils.success("角色删除成功！!");
+            } else {
+                dbUtils.error("删除失败!");
             }
+            $scope.lionFormGrid.reLoadData();
+        }, function (error) {
+            dbUtils.error("角色删除处理异常!" + error);
         });
     }
-
 
 }
