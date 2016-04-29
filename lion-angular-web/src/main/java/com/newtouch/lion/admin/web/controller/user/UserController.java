@@ -7,11 +7,15 @@
 */
 package com.newtouch.lion.admin.web.controller.user;
 
+import com.newtouch.lion.admin.web.model.role.AuthModel;
+import com.newtouch.lion.admin.web.model.role.RoleGetReq;
 import com.newtouch.lion.admin.web.model.user.*;
 import com.newtouch.lion.common.date.DateUtil;
-import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.model.system.*;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
+import com.newtouch.lion.service.system.GroupService;
+import com.newtouch.lion.service.system.RoleService;
 import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.page.Page;
 import com.newtouch.lion.web.shiro.credentials.PasswordEncoder;
@@ -21,6 +25,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,6 +52,10 @@ import java.util.List;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RoleService roleService;
+	@Autowired
+	private GroupService groupService;
 	@Autowired
 	private PasswordEncoder passwordEncoderService;
 
@@ -200,6 +209,241 @@ public class UserController {
 		return new UserEditResp(UserEditResp.SUCCESS_USER_EDIT_CODE,UserEditResp.SUCCESS_USER_EDIT_MESSAGE);
 	}
 
+	/** 显示已关联的用户组 */
+	@Trans("system.user.userGroup")
+	public Page<Group> authGroup(UserGetReq req) {
+		QueryCriteria queryCriteria = QueryUtils.pageFormat( new QueryCriteria(),req);
+
+		// 设置排序字段及排序方向
+
+			queryCriteria.setOrderField("groups."+DEFAULT_ORDER_FILED_NAME);
+
+		// 查询条件 参数类型 用户名
+		if (req.getId()!=null&&req.getId()>0) {
+			queryCriteria.addQueryCondition("userId",req.getId());
+		}
+		PageResult<Group>  pageResult=groupService.doFindByCriteriaAndUser(queryCriteria);
+
+		for(Group group:pageResult.getContent()){
+			group.setUsers(null);
+			group.setRoles(null);
+		}
+
+
+		return  new Page(pageResult);
+	}
+
+
+	/** 显示已关联的角色 */
+
+	@Trans("system.user.userRole")
+	public  Page<Role> authRoles(UserGetReq req) {
+
+			QueryCriteria queryCriteria = QueryUtils.pageFormat( new QueryCriteria(),req);
+			queryCriteria.setOrderField("role."+DEFAULT_ORDER_FILED_NAME);
+
+		// 查询条件 参数类型 用户名
+		if (req.getId()!=null&&req.getId()>0) {
+			queryCriteria.addQueryCondition("userId",req.getId());
+		}
+		//查询用户所关联角色
+		PageResult<Role>  pageResult=this.roleService.doFindByCriteriaAndUser(queryCriteria);
+
+		for(Role role:pageResult.getContent()){
+			role.setUsers(null);
+			role.setGroups(null);
+			role.setResources(null);
+		}
+
+		return new Page<Role>(pageResult);
+	}
+
+	/** 显示所有的用户组 */
+	@Trans("system.user.authGroupList")
+	public Page<GroupRole> groups(UserGetReq req) {
+		QueryCriteria queryCriteria =QueryUtils.pageFormat(new QueryCriteria(), req);
+
+		// 设置排序字段及排序方向
+		queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+
+		PageResult<GroupRole> pageResult = this.groupService.doFindGroupUserByCriteria(queryCriteria,req.getId());
+
+		return new Page<GroupRole>(pageResult);
+	}
+
+
+	/** 显示所有的角色 */
+	@Trans("system.user.authRoleList")
+	public Page<RoleGroup> roles(UserGetReq req) {
+		QueryCriteria queryCriteria =QueryUtils.pageFormat(new QueryCriteria(), req);
+
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+
+
+		PageResult<RoleGroup> pageResult = this.roleService.doFindRoleUserByCriteria(queryCriteria,req.getId());
+
+		return new Page<RoleGroup>(pageResult);
+	}
+
+
+	/** 为用户添加用户组集合 */
+	@Trans("system.user.addGroupUser")
+	public UserAuthResp addGroups(AuthModel req) {
+		//验证输入
+		Long userId=req.getId();
+		//查询角色列表
+		QueryCriteria queryCriteria = new QueryCriteria(0,9999);
+		// 查询条件用户组ID
+		if (req.getId()>0) {
+			queryCriteria.addQueryCondition("userId",userId);
+		}
+		//查询条件不能为空
+		if(!CollectionUtils.isEmpty(req.getAuths())){
+			queryCriteria.addQueryCondition("groupIds",req.getAuths());
+		}
+		PageResult<Group> pageResult=this.groupService.doFindByCriteriaAndUser(queryCriteria);
+
+		List<Long> targetGroupIds =req.getSelecteds();
+
+		List<Long> deleteGroupIds = new ArrayList<Long>();
+
+		for (Group group : pageResult.getContent()) {
+			if (targetGroupIds.contains(group.getId())) {
+				targetGroupIds.remove(group.getId());
+			} else {
+				deleteGroupIds.add(group.getId());
+			}
+		}
+
+		User user = this.userService.doFindById(userId);
+
+		this.userService.doAuthGroupToUser(targetGroupIds, deleteGroupIds, user);
+
+		return new UserAuthResp(UserAuthResp.SUCCESS_USER_AUTH_CODE,UserAuthResp.SUCCESS_USER_AUTH_MESSAGE);
+	}
+
+
+	/** 为用户添加用户组集合 */
+	@Trans("system.user.addRoleUser")
+	public UserAuthResp addRoles(AuthModel req) {
+		//验证输入
+		Long userId=req.getId();
+		//查询角色列表
+		QueryCriteria queryCriteria = new QueryCriteria(0,9999);
+		// 查询条件用户组ID
+		if (req.getId()>0) {
+			queryCriteria.addQueryCondition("userId",req.getId());
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(req.getAuths())){
+			queryCriteria.addQueryCondition("roleIds",req.getAuths());
+		}
+		PageResult<Role> pageResult=this.roleService.doFindByCriteriaAndUser(queryCriteria);
+		User user = this.userService.doFindById(userId);
+		List<Long> targetRoleIds =req.getSelecteds();
+		List<Long> deleteRoleIds = new ArrayList<Long>();
+		for (Role role : pageResult.getContent()) {
+			if (targetRoleIds.contains(role.getId())) {
+				targetRoleIds.remove(role.getId());
+			} else {
+				deleteRoleIds.add(role.getId());
+			}
+		}
+		this.userService.doAuthRoleToUser(targetRoleIds, deleteRoleIds, user);
+
+		return new UserAuthResp(UserAuthResp.SUCCESS_USER_AUTH_CODE,UserAuthResp.SUCCESS_USER_AUTH_MESSAGE);
+	}
+
+
+	/***
+	 * 锁定
+	 * @param req
+	 * @return
+     */
+	@Trans("system.user.lock")
+	public UserAuthResp lock(UserGetReq req){
+
+		User user = this.userService.doFindById(req.getId());
+		if(user==null){
+			return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,UserAuthResp.FAIL_USER_AUTH_MESSAGE);
+		}
+		if(this.userService.getSuperUsername().equals(user.getUsername())){
+			return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,UserAuthResp.FAIL_USER_AUTH_MESSAGE);
+		}
+
+		if(!user.getAccountLocked()){
+			user.setAccountLocked(Boolean.TRUE);
+			user=this.userService.doUpdate(user);
+			if (user!=null) {
+				return new UserAuthResp(UserAuthResp.SUCCESS_USER_AUTH_CODE,UserAuthResp.SUCCESS_USER_AUTH_MESSAGE);
+			} else {
+				return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,UserAuthResp.FAIL_USER_AUTH_MESSAGE);			}
+		}else{
+			return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,"该账号已经被锁定");
+		}
+
+	}
+
+	/***
+	 * 解锁
+	 * @param req
+	 *
+     * @return
+     */
+	@Trans("system.user.ulock")
+	public UserAuthResp unlock(UserGetReq req){
+
+
+		User user = this.userService.doFindById(req.getId());
+		if(user==null){
+			return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,UserAuthResp.FAIL_USER_AUTH_MESSAGE);
+		}
+		if(this.userService.getSuperUsername().equals(user.getUsername())){
+			return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,UserAuthResp.FAIL_USER_AUTH_MESSAGE);
+		}
+
+		if(user.getAccountLocked()){
+			user.setAccountLocked(Boolean.FALSE);
+			user=this.userService.doUpdate(user);
+			if (user!=null) {
+				return new UserAuthResp(UserAuthResp.SUCCESS_USER_AUTH_CODE,UserAuthResp.SUCCESS_USER_AUTH_MESSAGE);
+			} else {
+				return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,UserAuthResp.FAIL_USER_AUTH_MESSAGE);
+			}
+		}else{
+			return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,"该账号已经被解锁");
+		}
+
+	}
+
+
+	/***
+	 * 重置密码
+	 * @param req
+	 * @return
+     */
+	@Trans("system.user.resetpwd")
+	public UserAuthResp resetPwd(UserGetReq req){
+
+		User user = this.userService.doFindById(req.getId());
+		if(user==null){
+			return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,UserAuthResp.FAIL_USER_AUTH_MESSAGE);
+		}
+		if(this.userService.getSuperUsername().equals(user.getUsername())){
+			return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,UserAuthResp.FAIL_USER_AUTH_MESSAGE);
+		}
+
+		String password=passwordEncoderService.encodePassword(DEFAULT_PASSWORD,user.getUsername());
+		user.setPassword(password);
+		user=this.userService.doUpdate(user);
+		if (user!=null) {
+			return new UserAuthResp(UserAuthResp.SUCCESS_USER_AUTH_CODE,UserAuthResp.SUCCESS_USER_AUTH_MESSAGE);
+		} else {
+			return new UserAuthResp(UserAuthResp.FAIL_USER_AUTH_CODE,UserAuthResp.FAIL_USER_AUTH_MESSAGE);
+		}
+
+
+	}
 
 
 }

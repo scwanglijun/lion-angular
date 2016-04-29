@@ -103,6 +103,12 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+
+
+	<servlet>
+		<servlet-name>DruidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+	</servlet>
 	<!--Servlet Definitions End -->
 
 	<!--Servlet Mappings Start -->
@@ -113,6 +119,11 @@
 	<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>
 		<url-pattern>*.json</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DruidStatView</servlet-name>
+		<url-pattern>/druid/*</url-pattern>
 	</servlet-mapping>
 	<!--Servlet Mappings End -->
 

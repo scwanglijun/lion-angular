@@ -280,7 +280,13 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(['../resources/admin/controllers/user/userListCtrl.js',
-                        '../resources/admin/controllers/user/userEditorCtrl.js']);
+                        '../resources/admin/controllers/user/userEditorCtrl.js',
+                        '../resources/admin/controllers/user/userAuthCtrl.js',
+                        '../resources/admin/controllers/user/userRoleCtrl.js',
+                        '../resources/admin/controllers/user/userGroupCtrl.js',
+                        '../resources/admin/controllers/user/addGroupUserCtrl.js',
+                        '../resources/admin/controllers/user/addRoleUserCtrl.js',
+                        '../resources/admin/controllers/user/userDetailCtrl.js']);
                 }]
             }
         })
@@ -384,21 +390,21 @@ function StateConfigController($stateProvider, $urlRouterProvider) {
             }
         })
 
-        .state('system/monitor/druid', {
-            url: "/system/monitor/druid",
-            views: {
-                "mainContentContainer": {
-                    controller: "druidListCtrl",
-                    templateUrl: "db/lion-form-grid.html"
-                }
-            },
-            data: {pageTitle: 'Druid', pageSubTitle: '系统设置|系统参数'},
-            resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(['../resources/admin/controllers/druid/druidListCtrl.js']);
-                }]
-            }
-        })
+        //.state('system/monitor/druid', {
+        //    url: "/system/monitor/druid",
+        //    views: {
+        //        "mainContentContainer": {
+        //            controller: "druidListCtrl"
+        //            templateUrl: "db/lion-form-grid.html"
+        //        }
+        //    },
+        //    data: {pageTitle: 'Druid', pageSubTitle: '系统设置|系统参数'},
+        //    resolve: {
+        //        loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+        //            return $ocLazyLoad.load(['../resources/admin/controllers/druid/druidListCtrl.js']);
+        //        }]
+        //    }
+        //})
 
         .state('system/datatable', {
             url: "/system/datatable",

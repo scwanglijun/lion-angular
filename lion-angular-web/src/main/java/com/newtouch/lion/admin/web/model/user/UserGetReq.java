@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class UserGetReq extends QueryReq {
     /**用户ID*/
-    private long id;
+    private Long id;
     /**用户编号*/
     @NotNull(message="${sys.user.employeecode.missing}")
     @Length(max=30,min=4,message="{sys.user.employeecode.length}")
@@ -80,11 +80,11 @@ public class UserGetReq extends QueryReq {
         this.employeeCode = employeeCode;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

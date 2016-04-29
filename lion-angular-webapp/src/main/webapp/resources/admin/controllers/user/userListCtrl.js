@@ -53,6 +53,26 @@ function userListCtrl($scope, $modal, dbUtils) {
                 name: "删除", class: "btn-danger", icon: "shanchu", click: function () {
                         quit();
                 }
+            },{
+                name: "授权", class: "btn-primary", icon: "queding", click: function (row) {
+                    openAuthModal(row);
+                }
+            },{
+        name: "锁定", class: "btn-primary", icon: "queding", click: function (row) {
+            lock(row);
+        }
+             },{
+                name: "解锁", class: "btn-primary", icon: "queding", click: function (row) {
+                    ulock(row);
+                }
+            },{
+                name: "重置密码", class: "btn-primary", icon: "queding", click: function (row) {
+                    resetpwd(row);
+                }
+            },{
+                name: "查看明细", class: "btn-primary", icon: "queding", click: function (row) {
+                    detail(row);
+                }
             }]
         }
     };
@@ -134,6 +154,147 @@ function userListCtrl($scope, $modal, dbUtils) {
                 dbUtils.error("用户删除处理异常!" + error);
             });
         });
+    }
+
+
+    /**
+     * 锁定
+     */
+    function lock() {
+        var selectRows = $scope.lionFormGrid.getAllSelectRows();
+        if (selectRows.length === 0) {
+            dbUtils.info('  请选择需要锁定的项');
+            return;
+        }
+        if(selectRows.length>1){
+            dbUtils.info('只能选择一行');
+            return;
+        }
+        var ids = dbUtils.getFieldArray(selectRows, "id");
+
+        dbUtils.confirm("确定要对所选用户进行<span style='color: red'>锁定</span>操作?", function () {
+            dbUtils.post('system.user.lock',{'id': ids[0]}, function (data) {
+                if (data) {
+                    dbUtils.success("用户锁定成功！!");
+                } else {
+                    dbUtils.error(data + "锁定失败！");
+                }
+                $scope.lionFormGrid.reLoadData();
+            }, function (error) {
+                dbUtils.error("用户处理异常!" + error);
+            });
+        });
+    }
+
+    /**
+     * 锁定
+     */
+    function ulock() {
+        var selectRows = $scope.lionFormGrid.getAllSelectRows();
+        if (selectRows.length === 0) {
+            dbUtils.info('  请选择需要解锁的项');
+            return;
+        }
+        if(selectRows.length>1){
+            dbUtils.info('只能选择一行');
+            return;
+        }
+        var ids = dbUtils.getFieldArray(selectRows, "id");
+
+        dbUtils.confirm("确定要对所选用户进行<span style='color: red'>解锁</span>操作?", function () {
+            dbUtils.post('system.user.lock',{'id': ids[0]}, function (data) {
+                if (data) {
+                    dbUtils.success("用户解锁成功！!");
+                } else {
+                    dbUtils.error(data + "解锁失败！");
+                }
+                $scope.lionFormGrid.reLoadData();
+            }, function (error) {
+                dbUtils.error("用户处理异常!" + error);
+            });
+        });
+    }
+
+    /**
+     * 重置密码
+     */
+    function resetpwd() {
+        var selectRows = $scope.lionFormGrid.getAllSelectRows();
+        if (selectRows.length === 0) {
+            dbUtils.info('  请选择需要解锁的项');
+            return;
+        }
+        if(selectRows.length>1){
+            dbUtils.info('只能选择一行');
+            return;
+        }
+        var ids = dbUtils.getFieldArray(selectRows, "id");
+
+        dbUtils.confirm("确定要对所选用户进行<span style='color: red'>重置密码</span>操作?", function () {
+            dbUtils.post('system.user.resetpwd',{'id': ids[0]}, function (data) {
+                if (data) {
+                    dbUtils.success("用户密码重置成功！!");
+                } else {
+                    dbUtils.error(data + "密码重置失败！");
+                }
+                $scope.lionFormGrid.reLoadData();
+            }, function (error) {
+                dbUtils.error("用户处理异常!" + error);
+            });
+        });
+    }
+
+    //查看详情
+    function detail(row) {
+        if ($scope.lionFormGrid.getAllSelectRows().length == 0) {
+            dbUtils.info('请选择要编辑的行数据');
+        } else if ($scope.lionFormGrid.getAllSelectRows().length > 1) {
+            dbUtils.info('请选择一行数据');
+        } else {
+            var instance = $modal.open({
+                animation: true,
+                templateUrl: 'views/admin/system/user/userDetailView.html',
+                controller: 'userDetailCtrl',
+                size: "lg",
+                backdrop: "static",
+                resolve: {
+                    source: function () {
+                        return $scope.lionFormGrid.getAllSelectRows();
+                    }
+                }
+            });
+            instance.result.then(function () {
+                $scope.lionFormGrid.reLoadData();
+            });
+        }
+    }
+
+
+
+    //授权
+
+    function openAuthModal(row) {
+        if($scope.lionFormGrid.getAllSelectRows().length == 0){
+            dbUtils.info('请选择要授权的行数据');
+        }else if($scope.lionFormGrid.getAllSelectRows().length > 1){
+            dbUtils.info('请选择一行数据');
+        }else{
+            var instance = $modal.open({
+                animation: true,
+                templateUrl: 'views/admin/system/user/userAuth.html',
+                controller: 'userEditorCtrl',
+                size: "md",
+                backdrop: "static",
+                resolve: {
+                    source: function(){
+                        return row;
+                    }
+                }
+            });
+            instance.result.then(function () {
+                $scope.lionFormGrid.reLoadData();
+            });
+        };
     }
 
 }

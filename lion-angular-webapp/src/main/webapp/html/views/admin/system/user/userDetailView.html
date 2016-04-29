@@ -1,0 +1,348 @@
+<form name="dataForm1" novalidate ng-submit="submitDialogForm(dataForm1.$valid)">
+    <div class="modal-body form-horizontal form" ng-click="formclick()">
+        <div class="form-body portlet light">
+            <div class="portlet-title">
+                <div class="caption font-green-sharp">
+                    <i class="icon-page1 iconfont font-green-sharp"></i>
+                    <span class="caption-subject bold uppercase">用户明细信息</span>
+                </div>
+                <div class="tools">
+                    <i class="iconfont icon-guanbi" ng-click="cancel()"></i>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="form-body">
+                    <div class="row">
+
+
+                        <div class="caption">
+                            <i class="fa"></i><strong>基本信息</strong>
+                        </div>
+                        <div class="table-scrollable">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>用户名</th>
+                                    <th>员工号</th>
+                                    <th>性别</th>
+                                    <th>真实姓名(中文)</th>
+                                    <th>真实姓名(英文)</th>
+                                    <th>联系电话</th>
+                                    <th>手机</th>
+                                    <th>邮箱</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><span >{{data.username}}</span></td>
+                                    <td><span ></span>{{data.employeeCode}}</td>
+                                    <th><span>{{data.gender}}</span></th>
+                                    <td><span >{{data.nameZh}}</span></td>
+                                    <td><span >{{data.telephone}}</span></td>
+                                    <td><span>{{data.username}}</span></td>
+                                    <td><span >{{data.mobile}}</span></td>
+                                    <td><span>{{data.email}}</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="caption">
+                            <i class="fa"></i><strong>账户状态</strong>
+                        </div>
+                        <div class="table-scrollable">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>账户锁定状态</th>
+                                    <th>账户有效日期</th>
+                                    <th>账户有效状态</th>
+                                    <th>密码有效日期</th>
+                                    <th>密码有效状态</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><span >{{data.accountLocked}}</span></td>
+                                    <td><span >{{data.accountExpiredDate}}</span></td>
+                                    <td><span >{{data.accountExpired}}</span></td>
+                                    <td><span >{{data.credentialExpiredDate}}</span></td>
+                                    <td><span >{{data.credentialExpired}}</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="caption">
+                            <i class="fa"></i><strong>其它信息</strong>
+                        </div>
+                        <div class="table-scrollable">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>所属门部</th>
+                                    <th>办公室电话</th>
+                                    <th>传真</th>
+                                    <th>邮编</th>
+                                    <th>地址</th>
+                                    <th>描述</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><span >{{data.department}}</span></td>
+                                    <td><span >{{data.officePhone}}</span></td>
+                                    <td><span ></span>{{data.fax}}</td>
+                                    <td><span >{{data.postcode}}</span></td>
+                                    <td><span>{{data.location}}</span></td>
+                                    <td><span >{{data.description}}</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!--<div class="col-md-6  margin-top-15">-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.username.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--用户名-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.username" name="username" db-validator="required" ng-maxlength="100" class="form-control" placeholder="用户名" ng-disabled="formDisabled"/>-->
+                                        <!--<span class="help-block" ng-show="dataForm1.username.$invalid && submited ">{{$dbForm.username.msg}}</span>-->
+
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.email.$invalid && submited }">-->
+                                <!--<label  class="col-md-3 control-label">-->
+                                    <!--邮箱-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="email" ng-model="data.email" name="email" db-validator="required email" ng-maxlength="100" class="form-control" placeholder="邮箱" ng-disabled="formDisabled"/>-->
+                                        <!--<span class="help-block" ng-show="dataForm1.email.$invalid && submited ">{{$dbForm.email.msg}}</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.credentialExpiredDate.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--密码有效期-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="date"   ng-model="data.credentialExpiredDate" name="credentialExpiredDate" class="form-control" ng-disabled="formDisabled"/>-->
+
+                                    <!--</div>-->
+
+
+
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.accountExpiredDate.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--账户有效期-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group input-append date">-->
+                                        <!--<input type="text" ng-model="data.accountExpiredDate" name="employeeCode" db-validator="required" ng-maxlength="100" class="form-control" ng-disabled="formDisabled"/>-->
+
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.realnameZh.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--用户名称(中文)-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.realnameZh" name="realnameZh" ng-maxlength="128" class="form-control" placeholder="用户名称(中文)" ng-disabled="formDisabled"/>-->
+                                        <!--<span class="help-block" ng-show="dataForm1.realnameZh.$invalid && submited ">{{$dbForm.realnameZh.msg}}</span>-->
+
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.telephone.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                   <!--电话-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.telephone" name="telephone" ng-maxlength="100" class="form-control" placeholder="电话" ng-disabled="formDisabled"/>-->
+                                        <!--<span class="help-block" ng-show="dataForm1.telephone.$invalid && submited ">{{$dbForm.telephone.msg}}</span>-->
+                                        <!--&lt;!&ndash;<span class="help-block" ng-show="dataForm1.nameZh.$error.unique">角色名必须唯一</span>&ndash;&gt;-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.officePhone.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--办公电话-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.officePhone" name="officePhone" ng-maxlength="100" class="form-control" placeholder="办公电话" ng-disabled="formDisabled"/>-->
+                                        <!--<span class="help-block" ng-show="dataForm1.officePhone.$invalid && submited ">{{$dbForm.officePhone.msg}}</span>-->
+                                        <!--&lt;!&ndash;<span class="help-block" ng-show="dataForm1.nameZh.$error.unique">角色名必须唯一</span>&ndash;&gt;-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.location.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--地址-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.location" name="location" class="form-control" placeholder="地址" ng-disabled="formDisabled"/>-->
+                                        <!--<span class="help-block" ng-show="dataForm1.location.$invalid && submited ">{{$dbForm.location.msg}}</span>-->
+                                        <!--&lt;!&ndash;<span class="help-block" ng-show="dataForm1.nameZh.$error.unique">角色名必须唯一</span>&ndash;&gt;-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.description.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--描述-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.description" name="description" class="form-control" placeholder="描述" ng-maxlength="255"  ng-disabled="formDisabled"/>-->
+                                        <!--<span class="help-block" ng-show="dataForm1.description.$invalid && submited ">{{$dbForm.description.msg}}</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--是否可编辑-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9 control-label">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<div class="checker">-->
+                                            <!--<span ng-class="{'checked':data.editable}">-->
+                                                <!--<input type="checkbox" ng-model="data.editable" class="form-control" name="editable" checked="true" value="1"/>-->
+                                            <!--</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-6  margin-top-15">-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.employeeCode.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--员工号-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.employeeCode" name="employeeCode" db-validator="required" ng-maxlength="100" class="form-control" placeholder="员工号" ng-disabled="formDisabled"/>-->
+                                        <!--<span class="help-block" ng-show="dataForm1.employeeCode.$invalid && submited ">{{$dbForm.employeeCode.msg}}</span>-->
+                                        <!--&lt;!&ndash;<span class="help-block" ng-show="dataForm1.nameZh.$error.unique">角色名必须唯一</span>&ndash;&gt;-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm.depement.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--所属部门-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group" >-->
+                                        <!--<input type="text" ng-click="departmentTree()" ng-model="data.department" name="description"  placeholder="新致软件" ng-maxlength="255"  ng-readonly="true"/>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--密码是否有效-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9 control-label">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<div class="checker">-->
+                                            <!--<span ng-class="{'checked':data.credentialExpired}">-->
+                                                <!--<input type="checkbox" ng-model="data.credentialExpired" class="form-control" name="credentialExpired" checked="true" value="1"/>-->
+                                            <!--</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--账户状态-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9 control-label">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<div class="checker">-->
+                                            <!--<span ng-class="{'checked':data.accountExpired}">-->
+                                                <!--<input type="checkbox" ng-model="data.accountExpired" class="form-control" name="accountExpired" checked="true" value="1"/>-->
+                                            <!--</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.realnameEn.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--用户名称(英文)-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.realnameEn" name="realnameEn" ng-maxlength="128" class="form-control" placeholder="用户名称(英文)"  ng-disabled="formDisabled"/>-->
+                                        <!--<span class="help-block" ng-show="dataForm1.realnameEn.$invalid && submited ">{{$dbForm.realnameEn.msg}}</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.mobile.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--手机-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.mobile" name="mobile" db-validator="required" ng-maxlength="100" class="form-control" placeholder="手机" ng-disabled="formDisabled"/>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.fax.$invalid && submited }">-->
+                            <!--<label class="col-md-3 control-label">-->
+                                <!--传真-->
+                            <!--</label>-->
+                            <!--<div class="col-md-9">-->
+                                <!--<div class="input-group">-->
+                                    <!--<input type="text" ng-model="data.fax" name="mobile" class="form-control" placeholder="传真" ng-disabled="formDisabled"/>-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.postcode.$invalid && submited }">-->
+                                <!--<label class="col-md-3 control-label">-->
+                                    <!--邮编-->
+                                <!--</label>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.postcode" name="postcode" class="form-control" placeholder="邮编" ng-disabled="formDisabled"/>-->
+                                        <!--<span class="help-block" ng-show="dataForm1.postcode.$invalid && submited ">{{$dbForm.postcode.msg}}</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+                            <!--<div class="form-group" ng-class="{ 'has-error' : dataForm1.postcode.$invalid && submited }">-->
+                                    <!--<label class="col-md-3 control-label">-->
+                                        <!--性别-->
+                                    <!--</label>-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" ng-model="data.gender" name="mobile" class="form-control"  ng-disabled="formDisabled"/>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                        <!--</div>-->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+
+        <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+    </div>
+</form>

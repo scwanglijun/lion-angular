@@ -666,7 +666,7 @@ var Layout = function () {
                             "name":"数据库连接池",
                             "translate":"aside.nav.system.systemmoniter.DRUID",
                             "icon":"star",
-                            "url":"system/monitor/druid"
+                            "href":"../druid/index.html"
                         },
                         {
                             "name":"缓存监控",

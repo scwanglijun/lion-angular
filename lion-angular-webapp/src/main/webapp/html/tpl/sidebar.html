@@ -54,7 +54,11 @@
 
 					<ul class="sub-menu" ng-if="submenu.subList">
 						<li ng-repeat="subsubmenu in submenu.subList" ui-sref-active="active">
-							<a ui-sref="{{subsubmenu.url}}">
+							<a ui-sref="{{subsubmenu.url}}"  ng-if="subsubmenu.url">
+								<i class="icon-{{subsubmenu.icon}}"></i>
+								<span class="title" translate="{{subsubmenu.translate}}">{{subsubmenu.name}}</span>
+							</a>
+							<a href="{{subsubmenu.href}}" target="_blank"  ng-if="!subsubmenu.url">
 								<i class="icon-{{subsubmenu.icon}}"></i>
 								<span class="title" translate="{{subsubmenu.translate}}">{{subsubmenu.name}}</span>
 							</a>
