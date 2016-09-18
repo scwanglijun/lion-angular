@@ -16,6 +16,7 @@ var DBApp = angular.module("DBApp", [
     "db.components.resourceTree",
     "db.components.departmentTree",
     "db.components.datetimepicker",
+    "db.components.datepicker",
     "db.components.tree",
     "ui.select",
     "ngSanitize",
@@ -128,10 +129,15 @@ DBApp.controller('HeaderController', ['$scope', '$window', '$http', '$state', 'd
     $scope.loginName = loginName;
     $scope.logout = function () {
         dbUtils.confirm("确定退出系统吗?", function () {
-            $http.post("../logout.do", {}).success(function (data, status, headers, config) {
+
+
+            // var reqBody = angular.copy($scope.data);
+            dbUtils.post('user.logout',{},function(data){
                 $window.sessionStorage.setItem("loginName", "");
-                $window.location.href = "../";//退出后直接返回主页
+                    $window.location.href = "login.html";//退出后直接返回主页
+
             });
+
         });
     }
     $scope.reBackIndex = function () {

@@ -143,11 +143,18 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/resources/** = anon
-				/unauthorized.htm =anon
-				/loginerror.htm=anon
-				/login.htm = authc
-				/unauthorized.htm = authc
-				/logout.htm=logoutFilter
+				/unauthorized.do =anon
+				/loginerror.do=anon
+				/login.do = anon
+				/unauthorized.do = authc
+				/logout.do=logoutFilter
+				/api.do=authc
+				<!--/resources/** = anon-->
+				<!--/unauthorized.htm =anon-->
+				<!--/loginerror.htm=anon-->
+				<!--/login.htm = authc-->
+				<!--/unauthorized.htm = authc-->
+				<!--/logout.htm=logoutFilter-->
 				<!--  /** = authc,forceLogoutFilter-->
 			</value>
 		</property>

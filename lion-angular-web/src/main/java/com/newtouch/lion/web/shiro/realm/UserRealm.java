@@ -47,7 +47,7 @@ import java.util.Set;
  * <p>
  * Company: Newtouch
  * </p>
- * 
+ *
  * @author WangLijun
  * @version 1.0
  */
@@ -59,7 +59,7 @@ public class UserRealm extends AuthorizingRealm {
 	/** 用户Service */
 	@Autowired
 	private UserService userService;
- 
+
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -137,7 +137,7 @@ public class UserRealm extends AuthorizingRealm {
 
 	/***
 	 * 更新用户的授权信息缓存
-	 * 
+	 *
 	 * @param principal
 	 */
 	public void clearCachedAuthorizationInfo(Object principal) {
@@ -154,7 +154,7 @@ public class UserRealm extends AuthorizingRealm {
 
 	/***
 	 * 更新用户认证信息缓存信息
-	 * 
+	 *
 	 * @param principal
 	 */
 	public void clearCachedAuthenticationInfo(Object principal) {
@@ -168,8 +168,8 @@ public class UserRealm extends AuthorizingRealm {
 	 */
 	public void clearCachedAuthenticationInfo(){
 		this.getAuthenticationCache().clear();
-	} 
-	
+	}
+
 	/**清除所有缓存信息*/
 	public void clearAllCached(){
 		this.clearCachedAuthenticationInfo();
@@ -181,7 +181,7 @@ public class UserRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected void doClearCache(PrincipalCollection principals) {
-		 this.clearAllCached();
+		this.clearAllCached();
 	}
 
 	public static void main(String[] args) {

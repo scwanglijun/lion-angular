@@ -21,6 +21,9 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * <p>
@@ -40,7 +43,7 @@ import org.springframework.stereotype.Controller;
  * @version 1.0
  */
 @Controller
-public class LoginController extends AbstractController {
+public class UserLoginController extends AbstractController {
 
 	/** Shiro Session缓存管理*/
 	@Autowired
@@ -95,6 +98,21 @@ public class LoginController extends AbstractController {
 		}
 		return new LoginUserResp(LoginUserResp.SUCCESS_CODE,LoginUserResp.SUCCESS_MESSAGE);
 	}
-	
 
+	@Trans(value="user.logout")
+	public void logout(LoginUserReq req){
+		logger.info("退出系统");
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.isAuthenticated()) {
+			UserInfo userInfo = LoginSecurityUtil.getUser();
+			//退出
+			//saveLoginLog(userInfo,"success","logout");s
+			// session 会销毁，在SessionListener监听session销毁，清理权限缓存
+			subject.logout();
+
+			logger.info("退出系统成功");
+			//清除缓存
+			//sessionCacheManager.removeSessionController(Constants.CACHE_SESSION_NAME,userInfo.getUsername());
+		}
+	}
 }

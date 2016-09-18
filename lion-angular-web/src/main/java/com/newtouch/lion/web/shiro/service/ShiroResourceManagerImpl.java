@@ -30,7 +30,7 @@ import java.util.List;
  * <p>
  * Company: Newtouch
  * </p>
- * 
+ *
  * @author WangLijun
  * @version 1.0
  */
@@ -39,12 +39,12 @@ public class ShiroResourceManagerImpl  implements ShiroResourceManager {
 	/** 资源读取类 */
 	@Autowired
 	private ResourceService resourceService;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see com.newtouch.lion.web.shiro.service.ShiroResourceService#findAll()
-	 */ 
+	 */
 	@Override
 	public List<AuthorityModel> doFindAll() {
 		List<Resource> resources = resourceService.doFindAuthAll();

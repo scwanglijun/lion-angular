@@ -268,7 +268,9 @@ function DialogUtil($modal, $http, $window, toaster,$q) {
             }
 
             $http.post("../api.do", ApiRequest).success(function (data, status, headers, config) {
-                //console.log(data);
+
+                console.log(data);
+                console.log(status);
                 Metronic.stopPageLoading();
                 if (data.status == "401") {//用户未登录
                     $window.location.href = "login.html";
@@ -284,6 +286,8 @@ function DialogUtil($modal, $http, $window, toaster,$q) {
 
                 //判断返回值是系统异常，还是业务异常，来决定是否需要调用error回调
             }).error(function (data, status, headers, config) {
+                console.log(data);
+                console.log(status);
                 doToasterTip('error', "提示", "系统异常!");
                 Metronic.stopPageLoading();
                 if (angular.isFunction(error)) {
